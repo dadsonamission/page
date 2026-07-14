@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision & Mitmachen — Dads on a Mission</title>
+<meta name="description" content="Vision und Mitmach-Möglichkeiten bei Dads on a Mission.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geom:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="subpage">
+  <!-- ================= HEADER: fixe Spalte rechts + Fullscreen-Menü ================= -->
+  <header id="header">
+    <div class="inside">
+      <!-- Nur auf Mobil sichtbar (siehe Handy-Mockup): persistenter
+           "Startseite"-Schnellzugriff links in der unteren Leiste,
+           neben Kontakt (rechts) und Burger (mittig). -->
+      <a href="index.html" class="mobile-home-link">Startseite</a>
+
+      <div class="burger" id="burgerBtn" role="button" tabindex="0" aria-label="Menü öffnen" aria-expanded="false">
+        <span class="line l1"></span>
+        <span class="line l2"></span>
+        <span class="line l3"></span>
+      </div>
+
+      <nav class="bigmenu" id="bigmenu" aria-hidden="true">
+        <div class="flexwrapper">
+          <div class="nav-side">
+            <ul>
+              <li><a href="angebote.html"><span class="num">1</span><span class="label">Angebote</span></a></li>
+              <li><a href="warum-mission.html"><span class="num">2</span><span class="label">Warum Mission?</span></a></li>
+              <li><a href="wie-ich-arbeite.html"><span class="num">3</span><span class="label">Wie ich arbeite.</span></a></li>
+              <li><a href="vision-mitmachen.html"><span class="num">4</span><span class="label">Vision &amp; Mitmachen</span></a></li>
+              <li><a href="das-bin-ich.html"><span class="num">5</span><span class="label">Das bin ich.</span></a></li>
+            </ul>
+          </div>
+          <div class="link-side">
+            <div class="box top"><a href="index.html">Blog</a></div>
+            <div class="box bottom">
+              <a href="index.html" aria-label="Zur Startseite" class="menu-logo-link">
+                <svg viewBox="0 0 210 210" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path style="fill:#ffffff;fill-opacity:1;stroke-width:0.264583" d="M 108.29781,6.4218302 C 52.695097,5.673423 6.3625908,45.864101 6.3626421,105.2086 9.7301823,164.92728 42.592305,205.20875 103.05933,204.83452 157.9137,201.84116 205.67874,158.56626 203.43361,102.96353 199.31771,55.59271 163.90054,9.7893706 108.29781,6.4218302 Z m -5.378,15.2094068 c 45.56339,7.2e-5 81.75144,40.678257 83.24822,86.241643 0.74829,37.3315 -36.18812,73.51955 -82.87404,79.50645 -43.6925,2.61918 -78.383849,-30.20128 -81.003162,-82.49987 6.8e-5,-45.563388 33.194708,-78.758028 80.628982,-83.248223 z" /><text style="font-size:56.4444px;fill:#ffffff" x="33.477898" y="111.69743"><tspan style="font-weight:800;font-family:'Geom', sans-serif;fill:#ffffff" x="33.477898" y="111.69743">Dads</tspan></text><text style="font-size:25.2236px;fill:#ffffff" x="36.118958" y="136.92235"><tspan style="font-weight:400;font-family:'Geom', sans-serif;fill:#ffffff" x="36.118958" y="136.92235">on a Mission</tspan></text></svg>
+                <span class="menu-logo-label">Startseite</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= KONTAKT-AUSKLAPPER (unabhängig vom Hauptmenü) ================= -->
+  <div class="contact-tab" id="contactTab" role="button" tabindex="0">Kontakt</div>
+  <aside id="contactSidebar" aria-hidden="true">
+    <div class="flexwrapper">
+      <div class="contact-panel">
+        <div class="close" id="contactClose" role="button" tabindex="0" aria-label="Kontakt schließen">&times;</div>
+        <div class="contact-panel-inner">
+          <p class="contact-address">Dads on a Mission<br>Dorfackerstraße 12<br>72074 Tübingen</p>
+          <div class="contact-map">
+            <iframe
+              src="https://www.google.com/maps?q=Dorfackerstra%C3%9Fe%2012%2C%2072074%20T%C3%BCbingen&output=embed"
+              title="Standort von Dads on a Mission auf Google Maps"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <p class="contact-map-link"><a href="https://www.google.com/maps?q=Dorfackerstra%C3%9Fe%2012%2C%2072074%20T%C3%BCbingen" target="_blank" rel="noopener">Auf Google Maps öffnen</a></p>
+          <p class="contact-details">
+            <a href="tel:+4917620718683">Tel. 0176 20 71 86 83</a><br>
+            <a href="mailto:info@dadsonamission.de">info@dadsonamission.de</a>
+          </p>
+          <p class="contact-legal"><a href="impressum.html">Impressum</a> &middot; <a href="datenschutz.html">Datenschutz</a></p>
+        </div>
+      </div>
+      <div class="link-side">
+        <div class="box top"><a href="index.html">Blog</a></div>
+        <div class="box bottom">
+          <a href="index.html" aria-label="Zur Startseite" class="menu-logo-link">
+            <svg viewBox="0 0 210 210" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path style="fill:#ffffff;fill-opacity:1;stroke-width:0.264583" d="M 108.29781,6.4218302 C 52.695097,5.673423 6.3625908,45.864101 6.3626421,105.2086 9.7301823,164.92728 42.592305,205.20875 103.05933,204.83452 157.9137,201.84116 205.67874,158.56626 203.43361,102.96353 199.31771,55.59271 163.90054,9.7893706 108.29781,6.4218302 Z m -5.378,15.2094068 c 45.56339,7.2e-5 81.75144,40.678257 83.24822,86.241643 0.74829,37.3315 -36.18812,73.51955 -82.87404,79.50645 -43.6925,2.61918 -78.383849,-30.20128 -81.003162,-82.49987 6.8e-5,-45.563388 33.194708,-78.758028 80.628982,-83.248223 z" /><text style="font-size:56.4444px;fill:#ffffff" x="33.477898" y="111.69743"><tspan style="font-weight:800;font-family:'Geom', sans-serif;fill:#ffffff" x="33.477898" y="111.69743">Dads</tspan></text><text style="font-size:25.2236px;fill:#ffffff" x="36.118958" y="136.92235"><tspan style="font-weight:400;font-family:'Geom', sans-serif;fill:#ffffff" x="36.118958" y="136.92235">on a Mission</tspan></text></svg>
+            <span class="menu-logo-label">Startseite</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Eck-Logo: auf Unterseiten dauerhaft fix (kein Hero/Manifest-Scroll-Trigger nötig) -->
+  <div class="corner-logo static-fixed" id="cornerLogo">
+    <a href="index.html#hero" aria-label="Zur Startseite" class="corner-logo-link"><svg viewBox="0 0 210 210" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path id="path9" style="fill:currentColor;fill-opacity:1;stroke-width:0.264583" d="M 108.29781,6.4218302 C 52.695097,5.673423 6.3625908,45.864101 6.3626421,105.2086 9.7301823,164.92728 42.592305,205.20875 103.05933,204.83452 157.9137,201.84116 205.67874,158.56626 203.43361,102.96353 199.31771,55.59271 163.90054,9.7893706 108.29781,6.4218302 Z m -5.378,15.2094068 c 45.56339,7.2e-5 81.75144,40.678257 83.24822,86.241643 0.74829,37.3315 -36.18812,73.51955 -82.87404,79.50645 -43.6925,2.61918 -78.383849,-30.20128 -81.003162,-82.49987 6.8e-5,-45.563388 33.194708,-78.758028 80.628982,-83.248223 z" /><text style="font-size:56.4444px;fill:currentColor" x="33.477898" y="111.69743"><tspan style="font-weight:800;font-family:'Geom', sans-serif;fill:currentColor" x="33.477898" y="111.69743">Dads</tspan></text><text style="font-size:25.2236px;fill:currentColor" x="36.118958" y="136.92235"><tspan style="font-weight:400;font-family:'Geom', sans-serif;fill:currentColor" x="36.118958" y="136.92235">on a Mission</tspan></text></svg></a>
+  </div>
+
+  <main class="subpage-main">
+    <section class="subpage-hero">
+      <p class="eyebrow">04</p>
+      <h1>Vision &amp; Mitmachen</h1>
+      <p class="subpage-placeholder-note">Diese Seite ist als Grundgerüst angelegt (Sidebar, mitlaufendes Eck-Logo) — der eigentliche Inhalt folgt in Kürze.</p>
+    </section>
+  </main>
+  <!-- ================= FOOTER ================= -->
+  <footer id="footer" role="contentinfo">
+    <div class="inside">
+      <div class="column" id="kontakt">
+        <h3>Kontakt</h3>
+        <p>
+          Dads on a Mission<br>
+          Musterstraße 1<br>
+          12345 Musterstadt
+        </p>
+        <p style="margin-top:1vw;">
+          <a href="tel:+49000000000">+49 000 000000</a><br>
+          <a href="mailto:info@example.de">info@example.de</a>
+        </p>
+      </div>
+      <div class="column">
+        <h3>Folgen</h3>
+        <ul class="socials">
+          <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+        <p class="fineprint">© 2026 Dads on a Mission · <a href="#">Impressum</a> · <a href="#">Datenschutz</a></p>
+      </div>
+    </div>
+  </footer>
+<script src="script.js"></script>
+</body>
+</html>
