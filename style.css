@@ -599,16 +599,14 @@ p{hyphens:auto;}
   background-color:#B46E54;
   padding:7vw 10vw;
 }
-/* Dekoratives Logo-Wasserzeichen oben rechts, leicht hinter der grauen
-   Header-Spalte verschwindend (wie in der gelieferten PPTX-Vorlage): Ring
-   + Schriftzug in Cream (#FBCD82), auf 40% Deckkraft (= 60% Transparenz),
-   liegt dank negativem z-index hinter dem Fließtext, aber vor der
-   Santa-Fe-Fläche. top bewusst positiv (nicht negativ), damit es nicht
-   über die Fläche hinaus auf das Hero-Foto darüber hinausragt. */
+/* Dekoratives Logo-Wasserzeichen oben rechts, leicht über den Rand hinaus-
+   ragend (wie in der gelieferten PPTX-Vorlage): Ring + Schriftzug in
+   Cream (#FBCD82), auf 40% Deckkraft (= 60% Transparenz), liegt dank
+   negativem z-index hinter dem Fließtext, aber vor der Santa-Fe-Fläche. */
 .pitch-logo-mark{
   position:absolute;
   z-index:-1;
-  top:3vw; right:-9vw;
+  top:-5vw; right:-3.6vw;
   width:38vw; height:38vw;
   color:var(--c-cream);
   opacity:0.4;
