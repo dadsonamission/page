@@ -1,8 +1,8 @@
 /* ==========================================================================
-   HOMEPAGE-TEMPLATE — Interaktion
-   Reines Vanilla JS, keine Abhängigkeiten. Nachgebaut nach dem Verhalten
-   von freybauern.de: Fullscreen-Menü, Kontakt-Ausklapper, scroll-fixiertes
-   Eck-Logo mit Farbwechsel, Hero-Logo-Scroll-Effekt, einfacher Produkt-Slider.
+   Dads on a Mission — Interaktion
+   Reines Vanilla JS, keine Abhängigkeiten. Steuert das Fullscreen-Menü, den
+   Kontakt-Ausklapper, das scroll-fixierte Eck-Logo mit Farbwechsel, den
+   Hero-Logo-Scroll-Effekt sowie einen einfachen Produkt-Slider.
    ========================================================================== */
 (function () {
   "use strict";
@@ -169,7 +169,7 @@
       var rect = nachvaternShowcase.getBoundingClientRect();
       if (rect.bottom > 0 && rect.top < window.innerHeight) {
         var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-        var shift = (progress - 0.5) * (rect.height * 0.6); /* verstärkt (vorher 0.3) */
+        var shift = (progress - 0.5) * (rect.height * 0.07); /* an minimalen Foto-Puffer angepasst (Foto-Kanten sollen bündig sein) */
         nachvaternPhoto.style.transform = "translate3d(0," + shift.toFixed(1) + "px,0)";
       }
     };

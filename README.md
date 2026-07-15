@@ -1,6 +1,5 @@
-# Homepage-Template — "Dads on a Mission"
+# Homepage — "Dads on a Mission"
 
-Nachempfunden an den strukturellen und grafischen Aufbau von freybauern.de.
 Zehn Dateien, keine Abhängigkeiten (bis auf die Google-Fonts-Einbindung):
 `index.html` (Startseite) + fünf Unterseiten (`angebote.html`,
 `warum-mission.html`, `wie-ich-arbeite.html`, `vision-mitmachen.html`,
@@ -9,6 +8,110 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Echte Bilddateien eingebunden**: Alle Fotos/Grafiken (Hero-Foto,
+  Daniel-Porträt, Gold-Banner, Gold-Illustration, Gold-Gestrichel,
+  „Love is the Answer"-Bild, Nach-Vätern-Sonnenuntergangsfoto,
+  Nach-Vätern-Logo-Cutout, Scroll-Pfeil) liegen jetzt als echte Dateien im
+  Ordner `assets/` und werden per `url("assets/…")` bzw. `src="assets/…"`
+  eingebunden — nicht mehr als Base64-Daten-URI. Dadurch sind `index.html`,
+  `style.css` und `wie-ich-arbeite.html` jetzt deutlich kleiner. Wichtig:
+  Der `assets`-Ordner muss beim Hosten/Verschieben der Seite immer
+  zusammen mit den HTML-/CSS-Dateien mitgeliefert werden.
+- **Hero-Mouseover-Effekt entfernt**: Der graue Verlaufs-Schleier, der sich
+  beim Hüberfahren mit der Maus über das Hero-Foto legte, ist entfernt.
+  Das Foto bleibt jetzt beim Hover unverändert; nur der dezente
+  Dark-Leather-Verlauf für die Lesbarkeit der weißen Schrift bleibt aktiv.
+- **Nach-Vätern-Foto verkleinert**: Der Puffer für den Parallax-Effekt wurde
+  drastisch reduziert (von 35%/170% auf 4%/108%), sodass die Fotokanten
+  praktisch bündig mit dem Container sind — "so klein wie möglich". Der
+  Parallax-Effekt ist dadurch dezenter als zuvor (Multiplikator von 0,6 auf
+  0,07 reduziert), bleibt aber spürbar vorhanden; per Test verifiziert,
+  dass der Bild-Versatz bei jeder Scroll-Position sicher innerhalb des
+  Puffers bleibt (kein sichtbarer Rand).
+- **Hero-Mouseover-Effekt**: Beim Hüberfahren mit der Maus färbt sich das
+  Hero-Foto jetzt grau (`#90A1B1`) statt der bisherigen (unveränderten)
+  Dark-Leather-Verlaufsüberlagerung. Da ich keinen bereits bestehenden
+  Färbe-Mouseover-Effekt im Hero finden konnte, habe ich diesen neu
+  ergänzt — falls du etwas anderes gemeint hast, sag gerne Bescheid.
+- **„Das Gold der Vaterschaft"**: Der erste Textblock (Intro-Absatz) ist
+  jetzt als Block auf der Seite zentriert, der Text selbst bleibt
+  linksbündig.
+- **Känguru-Offenbarung-Zitat neu gestaltet** (nach der hochgeladenen
+  Folie): zwei überdimensionierte Anführungszeichen umrahmen das Zitat,
+  der Folgetext „Und darüber …" sitzt versetzt rechts darunter in
+  größerer Schrift (1,4vw, wie der erste Textblock des Abschnitts statt
+  vorher 1,05vw).
+- **Goldenes Gestrichel hinter allen „Gold"-Wörtern**: aus der PPTX
+  extrahiert (identisch mit der Grafik aus `v1001-016a.eps`, die als
+  Sammel-Datei mit vielen Gold-Elementen vorlag) und hinter jedem
+  Vorkommen von „Gold" im Abschnitt platziert — inklusive der Überschrift
+  „Das Gold der Vaterschaft" (4 Stellen insgesamt).
+- **Footer auf allen acht Seiten aktualisiert**: echte Adresse
+  (Dorfackerstraße 12, 72074 Tübingen), echte Telefonnummer und E-Mail;
+  Instagram/Facebook entfernt und durch einen Substack-Link
+  (`https://substack.com/@danielgoldmann`) ersetzt; Impressum-/
+  Datenschutz-Links zeigen jetzt auf die echten Unterseiten statt auf
+  Platzhalter.
+- **Foto im „Nach-Vätern"-Bereich ausgetauscht**: Das bisherige (breite,
+  querformatige) Sonnenuntergangsfoto wurde durch das neu gelieferte
+  `vater_sohn_wurf.jpg` ersetzt — ein Hochformat-Foto, das für diesen
+  schmalen, hohen Ausschnitt von Haus aus deutlich besser passt (Silhouette
+  bereits mittig komponiert bei ~48%, Sonne bei ~51% horizontal). Die
+  Bildposition wurde daher von der linksverschobenen `25% center` (die
+  für das alte Querformat-Foto nötig war) zurück auf `center` gestellt.
+  Per Pixel-Analyse verifiziert: kühlere/dunklere Töne im oberen Ring-
+  Bereich (Himmel/Kind), wärmere Sonnenuntergangstöne im unteren
+  Ring-Bereich — passend zur mitgelieferten Referenzansicht.
+- **Mobile Feinjustierungen**: Hero-Logo sitzt jetzt etwas weiter oben
+  (`top:42%` statt 50%), „Hier geht's weiter" inkl. Pfeil ebenfalls etwas
+  höher (Abstand vom unteren Rand vergrößert). „Startseite" und „Kontakt"
+  in der unteren grauen Leiste haben jetzt dieselbe Schriftgröße (15px).
+- **Nach-Vätern-Bereich auf `wie-ich-arbeite.html` überarbeitet**:
+  - **Bug behoben**: Der Cutout-Layer war nicht bündig mit dem unteren
+    Rand (fehlte um genau die Breite des Trennbalkens, 6vw) — Ursache war
+    `border-bottom` direkt auf dem `aspect-ratio`-Container in Kombination
+    mit `box-sizing:border-box`. Der Trennbalken ist jetzt ein eigenes
+    Element unterhalb des Containers; Cutout und Foto füllen den Container
+    jetzt exakt bis zum Rand (0px Abweichung, verifiziert).
+  - **Bildausschnitt**: Das Foto wird jetzt von der linken Bildhälfte aus
+    zentriert (`background-position:25% center` statt `center`), damit die
+    Vater-Kind-Silhouette (die im Originalfoto links sitzt) im schmalen,
+    hohen Ausschnitt sichtbar bleibt.
+  - **Zitattext**: fett (statt normal) und doppelte Schriftgröße, dabei
+    horizontal **und** vertikal exakt auf die Mitte des Logo-Cutouts
+    zentriert (Position des Logos per Pixel-Analyse ermittelt: vertikale
+    Mitte bei 58,7% der Container-Höhe) — auf Desktop und Mobil mit 0px
+    Abweichung verifiziert.
+- **Vollbild-Menü**: „Startseite"-Beschriftung unter dem Logo entfernt,
+  Logo ist jetzt exakt zentriert im gelben Feld (0px Abweichung, per Test
+  verifiziert).
+- **Kontakt-Panel radikal vereinfacht** — zurück zum Prinzip der alten
+  Versionen: Blog und Logo erscheinen beim
+  Öffnen gar nicht mehr. Es gleitet nur noch das weiße Panel selbst über
+  die aktuelle Seite (mit Schatten), und deckt auf dem Desktop nur noch
+  **etwa die Hälfte des Bildschirms** ab (50% Breite, vorher Vollbild) —
+  die dahinterliegende Seite bleibt sichtbar.
+  - **Telefon/E-Mail** jetzt linksbündig als eigene zweite Spalte, deren
+    Mitte exakt auf der Höhe der Mitte der Adress-Spalte liegt (per
+    `align-items:center` im Flex-Container, pixelgenau verifiziert).
+- **Textkörper auf weißem Untergrund vereinheitlicht**: Sämtlicher
+  Fließtext (keine Überschriften) auf weißem Hintergrund nutzt jetzt
+  konsequent Cadet Gray (`#90A1B1`) — u.a. Footer-Adresse/-Kontakt/
+  -Fineprint, „Hi Daniel"-Bio-Text, Platzhalter-Hinweise auf den
+  Unterseiten, „Das Gold der Vaterschaft"-Intro. Per automatisiertem
+  Farb-Audit über alle acht Seiten auf 0 Verstöße verifiziert. Links
+  behalten bewusst ihre Akzentfarbe (Santa Fe) zur Unterscheidbarkeit von
+  reinem Fließtext.
+- **Kontakt-Panel korrigiert** (Details nochmal nachjustiert):
+  - **Nur das weiße Panel fliegt noch ein** — Blog/Logo (link-side) sind
+    jetzt vom Slide-in getrennt: `#contactSidebar` selbst blendet nur noch
+    sanft ein/aus (Opacity), während ausschließlich `.contact-panel` seine
+    eigene Slide-Transform bekommen hat. Per Test verifiziert: Blog/Logo
+    bleiben während der gesamten Animation unbewegt an Ort und Stelle.
+  - **Adresse vergrößert** (3,4vw statt 2,4vw), sitzt oben links im Panel.
+  - **Telefon/E-Mail vergrößert** (1,9vw statt 1,4vw) **und an den rechten
+    Rand des weißen Feldes verschoben** (eigene Spalte, rechtsbündig, auf
+    gleicher Höhe wie die Adresse).
 - **Eck-Logo als Link**: Auf der Startseite verlinkt es zu `#hero`, auf allen
   Unterseiten zu `index.html#hero` — mit kleinem Hover-Effekt (Logo wächst
   leicht, `scale(1.08)`).
@@ -86,8 +189,8 @@ Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
     Erklärtext zur gemeinschaftsbasierten Finanzierung rechts.
   - **„Hi! Ich bin Daniel..."** — Pastel-Light-Orange-Kopfleiste mit
     Überschrift, darunter Bio-Text und Porträtfoto (aus der PPTX
-    extrahiert). Bewusst **ohne** den grauen Adress-/Impressum-/Substack-
-    Abschluss aus der Vorlage — direkt gefolgt vom normalen Footer der
+    extrahiert). Bewusst **ohne** grauen Adress-/Impressum-/Substack-
+    Abschluss — direkt gefolgt vom normalen Footer der
     Seite. Der Textlink „Mehr über Daniel erfahren" verweist auf
     `das-bin-ich.html`.
 - **„Nach-Vätern"-Bereich auf `wie-ich-arbeite.html`** (zweiter Teil von
@@ -95,7 +198,7 @@ Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
   großformatige Bildsektion mit dem Sonnenuntergangsfoto (Vater wirft Kind
   in die Luft, aus der PPTX extrahiert) und dem großen Zitat
   („Wir wurden alle von unseren Vätern beschenkt...") darüber. Zwei
-  Effekte wie im Original:
+  Effekte:
   - **Parallax**: Das Foto scrollt langsamer als die Seite (gleiche
     Technik wie zuvor bei der jetzt entfernten Parallax-Showcase-Sektion,
     hier gezielt für diesen Bereich wieder eingebaut).
@@ -214,9 +317,9 @@ Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
   als Link zum Kontaktbereich.
 - **Vertikale Navigationsleiste links im Hero wurde ersatzlos entfernt.**
 - **Seitentitel, Meta-Description, Footer- und Kontakt-Marke** durchgängig
-  auf „Dads on a Mission" umgestellt (statt des ursprünglichen „Hofname").
-- Landwirtschaftliche Platzhalter-Begriffe wurden an die neue Marke
-  angepasst: „Erzeugnisse" → „Angebote", „Was auf unserem Hof entsteht" →
+  auf „Dads on a Mission" umgestellt.
+- Alte Platzhalter-Begriffe wurden an die neue Marke angepasst:
+  „Erzeugnisse" → „Angebote", „Was auf unserem Hof entsteht" →
   „Was wir gemeinsam bewegen", „Unser Hof" → „Unsere Gemeinschaft",
   „Neues vom Hof" → „Neues aus der Gemeinschaft".
 - Restliche Details (echte Adresse, Telefonnummer, konkrete Angebotsnamen,
@@ -237,7 +340,7 @@ Definiert als CSS-Variablen in `style.css` (`:root`):
 Alle Platzhalter-Fotoflächen (Angebote-Slider) nutzen Verläufe aus dieser
 Palette, bis echte Fotos folgen.
 
-## Was übernommen wurde (struktureller/grafischer Aufbau von freybauern.de)
+## Struktureller und grafischer Aufbau
 - Fixe Header-Spalte rechts (Desktop, 2/3 der ursprünglichen Breite) /
   Leiste unten (Mobil) mit Fullscreen-Menü
 - **Fixes Hero-Foto**, über das der restliche Inhalt hinwegscrollt (Geschwindigkeit 0 vs. normal)
@@ -256,33 +359,29 @@ Palette, bis echte Fotos folgen.
 ## Hero-Foto — technischer Hintergrund
 `assets/hero-hauptbild.png` ist die Originaldatei (Quelle, 2,1 MB);
 `assets/hero-hauptbild.jpg` ist eine komprimierte, web-taugliche Version
-(Qualität 85, ca. 235 KB). **Tatsächlich im CSS verwendet wird jedoch eine
-Base64-Daten-URI dieser JPG-Datei**, direkt eingebettet als CSS-Variable
-`--hero-photo` in `style.css` (`:root`) — nicht der externe Datei-Link. Das
-ist bewusst so: Ein externer Link (`url('assets/…')`) kann in manchen
-Vorschau-/Preview-Umgebungen fehlschlagen, wenn der `assets`-Ordner dort
-nicht mitgeliefert oder nicht erreichbar ist. Die Daten-URI-Einbettung macht
-das Foto komplett unabhängig von der Ordnerstruktur — es lädt garantiert,
-egal wie/wo die `index.html` geöffnet wird. Für den Vollbild-Hintergrund
-sorgt `background-size:cover` automatisch für unverzerrte Darstellung in
-jeder Bildschirmgröße; ein zusätzliches `.hero-overlay`-Element legt einen
-dezenten dunklen Verlauf darüber, damit weiße Schrift (Logo, Scroll-Hinweis)
-lesbar bleibt.
+(Qualität 85, ca. 235 KB). Im CSS verwendet wird die JPG-Datei über einen
+normalen externen Link: `--hero-photo: url("assets/hero-hauptbild.jpg")`
+in `style.css` (`:root`). **Wichtig:** Der `assets`-Ordner muss dafür immer
+im selben Verzeichnis wie `index.html`/`style.css` liegen. Für den
+Vollbild-Hintergrund sorgt `background-size:cover` automatisch für
+unverzerrte Darstellung in jeder Bildschirmgröße; ein zusätzliches
+`.hero-overlay`-Element legt einen dezenten dunklen Verlauf darüber, damit
+weiße Schrift (Logo, Scroll-Hinweis) lesbar bleibt.
 
 Falls du das Hero-Foto später austauschst: neue Datei nach
-`assets/hero-hauptbild.jpg` kopieren, Base64 neu erzeugen
-(`base64 -w0 hero-hauptbild.jpg`) und den Wert von `--hero-photo` in
-`style.css` ersetzen (Format: `url("data:image/jpeg;base64,…")`).
+`assets/hero-hauptbild.jpg` kopieren (gleicher Dateiname) — fertig, kein
+weiterer Schritt in `style.css` nötig.
 
 ## Logo — technischer Hintergrund
 Die hochgeladene `Logo_DoaM.svg` liegt in drei Varianten in `assets/`:
 - `logo-mask.svg` — Originaldatei (weiße Formen). Wird aktuell an keiner
   Stelle mehr als CSS-Maske verwendet (das große Hero-Logo ist jetzt ein
   eigenständiges Inline-SVG direkt in `index.html`, kein Foto-Cutout mehr).
-  Die zugehörige Variable `--mask-shape` (Base64-Daten-URI in `style.css`,
-  `:root`) bleibt aber erhalten, falls du den Foto-Durchblick-Effekt später
-  an anderer Stelle wieder einsetzen möchtest (`mask-image:var(--mask-shape)`
-  auf ein beliebiges Element anwenden).
+  Die zugehörige Variable `--mask-shape` in `style.css` (`:root`) verweist
+  per externem Link auf `assets/logo-mask.svg` und bleibt erhalten, falls
+  du den Foto-Durchblick-Effekt später an anderer Stelle wieder einsetzen
+  möchtest (`mask-image:var(--mask-shape)` auf ein beliebiges Element
+  anwenden).
 - `logo-mono.svg` / `logo-inline-clean.svg` — Variante mit `fill:currentColor`,
   direkt inline im HTML (`#cornerLogo` in `index.html`) eingebettet, damit der
   Scroll-Farbwechsel (Weiß über dem Hero-Foto → Cadet Gray über weißem
@@ -302,8 +401,7 @@ ersetzen (Pfad-Daten aus deiner SVG-Datei übernehmen); für `#cornerLogo`
 `fill="currentColor"` beibehalten, für `#maskLogo` `fill="#ffffff"` fest
 lassen (oder anpassen, falls eine andere feste Farbe gewünscht ist). Für die
 optionale Maskenform-Variable `--mask-shape`: neue Datei nach
-`assets/logo-mask.svg` kopieren, Base64 neu erzeugen
-(`base64 -w0 logo-mask.svg`) und in `--mask-shape` einsetzen.
+`assets/logo-mask.svg` kopieren (gleicher Dateiname) — fertig.
 
 ## Schrift — technischer Hintergrund
 Google-Fonts-Embed für „Geom" liegt im `<head>` von `index.html`
@@ -316,10 +414,9 @@ fonts.google.com/specimen/Geom neu kopieren. Body-Text nutzt Gewicht 400,
 Überschriften 800 (Ultra-Bold, wie im Logo-Schriftzug „Dads").
 
 ## Was noch Platzhalter ist
-- Weitere Fotos (Angebote-Slider) →
-  CSS-Farbverläufe in der neuen Palette (Suche nach `PLATZHALTER` im Code)
-- Echte Adresse, Telefonnummer, Impressum-Link im Footer und Kontakt-Panel
-  (aktuell „Musterstraße 1, 12345 Musterstadt" etc.)
+- Fotos für den Angebote-Slider (aktuell CSS-Farbverläufe in der Palette,
+  Suche nach `PLATZHALTER` im Code) — alle anderen Fotos/Grafiken sind
+  bereits eingebunden (siehe „Aktueller Stand")
 - Konkrete Angebots-/Programmnamen im Slider (aktuell „Angebot 1/2/3 —
   PLATZHALTER-Name") und Instagram/Facebook-Links
 
