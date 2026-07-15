@@ -8,6 +8,25 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Cutout-Logo-Wasserzeichen auf „Wie ich arbeite." repariert**: War beim
+  direkten Öffnen der Seite per Doppelklick (`file://`) unsichtbar, weil
+  Chrome dort externe SVG-Dateien als CSS-Maske aus Sicherheitsgründen
+  blockiert. `--nachvatern-cutout-svg` in `style.css` ist jetzt wieder als
+  Base64-Daten-URI eingebettet (Quelldatei bleibt zusätzlich unter
+  `assets/nachvatern-cutout.svg` erhalten). Alle anderen Bilder bleiben
+  externe Datei-Links, da nur `mask-image` von dem Problem betroffen ist.
+- **„is not a" in der Mission-Pitch-Sektion**: jetzt in Cream/Gold
+  (`var(--c-cream)`) statt Weiß.
+- **„Fatherhood is not a Solo Mission"-Sektion neu gestaltet**: Statt einer
+  zentrierten Textbox mit Bullet-Liste jetzt eine große, dreizeilige
+  Statement-Headline auf der Santa-Fe-Fläche ("Fatherhood" / "is not a" /
+  "Solo Mission"), die mittlere Zeile deutlich größer als eine normale
+  Zwischenzeile. Darunter rechtsbündig eine schmale Spalte mit der
+  Angebots-Liste (leicht gekürzt zu eigenständigen Phrasen, da sie nicht
+  mehr an einen einleitenden Satz anschließt), CTA-Satz und den zwei
+  Buttons. Zugehörige Klassen in `style.css`: `.pitch-heading`,
+  `.pitch-line1/2/3`, `.pitch-bottom`, `.pitch-side` (ersetzen die alten
+  `.pitch-inner`/`.pitch-lead`).
 - **Echte Bilddateien eingebunden**: Alle Fotos/Grafiken (Hero-Foto,
   Daniel-Porträt, Gold-Banner, Gold-Illustration, Gold-Gestrichel,
   „Love is the Answer"-Bild, Nach-Vätern-Sonnenuntergangsfoto,
