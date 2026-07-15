@@ -8,6 +8,13 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Logo-Wasserzeichen durch bereits beschnittene Vorlage ersetzt**
+  (Quelle: `Logo_DoaM_gelb_verschoben.svg`, liegt zusätzlich unter
+  `assets/logo-pitch-watermark.svg`). Ring und Schriftzug sind in dieser
+  Datei bereits so verschoben, dass sie oben und rechts sauber vom Rand
+  angeschnitten werden — daher jetzt `top:0; right:0` (bündig in der
+  Ecke), keine manuellen Offsets mehr nötig wie bei der vorherigen
+  Notlösung.
 - **Logo-Wasserzeichen nachjustiert**: `top` von -5vw auf 3vw (positiv)
   geändert, damit es nicht mehr über die Santa-Fe-Fläche hinaus auf das
   Hero-Foto darüber ragt; `right` von -3.6vw auf -9vw, damit der Anfang

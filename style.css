@@ -599,16 +599,18 @@ p{hyphens:auto;}
   background-color:#B46E54;
   padding:7vw 10vw;
 }
-/* Dekoratives Logo-Wasserzeichen oben rechts, leicht hinter der grauen
-   Header-Spalte verschwindend (wie in der gelieferten PPTX-Vorlage): Ring
-   + Schriftzug in Cream (#FBCD82), auf 40% Deckkraft (= 60% Transparenz),
-   liegt dank negativem z-index hinter dem Fließtext, aber vor der
-   Santa-Fe-Fläche. top bewusst positiv (nicht negativ), damit es nicht
-   über die Fläche hinaus auf das Hero-Foto darüber hinausragt. */
+/* Dekoratives Logo-Wasserzeichen, bündig in der oberen rechten Ecke der
+   Santa-Fe-Fläche: Ring + Schriftzug in Cream (#FBCD82), auf 40%
+   Deckkraft (= 60% Transparenz), liegt dank negativem z-index hinter dem
+   Fließtext, aber vor der Santa-Fe-Fläche. Nutzt die bereits vom Nutzer
+   beschnittene/verschobene SVG-Vorlage (Logo_DoaM_gelb_verschoben.svg) —
+   Ring und Schriftzug sind darin schon so positioniert, dass sie oben und
+   rechts sauber vom Rand angeschnitten werden, daher hier kein weiterer
+   top/right-Offset nötig. */
 .pitch-logo-mark{
   position:absolute;
   z-index:-1;
-  top:3vw; right:-9vw;
+  top:0; right:0;
   width:38vw; height:38vw;
   color:var(--c-cream);
   opacity:0.4;
