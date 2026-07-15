@@ -500,8 +500,7 @@ p{hyphens:auto;}
    gerendert statt eines mit Foto gefüllten mask-image.
    Der vertikale Versatz (transform) wird per JS gesetzt (siehe script.js,
    updateMaskLogo): Das Logo scrollt beim Verlassen des Heros mit derselben
-   Geschwindigkeit nach oben weg wie das Eck-Logo und der Manifest-Text
-   ankommen, und ist verschwunden, sobald diese oben angekommen sind. Der
+   Geschwindigkeit nach oben weg wie das Eck-Logo ankommt, und ist verschwunden, sobald diese oben angekommen sind. Der
    CSS-Wert unten ist nur der Ausgangszustand vor dem ersten Scroll-Event.
 --------------------------------------------------------------------------- */
 .mask-logo{
@@ -524,68 +523,56 @@ p{hyphens:auto;}
 
 
 /* ==========================================================================
-   MANIFEST — schiebt sich als weiße Fläche über den fixen Hero.
+   START — kurze transparente Zone über dem fixen Hero-Foto.
    margin-top:100vh sorgt dafür, dass der Hero erst freigegeben wird,
-   nachdem eine volle Bildschirmhöhe gescrollt wurde.
+   nachdem eine volle Bildschirmhöhe gescrollt wurde. Enthält keinen Text
+   mehr (siehe README), nur noch das Eck-Logo (Markup hier aus
+   Stacking-Context-Gründen, siehe unten) — gibt dem Hero-Foto kurz Raum,
+   bevor die Santa-Fe-Fläche kommt. Die Scroll-Trigger fürs Eck-Logo
+   (Einblendung/Farbwechsel) beziehen sich NICHT auf diese Zone, sondern auf
+   die folgende Pitch-Sektion (siehe script.js) — deshalb ist die Höhe
+   hier unkritisch und bewusst klein gehalten.
    ========================================================================== */
-#manifest{
+#start{
   position:relative;
   /* WICHTIG: bewusst KEIN z-index hier — sonst entsteht ein eigener
      Stacking-Context, in dem das fixierte Eck-Logo (weiter unten) trotz
-     position:fixed hinter späteren Abschnitten verschwindet. */
+     position:fixed hinter späteren, gleichrangigen Abschnitten (z. B.
+     .pitch, .gold-section — beide z-index:30) verschwinden würde. Das
+     Eck-Logo bleibt deshalb hier in #start statt in .pitch verschachtelt,
+     obwohl sich sein Scroll-Trigger auf .pitch bezieht. */
   margin-top:100vh;
-  /* bewusst transparent: das fixe Hero-Foto bleibt sichtbar, der
-     Manifest-Text scrollt normal schnell darüber hinweg */
-  /* Seitliches Padding bewusst schmaler als oben/unten gehalten (statt
-     symmetrisch 16vw), damit der lange letzte Satzteil ("braucht es...
-     Großvätern.") auf einer Zeile Platz hat, wie gewünscht. */
-  padding:14vw 3vw 20vw;
-  color:#fff; /* Fließtext wieder weiß; nur der CTA-Link bleibt Cadet Gray */
-  text-align:center;
+  /* bewusst transparent: das fixe Hero-Foto bleibt sichtbar */
+  padding:3vw 3vw;
 }
-#manifest p{
-  font-size:2.6vw;
-  line-height:3.6vw;
-  hyphens:none;
-  -webkit-hyphens:none;
-  -ms-hyphens:none;
-  text-shadow:0 0.3vw 1.4vw rgba(0,0,0,.55);
-}
-.manifest-lead{font-weight:700;} /* "Um unserer Aufgabe..." fett, wie gewünscht */
-/* "Werde Teil der Gemeinschaft." wird erst nach einer Zeile Freiraum
-   angefügt — margin-top entspricht einer Zeilenhöhe des Fließtexts. */
-#manifest .manifest-cta{margin-top:3.6vw;}
-#manifest p a{
-  color:#fff; /* wieder weiß, wie gewünscht */
-  font-weight:800;
-  text-decoration:underline;
-  text-underline-offset:0.3vw;
-  text-decoration-thickness:0.12vw;
-  transition:color .25s ease-out;
-}
-#manifest p a:hover{color:var(--c-accent);}
 
-/* Eck-Logo: startet absolut in der Ecke von #manifest, wird beim
-   Erreichen der Sektion fixiert (bleibt oben links stehen), und wechselt
-   nach Verlassen der Sektion die Farbe/Deckkraft. Etwas breiter als ein
-   reines Icon, da das Logo den Schriftzug "Dads on a Mission" enthält. */
+/* Eck-Logo: sitzt von Anfang an fixed an seiner finalen Position (scrollt
+   also nie mit der Seite mit), ist aber unsichtbar (opacity:0) bis die
+   Pitch-Sektion ("Fatherhood is not a Solo Mission") erreicht ist — dann
+   blendet es sich an Ort und Stelle ein (Klasse .visible), bleibt weiß,
+   solange die Santa-Fe-Fläche im Hintergrund ist, und wechselt die Farbe
+   erst auf dem weißen Untergrund danach (Trigger-Messung siehe
+   script.js). Etwas breiter als ein reines Icon, da das Logo den
+   Schriftzug "Dads on a Mission" enthält. */
 .corner-logo{
-  position:absolute;
+  position:fixed;
   top:3vw; left:3vw;
   z-index:40;
   width:6.4vw;
   color:#fff;
-  opacity:1;
+  opacity:0;
+  pointer-events:none;
   transition:opacity .3s ease-out, color .3s ease-out;
 }
-.corner-logo.fixed{position:fixed;top:3vw;}
+.corner-logo.visible{opacity:1;pointer-events:auto;}
 .corner-logo.swap{opacity:0.75;color:var(--c-grey);filter:drop-shadow(0 1px 6px rgba(255,255,255,.35));}
-/* Unterseiten ohne Hero/Manifest: Eck-Logo "läuft" von Anfang an dauerhaft
+/* Unterseiten ohne Hero/Start-Zone: Eck-Logo "läuft" von Anfang an dauerhaft
    fix mit (kein Scroll-Trigger nötig, da kein dunkles Hero-Foto darunter
    liegt). Dark Leather auf hellem Untergrund, siehe Unterseiten-HTML. */
 .corner-logo.static-fixed{
   position:fixed;
   opacity:0.85;
+  pointer-events:auto;
   color:var(--c-ink);
 }
 .corner-logo svg{display:block;width:100%;height:auto;}
@@ -594,15 +581,7 @@ p{hyphens:auto;}
 .corner-logo-link:hover svg{transform:scale(1.08);}
 
 @media (max-width:900px){
-  #manifest{margin-top:calc(100vh - var(--header-h-mobile));padding:18% 8%;}
-  #manifest p{font-size:19px;line-height:29px;}
-  #manifest .manifest-cta{margin-top:29px;}
-  #manifest p a{text-underline-offset:3px;text-decoration-thickness:2px;}
-  /* Die festen Zeilenumbrüche (nach Komma 1 und 2) sind für die breite
-     Desktop-Ansicht gedacht — auf schmalen Handybildschirmen wäre speziell
-     der letzte, unumbrochene Teil ("braucht es... Großvätern.") zu lang
-     für eine Zeile. Auf Mobil daher natürlicher, automatischer Umbruch. */
-  #manifest .manifest-lead br.lb{display:none;}
+  #start{margin-top:calc(100vh - var(--header-h-mobile));padding:6% 8%;}
   .corner-logo{display:none;}
 }
 
@@ -611,15 +590,31 @@ p{hyphens:auto;}
    Farbfläche (#B46E54, kein Verlauf) mit großer, mehrzeiliger Statement-
    Headline ("Fatherhood / is not a / Solo Mission", die mittlere Zeile
    bewusst doppelt so groß wie eine normale Zwischenzeile), darunter
-   rechtsbündig eine schmale Spalte mit Angebots-Liste, CTA-Satz und zwei
-   Buttons zur Gruppenwahl.
+   zweispaltig links Einleitungssatz + Angebots-Liste + CTA + zwei Buttons,
+   rechts ein persönliches Zitat mit großem dekorativem Anführungszeichen.
    ========================================================================== */
 .pitch{
   position:relative;
   z-index:30;
   background-color:#B46E54;
-  padding:7vw 8vw;
+  padding:7vw 10vw;
 }
+/* Dekoratives Logo-Wasserzeichen oben rechts, leicht hinter der grauen
+   Header-Spalte verschwindend (wie in der gelieferten PPTX-Vorlage): Ring
+   + Schriftzug in Cream (#FBCD82), auf 40% Deckkraft (= 60% Transparenz),
+   liegt dank negativem z-index hinter dem Fließtext, aber vor der
+   Santa-Fe-Fläche. top bewusst positiv (nicht negativ), damit es nicht
+   über die Fläche hinaus auf das Hero-Foto darüber hinausragt. */
+.pitch-logo-mark{
+  position:absolute;
+  z-index:-1;
+  top:3vw; right:-9vw;
+  width:38vw; height:38vw;
+  color:var(--c-cream);
+  opacity:0.4;
+  pointer-events:none;
+}
+.pitch-logo-mark svg{display:block;width:100%;height:100%;fill:currentColor;}
 .pitch-heading{
   margin:0;
   color:#fff;
@@ -643,40 +638,46 @@ p{hyphens:auto;}
   color:var(--c-cream);
   margin:0.6vw 0;
 }
-.pitch-bottom{
+.pitch-content{
   display:flex;
-  justify-content:flex-end;
-  margin-top:4vw;
+  gap:6vw;
+  margin-top:4.5vw;
 }
-.pitch-side{
-  max-width:24vw;
+.pitch-offer{
+  flex:1 1 52%;
   color:#fff;
+}
+.pitch-intro{
+  font-size:1.15vw;
+  line-height:1.9vw;
+  max-width:36vw;
+  margin:0 0 1.8vw;
 }
 .pitch-list{
   list-style:none;
   text-align:left;
-  margin:0 0 1.6vw;
+  margin:0 0 1.8vw;
   padding:0;
 }
 .pitch-list li{
   position:relative;
   padding-left:1.3vw;
-  font-size:1.1vw;
-  line-height:1.7vw;
+  font-size:1.15vw;
+  line-height:1.9vw;
   margin-bottom:0.4vw;
 }
 .pitch-list li::before{
   content:'';
   position:absolute;
-  left:0; top:0.65vw;
+  left:0; top:0.75vw;
   width:0.4vw; height:0.4vw;
   background-color:var(--c-cream);
 }
 .pitch-cta{
-  font-size:1.15vw;
-  line-height:1.7vw;
+  font-size:1.2vw;
+  line-height:1.9vw;
   font-weight:800;
-  margin-bottom:1.6vw;
+  margin-bottom:1.8vw;
 }
 .pitch-buttons{
   display:flex;
@@ -698,19 +699,48 @@ p{hyphens:auto;}
   background-color:var(--c-ink);
   color:#fff;
 }
+.pitch-quote{
+  flex:1 1 40%;
+  position:relative;
+  margin:0;
+  padding:3.4vw 2.4vw 2.6vw;
+  background-color:rgba(255,255,255,.09);
+  box-shadow:0 1vw 2.5vw rgba(80,47,32,.18);
+  color:#fff;
+}
+.pitch-quote::before{
+  content:'\201E';
+  position:absolute;
+  top:0.4vw; left:1.1vw;
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:6vw;
+  line-height:1;
+  color:var(--c-cream);
+}
+.pitch-quote p{
+  font-style:italic;
+  font-size:1.1vw;
+  line-height:1.85vw;
+  margin:0 0 1.1vw;
+  opacity:.95;
+}
+.pitch-quote p:last-child{margin-bottom:0;}
 
 @media (max-width:900px){
   .pitch{padding:16% 8%;}
   .pitch-line1,.pitch-line3{font-size:44px;line-height:44px;}
   .pitch-line2{font-size:22px;line-height:26px;margin:8px 0;}
-  .pitch-bottom{justify-content:flex-start;margin-top:8%;}
-  .pitch-side{max-width:100%;}
+  .pitch-content{flex-direction:column;gap:10%;margin-top:8%;}
+  .pitch-intro{max-width:100%;font-size:17px;line-height:26px;margin-bottom:6%;}
   .pitch-list{margin-bottom:6%;}
   .pitch-list li{font-size:17px;line-height:26px;padding-left:22px;margin-bottom:8px;}
-  .pitch-list li::before{width:7px;height:7px;top:9px;}
   .pitch-cta{font-size:17px;line-height:26px;margin-bottom:6%;}
   .pitch-buttons{flex-direction:column;gap:12px;width:100%;}
   .pitch-btn{padding:14px 20px;text-align:center;}
+  .pitch-quote{padding:56px 24px 28px;}
+  .pitch-quote::before{font-size:64px;top:6px;left:16px;}
+  .pitch-quote p{font-size:17px;line-height:26px;margin-bottom:12px;}
 }
 
 /* ==========================================================================
@@ -721,7 +751,7 @@ p{hyphens:auto;}
   z-index:30;
   margin-right:var(--edge);
   /* WICHTIG: bewusst kein Hintergrund hier — sonst verdeckt er den
-     transparenten #manifest-Effekt über dem fixen Hero-Foto. */
+     transparenten #start-Effekt über dem fixen Hero-Foto. */
 }
 .section{padding:9vw 10vw;background-color:var(--c-bg);}
 .section .eyebrow{
@@ -1049,8 +1079,8 @@ p{hyphens:auto;}
 }
 .nachvatern-photo-wrap .nachvatern-photo{
   position:absolute;
-  top:-4%; left:0;
-  width:100%; height:108%; /* so klein wie möglich — Kanten praktisch bündig mit dem Container, minimaler Puffer nur für den (dezenten) Parallax-Weg */
+  top:-20%; left:0;
+  width:100%; height:140%; /* großzügiger Puffer (±20% der Sektionshöhe), damit der Parallax-Weg deutlich sichtbar ist */
   background-image:var(--nachvatern-photo);
   background-size:cover;
   background-position:center; /* neues Foto ist bereits mittig komponiert (Silhouette bei ~48%, Sonne bei ~51%) */

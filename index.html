@@ -100,50 +100,57 @@
       <svg viewBox="0 0 210 210" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path style="fill:#ffffff;fill-opacity:1;stroke-width:0.264583" d="M 108.29781,6.4218302 C 52.695097,5.673423 6.3625908,45.864101 6.3626421,105.2086 9.7301823,164.92728 42.592305,205.20875 103.05933,204.83452 157.9137,201.84116 205.67874,158.56626 203.43361,102.96353 199.31771,55.59271 163.90054,9.7893706 108.29781,6.4218302 Z m -5.378,15.2094068 c 45.56339,7.2e-5 81.75144,40.678257 83.24822,86.241643 0.74829,37.3315 -36.18812,73.51955 -82.87404,79.50645 -43.6925,2.61918 -78.383849,-30.20128 -81.003162,-82.49987 6.8e-5,-45.563388 33.194708,-78.758028 80.628982,-83.248223 z" /><text style="font-size:56.4444px;fill:#ffffff" x="33.477898" y="111.69743"><tspan style="font-weight:800;font-family:'Geom', sans-serif;fill:#ffffff" x="33.477898" y="111.69743">Dads</tspan></text><text style="font-size:25.2236px;fill:#ffffff" x="36.118958" y="136.92235"><tspan style="font-weight:400;font-family:'Geom', sans-serif;fill:#ffffff" x="36.118958" y="136.92235">on a Mission</tspan></text></svg>
     </div>
 
-    <a class="scrollcue" href="#manifest" id="scrollCue">
+    <a class="scrollcue" href="#start" id="scrollCue">
       <span class="scrollcue-text">Hier geht&rsquo;s<br>weiter</span>
       <img class="scrollcue-arrow" src="assets/scroll-arrow.png" alt="" aria-hidden="true">
     </a>
   </div>
-  <div id="hero" class="visually-hidden"></div>
 
   <!-- ================= CONTAINER: gesamter scrollender Inhalt ================= -->
   <main id="container">
 
-    <!-- MANIFEST: schiebt sich über das fixe Hero-Foto, Text bleibt normal-schnell,
-         das Foto dahinter steht still — das ist der erste Scroll-Speed-Kontrast. -->
-    <section id="manifest">
+    <!-- START: kurze transparente Übergangszone über dem fixen Hero-Foto.
+         Enthält das Eck-Logo (bleibt hier aus technischen Gründen: .pitch
+         hat einen eigenen z-index, ein dort verschachteltes fixiertes
+         Logo würde hinter späteren gleichrangigen Abschnitten verschwinden).
+         Der Scroll-Trigger fürs Fixieren/Farbwechsel bezieht sich aber auf
+         die folgende Pitch-Sektion, nicht auf diese Zone hier — siehe
+         script.js. -->
+    <section id="start">
       <div class="corner-logo" id="cornerLogo">
-        <a href="#hero" aria-label="Zur Startseite" class="corner-logo-link"><svg viewBox="0 0 210 210" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path id="path9" style="fill:currentColor;fill-opacity:1;stroke-width:0.264583" d="M 108.29781,6.4218302 C 52.695097,5.673423 6.3625908,45.864101 6.3626421,105.2086 9.7301823,164.92728 42.592305,205.20875 103.05933,204.83452 157.9137,201.84116 205.67874,158.56626 203.43361,102.96353 199.31771,55.59271 163.90054,9.7893706 108.29781,6.4218302 Z m -5.378,15.2094068 c 45.56339,7.2e-5 81.75144,40.678257 83.24822,86.241643 0.74829,37.3315 -36.18812,73.51955 -82.87404,79.50645 -43.6925,2.61918 -78.383849,-30.20128 -81.003162,-82.49987 6.8e-5,-45.563388 33.194708,-78.758028 80.628982,-83.248223 z" /><text style="font-size:56.4444px;fill:currentColor" x="33.477898" y="111.69743"><tspan style="font-weight:800;font-family:'Geom', sans-serif;fill:currentColor" x="33.477898" y="111.69743">Dads</tspan></text><text style="font-size:25.2236px;fill:currentColor" x="36.118958" y="136.92235"><tspan style="font-weight:400;font-family:'Geom', sans-serif;fill:currentColor" x="36.118958" y="136.92235">on a Mission</tspan></text></svg></a>
+        <a href="#" aria-label="Zur Startseite" class="corner-logo-link"><svg viewBox="0 0 210 210" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path id="path9" style="fill:currentColor;fill-opacity:1;stroke-width:0.264583" d="M 108.29781,6.4218302 C 52.695097,5.673423 6.3625908,45.864101 6.3626421,105.2086 9.7301823,164.92728 42.592305,205.20875 103.05933,204.83452 157.9137,201.84116 205.67874,158.56626 203.43361,102.96353 199.31771,55.59271 163.90054,9.7893706 108.29781,6.4218302 Z m -5.378,15.2094068 c 45.56339,7.2e-5 81.75144,40.678257 83.24822,86.241643 0.74829,37.3315 -36.18812,73.51955 -82.87404,79.50645 -43.6925,2.61918 -78.383849,-30.20128 -81.003162,-82.49987 6.8e-5,-45.563388 33.194708,-78.758028 80.628982,-83.248223 z" /><text style="font-size:56.4444px;fill:currentColor" x="33.477898" y="111.69743"><tspan style="font-weight:800;font-family:'Geom', sans-serif;fill:currentColor" x="33.477898" y="111.69743">Dads</tspan></text><text style="font-size:25.2236px;fill:currentColor" x="36.118958" y="136.92235"><tspan style="font-weight:400;font-family:'Geom', sans-serif;fill:currentColor" x="36.118958" y="136.92235">on a Mission</tspan></text></svg></a>
       </div>
-      <p class="manifest-lead">
-        Um unserer Aufgabe gerecht zu werden,<br class="lb">
-        die Kinder gut in die Welt zu bringen,<br class="lb">
-        braucht es eine Gemeinschaft von Vätern,<br class="lb">
-        Onkels und Großvätern.
-      </p>
-      <p class="manifest-cta">
-        <a href="#kontakt">Werde Teil der Gemeinschaft.</a>
-      </p>
     </section>
 
     <!-- MISSION-PITCH: erste farbige Fläche der Seite — große Statement-
          Typografie auf Santa-Fe-Fläche ("Fatherhood is not a Solo
-         Mission"), darunter rechtsbündig die Angebots-Liste und zwei
-         Buttons zur Gruppenwahl. -->
+         Mission"), darunter zweispaltig links der Angebots-Text mit Liste
+         und Buttons, rechts ein persönliches Zitat. Das Eck-Logo (oben in
+         #start) fixiert sich erst, sobald diese Fläche bereits sichtbar
+         ist, bleibt weiß bis zum Ende dieser Fläche und wechselt erst auf
+         dem folgenden weißen Untergrund (.gold-section) die Farbe. -->
     <section class="pitch" id="mission">
+      <div class="pitch-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg"><path d="M 108.29781,6.4218302 C 52.695097,5.673423 6.3625908,45.864101 6.3626421,105.2086 9.7301823,164.92728 42.592305,205.20875 103.05933,204.83452 157.9137,201.84116 205.67874,158.56626 203.43361,102.96353 199.31771,55.59271 163.90054,9.7893706 108.29781,6.4218302 Z m -5.378,15.2094068 c 45.56339,7.2e-5 81.75144,40.678257 83.24822,86.241643 0.74829,37.3315 -36.18812,73.51955 -82.87404,79.50645 -43.6925,2.61918 -78.383849,-30.20128 -81.003162,-82.49987 6.8e-5,-45.563388 33.194708,-78.758028 80.628982,-83.248223 z" /><text style="font-size:56.4444px" x="33.477898" y="111.69743"><tspan style="font-weight:800;font-family:'Geom', sans-serif" x="33.477898" y="111.69743">Dads</tspan></text><text style="font-size:25.2236px" x="36.118958" y="136.92235"><tspan style="font-weight:400;font-family:'Geom', sans-serif" x="36.118958" y="136.92235">on a Mission</tspan></text></svg>
+      </div>
       <h2 class="pitch-heading">
         <span class="pitch-line1">Fatherhood</span>
         <span class="pitch-line2">is not a</span>
         <span class="pitch-line3">Solo Mission</span>
       </h2>
-      <div class="pitch-bottom">
-        <div class="pitch-side">
+      <div class="pitch-content">
+        <blockquote class="pitch-quote">
+          <p>Ich habe lange geglaubt, ich müsste alles mit mir selbst ausmachen. Also habe ich funktioniert. Verantwortung übernommen. Gleichmütig gelächelt.</p>
+          <p>Nach außen wirkte alles gut. Innerlich fühlte ich mich nicht lebendig und verbunden.</p>
+          <p>Heute weiß ich um die Kraft, die in einem Kreis von Männern erwächst, die sich offen und ehrlich zeigen. Die einander herausfordern und halten.</p>
+        </blockquote>
+        <div class="pitch-offer">
+          <p class="pitch-intro">Um unserer Aufgabe gerecht zu werden, die Kinder gut in die Welt zu bringen, braucht es eine Gemeinschaft von Vätern, Onkels und Großvätern. Dads on a Mission bietet Räume, um</p>
           <ul class="pitch-list">
             <li>Dein Gold als Vater mit anderen feiern</li>
             <li>Klarheit in Deiner Rolle als Vater finden</li>
-            <li>Deine Wünsche in der Partnerschaft klären</li>
-            <li>Familie und Beruf miteinander vereinbaren</li>
+            <li>Deine Wünsche in der Partnerschaft zu klären und</li>
+            <li>Familie und Beruf miteinander in Einklang zu bringen.</li>
           </ul>
           <p class="pitch-cta">Werde Teil der Gemeinschaft.</p>
           <div class="pitch-buttons">

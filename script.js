@@ -48,12 +48,22 @@
   contactClose.addEventListener("click", function () { toggleContact(false); });
 
   /* ---- Scrollcue "Hier geht's weiter": schnelles Ausblenden bei Klick
-         oder sobald zu scrollen begonnen wird ----------------------------
+         oder sobald zu scrollen begonnen wird. Der Klick scrollt gezielt
+         bis zum Anfang von "Fatherhood is not a Solo Mission" (#mission)
+         statt nur bis zum Anfang der kurzen, transparenten #start-Zone —
+         sonst bliebe ein Teil des Hero-Fotos sichtbar stehen.
          Nur auf der Startseite vorhanden. */
   var scrollCue = document.getElementById("scrollCue");
   if (scrollCue) {
     var hideScrollCue = function () { scrollCue.classList.add("is-hidden"); };
-    scrollCue.addEventListener("click", hideScrollCue);
+    var missionSection = document.getElementById("mission");
+    scrollCue.addEventListener("click", function (e) {
+      hideScrollCue();
+      if (missionSection) {
+        e.preventDefault();
+        missionSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
     window.addEventListener("scroll", function () {
       if (window.scrollY > 10) {
         hideScrollCue();
@@ -63,38 +73,44 @@
     }, { passive: true });
   }
 
-  /* ---- Eck-Logo: fixiert sich sobald #manifest erreicht ist,
-         wechselt Farbe/Deckkraft sobald #manifest verlassen wird -------
-         Nur auf der Startseite vorhanden (dort gibt es #manifest/#maskLogo).
-         Auf Unterseiten ist das Eck-Logo stattdessen dauerhaft fix per CSS
-         positioniert (Klasse .static-fixed in index.html/den Unterseiten),
-         daher wird dieser ganze Block dort übersprungen. */
-  var manifest = document.getElementById("manifest");
+  /* ---- Eck-Logo: sitzt von Anfang an fixed an seiner finalen Position
+         (scrollt nie mit), blendet sich aber erst ein, sobald die
+         Santa-Fe-Fläche ("Fatherhood is not a Solo Mission", #mission)
+         bereits sichtbar ist — bleibt weiß, solange diese Fläche im
+         Hintergrund ist, und wechselt die Farbe erst auf dem folgenden
+         weißen Untergrund (.gold-section). Deshalb Trigger-Punkte an
+         #mission gemessen, nicht an der kurzen transparenten #start-Zone
+         davor.
+         Nur auf der Startseite vorhanden (dort gibt es #mission/#maskLogo).
+         Auf Unterseiten ist das Eck-Logo stattdessen dauerhaft sichtbar
+         per CSS positioniert (Klasse .static-fixed in index.html/den
+         Unterseiten), daher wird dieser ganze Block dort übersprungen. */
+  var pitchSection = document.getElementById("mission");
   var cornerLogo = document.getElementById("cornerLogo");
   var maskLogo = document.getElementById("maskLogo");
 
-  if (manifest && cornerLogo && maskLogo) {
+  if (pitchSection && cornerLogo && maskLogo) {
     var distanceTop = 0;
     var distanceBottom = 0;
 
-    var measureManifest = function () {
-      var rect = manifest.getBoundingClientRect();
+    var measurePitchSection = function () {
+      var rect = pitchSection.getBoundingClientRect();
       distanceTop = rect.top + window.scrollY;
-      distanceBottom = distanceTop + manifest.offsetHeight;
+      distanceBottom = distanceTop + pitchSection.offsetHeight;
     };
 
     var updateCornerLogo = function () {
       var y = window.scrollY;
-      cornerLogo.classList.toggle("fixed", y >= distanceTop);
+      cornerLogo.classList.toggle("visible", y >= distanceTop);
       cornerLogo.classList.toggle("swap", y >= distanceBottom);
     };
 
     /* Großes Hero-Logo: scrollt mit derselben Geschwindigkeit (1:1 mit
-       scrollY) nach oben weg wie das Eck-Logo/der Manifest-Text ankommen,
-       und ist vollständig verschwunden, sobald distanceTop erreicht ist —
-       genau der Punkt, an dem sich das Eck-Logo oben fixiert. Das Hero-Foto
-       selbst (#video) bleibt dabei unverändert fix stehen; nur das Logo
-       bewegt sich, unabhängig vom fixierten Hintergrund. */
+       scrollY) nach oben weg wie das Eck-Logo ankommt, und ist vollständig
+       verschwunden, sobald distanceTop erreicht ist — genau der Punkt, an
+       dem sich das Eck-Logo oben fixiert. Das Hero-Foto selbst (#video)
+       bleibt dabei unverändert fix stehen; nur das Logo bewegt sich,
+       unabhängig vom fixierten Hintergrund. */
     var updateMaskLogo = function () {
       var shift = Math.min(window.scrollY, distanceTop);
       maskLogo.style.transform = "translate3d(-50%, calc(-50% - " + shift + "px), 0)";
@@ -114,11 +130,11 @@
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", function () {
-      measureManifest();
+      measurePitchSection();
       onScroll();
     });
 
-    measureManifest();
+    measurePitchSection();
     updateCornerLogo();
     updateMaskLogo();
   }
@@ -169,7 +185,7 @@
       var rect = nachvaternShowcase.getBoundingClientRect();
       if (rect.bottom > 0 && rect.top < window.innerHeight) {
         var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-        var shift = (progress - 0.5) * (rect.height * 0.07); /* an minimalen Foto-Puffer angepasst (Foto-Kanten sollen bündig sein) */
+        var shift = (progress - 0.5) * (rect.height * 0.35); /* deutlich verstärkt, an den größeren Foto-Puffer angepasst (±20%) */
         nachvaternPhoto.style.transform = "translate3d(0," + shift.toFixed(1) + "px,0)";
       }
     };

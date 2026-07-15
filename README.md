@@ -8,6 +8,96 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Logo-Wasserzeichen nachjustiert**: `top` von -5vw auf 3vw (positiv)
+  geändert, damit es nicht mehr über die Santa-Fe-Fläche hinaus auf das
+  Hero-Foto darüber ragt; `right` von -3.6vw auf -9vw, damit der Anfang
+  des Schriftzugs jetzt leicht hinter der grauen Header-Spalte
+  verschwindet.
+- **Dekoratives Logo-Wasserzeichen in der Pitch-Sektion** (Quelle:
+  `fatherhood_solo.pptx`): Ring + Schriftzug in Cream (`#FBCD82`), 40%
+  Deckkraft (= 60% Transparenz wie gewünscht), oben rechts positioniert
+  und leicht über den Rand hinausragend — genau wie in der PPTX-Vorlage
+  (dort per `alphaModFix` auf 45% gesetzt; das SVG selbst war schon in
+  `#FBCD82` gefüllt). Neue Klasse `.pitch-logo-mark` in `style.css`,
+  liegt per `z-index:-1` hinter dem Fließtext, aber vor der Santa-Fe-
+  Fläche.
+- **Eck-Logo-Link zeigt jetzt auf den Seitenanfang statt auf `#hero`**:
+  Auf der Startseite `href="#"`, auf den Unterseiten `href="index.html"`
+  (ohne Anker). Das dafür genutzte, unsichtbare `<div id="hero">` in
+  `index.html` ist raus, da nicht mehr gebraucht.
+- **Eck-Logo "poppte" beim Erscheinen**: Es scrollte bisher normal mit der
+  Seite mit (position:absolute) und wurde erst spät per JS auf
+  position:fixed umgeschaltet — dadurch fuhr es sichtbar nach oben aus dem
+  Bild und "poppte" dann verzögert wieder rein. Jetzt sitzt `.corner-logo`
+  von Anfang an fest auf seiner finalen Position (`position:fixed`,
+  scrollt also nie mit) und wird nur noch per Opacity ein-/ausgeblendet.
+  Die JS-Klasse dafür heißt jetzt `.visible` statt `.fixed` (siehe
+  `updateCornerLogo()` in `script.js`), da sie nur noch die Sichtbarkeit
+  steuert, nicht mehr die Positionierungsart.
+- **Eck-Logo: Fixier-/Farbwechsel-Trigger auf die Pitch-Sektion umgestellt**:
+  Fixiert sich jetzt erst, sobald die Santa-Fe-Fläche („Fatherhood is not
+  a Solo Mission") bereits sichtbar ist (Trigger an `#mission` statt an
+  der kurzen `#start`-Zone gemessen), bleibt dort durchgängig weiß und
+  wechselt die Farbe erst auf dem folgenden weißen Untergrund
+  (`.gold-section`). Das Logo-Markup selbst bleibt bewusst in `#start`
+  (nicht in `.pitch` verschachtelt) — `.pitch` hat einen eigenen z-index,
+  ein dort verschachteltes `position:fixed`-Element würde hinter späteren
+  gleichrangigen Abschnitten verschwinden. `#start`s Padding ist dadurch
+  wieder unkritisch und auf 3vw reduziert (`measurePitchSection()` in
+  `script.js`, `#start`/`.corner-logo`-Kommentare in `style.css`).
+- **Drei Korrekturen an der Start-/Scroll-Trigger-Zone**:
+  1. *Eck-Logo stand beim Fixieren halb auf der farbigen Fläche*: Die
+     Zone (bisher `#manifest`, jetzt `#start`) war nach dem Entfernen des
+     Manifest-Texts zu niedrig (padding 3vw) — das Eck-Logo (top:3vw,
+     ~6.4vw hoch) brauchte aber mindestens ~9.4vw Platz, um beim Fixieren
+     komplett innerhalb der transparenten Zone zu stehen. Padding jetzt
+     6vw 3vw (12vw Gesamthöhe), das Logo steht jetzt die ganze Zeit
+     vollständig auf einem einheitlichen Hintergrund.
+  2. *„Hier geht's weiter"-Klick scrollte nicht weit genug*: Der Klick
+     sprang bisher nativ nur zum Anfang der (jetzt wieder etwas höheren)
+     transparenten Zone — ein Teil des Hero-Fotos blieb sichtbar. Der
+     Klick auf `#scrollCue` scrollt jetzt gezielt per JS
+     (`scrollIntoView`) bis zum Anfang von „Fatherhood is not a Solo
+     Mission" (`#mission`), unabhängig von der Höhe der Start-Zone.
+  3. *`#manifest` → `#start` umbenannt*: an allen Stellen ersetzt
+     (`index.html`, `style.css`, `script.js`, sowie der Kommentar
+     „kein Hero/Manifest-Scroll-Trigger nötig" auf allen sieben
+     Unterseiten). Die alte Bezeichnung „Manifest" bezog sich auf den
+     inzwischen entfernten Manifest-Text und war nicht mehr zutreffend.
+- **Manifest-Text im Hero-Bereich entfernt**: „Um unserer Aufgabe...“ /
+  „Werde Teil der Gemeinschaft.“ stand doppelt auf der Seite — einmal im
+  `#manifest`-Bereich direkt über dem Hero-Foto, einmal (aktualisiert) in
+  der Mission-Pitch-Sektion. Der Text im Hero ist jetzt raus; `#manifest`
+  bleibt als schlanke, unsichtbare Übergangszone bestehen (nur noch der
+  Scroll-Trigger fürs Eck-Logo und den Hero-Logo-Scroll-Effekt, Padding
+  von 14vw/20vw auf 3vw reduziert). Direkt nach dem Hero-Foto folgt jetzt
+  „Fatherhood is not a Solo Mission“.
+- **Mission-Pitch-Sektion: drei Feinjustierungen**: Spaltenreihenfolge
+  vertauscht (Zitat jetzt links, Angebot mit Buttons rechts); seitliches
+  Padding von 8vw auf 10vw erhöht — passend zu allen anderen Sektionen
+  (`.section`, `.gold-intro` etc. nutzen ebenfalls 10vw), dadurch läuft
+  das fixierte Eck-Logo beim Scrollen nicht mehr über die Headline;
+  Zitat-Block hat jetzt eine dezente Kartenoptik (leicht abgesetzter
+  heller Hintergrund `rgba(255,255,255,.09)` + weicher Schatten, bewusst
+  ohne `border-radius`, da die restliche Seite komplett kantig gestaltet
+  ist).
+- **„Fatherhood is not a Solo Mission"-Sektion: Text aktualisiert** (Quelle:
+  `fatherhood_solo.pptx`). Die große Statement-Headline bleibt unverändert,
+  darunter jetzt zweispaltig: links ein neuer Einleitungssatz + die
+  aktualisierte Angebots-Liste + CTA + die zwei bestehenden Buttons
+  (Tübingen / Online-Gruppe, unverändert), rechts neu ein persönliches
+  Zitat mit großem dekorativem Anführungszeichen (`.pitch-quote`). Neue
+  Klassen: `.pitch-content` (Zwei-Spalten-Flexbox), `.pitch-offer`,
+  `.pitch-intro`, `.pitch-quote` — ersetzen `.pitch-bottom`/`.pitch-side`.
+- **Parallax-Effekt auf „Wie ich arbeite." deutlich verstärkt**: Der
+  Foto-Puffer im Nach-Vätern-Bereich wurde von ±4% auf ±20% der
+  Sektionshöhe vergrößert (`.nachvatern-photo` in `style.css`), die
+  Bewegung selbst im Script von Faktor 0.07 auf 0.35 erhöht
+  (`updateNachvaternParallax()` in `script.js`) — die Bewegung beim
+  Scrollen ist jetzt gut fünfmal so groß und deutlich sichtbar.
+  Nebeneffekt: Das Foto ist dadurch etwas stärker angeschnitten/gezoomt
+  als vorher, da der größere Puffer mehr vom Bildrand für den Bewegungsweg
+  „verbraucht".
 - **Cutout-Logo-Wasserzeichen auf „Wie ich arbeite." repariert**: War beim
   direkten Öffnen der Seite per Doppelklick (`file://`) unsichtbar, weil
   Chrome dort externe SVG-Dateien als CSS-Maske aus Sicherheitsgründen
