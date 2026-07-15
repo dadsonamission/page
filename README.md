@@ -8,6 +8,11 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Logo-Wasserzeichen nachjustiert**: `top` von -5vw auf 3vw (positiv)
+  geändert, damit es nicht mehr über die Santa-Fe-Fläche hinaus auf das
+  Hero-Foto darüber ragt; `right` von -3.6vw auf -9vw, damit der Anfang
+  des Schriftzugs jetzt leicht hinter der grauen Header-Spalte
+  verschwindet.
 - **Dekoratives Logo-Wasserzeichen in der Pitch-Sektion** (Quelle:
   `fatherhood_solo.pptx`): Ring + Schriftzug in Cream (`#FBCD82`), 40%
   Deckkraft (= 60% Transparenz wie gewünscht), oben rechts positioniert
