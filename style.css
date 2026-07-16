@@ -331,6 +331,20 @@ p{hyphens:auto;}
   transition:transform .5s ease-out;
 }
 #contactSidebar.open{transform:translate3d(0,0,0);}
+/* Dekoratives Logo-Wasserzeichen oben rechts auf der Kontakt-Fläche,
+   dieselbe bereits beschnittene/verschobene Vorlage wie in der
+   Pitch-Sektion (siehe dort) — daher auch hier bündig top:0/right:0.
+   Deutlich kleiner als dort, da die Kontakt-Fläche selbst schmaler ist. */
+.contact-logo-mark{
+  position:absolute;
+  z-index:-1;
+  top:0; right:0;
+  width:20vw; height:20vw;
+  color:var(--c-cream);
+  opacity:0.4;
+  pointer-events:none;
+}
+.contact-logo-mark svg{display:block;width:100%;height:100%;fill:currentColor;}
 #contactSidebar .close{
   cursor:pointer;
   position:absolute;
@@ -411,6 +425,7 @@ p{hyphens:auto;}
     transform:translate3d(0,100%,0);
   }
   #contactSidebar.open{transform:translate3d(0,0,0);}
+  .contact-logo-mark{width:140px;height:140px;}
   #contactSidebar .close{top:16px;right:16px;font-size:26px;}
   #contactSidebar .contact-panel-inner{padding:20% 8% 8%;}
   #contactSidebar .contact-panel-top{
@@ -1131,8 +1146,8 @@ p{hyphens:auto;}
     max-width:100%;
     width:92%;
     top:58.7%;
-    font-size:30px;
-    line-height:40px;
+    font-size:20px;
+    line-height:28px;
   }
 }
 
