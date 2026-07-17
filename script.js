@@ -46,6 +46,14 @@
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleContact(); }
   });
   contactClose.addEventListener("click", function () { toggleContact(false); });
+  // Schließt die Kontakt-Fläche auch, wenn irgendwo auf der noch
+  // sichtbaren Seite daneben geklickt wird (nicht auf die Fläche selbst
+  // oder den Kontakt-Reiter, die haben ihre eigene Klick-Logik oben).
+  document.addEventListener("click", function (e) {
+    if (!contactSidebar.classList.contains("open")) return;
+    if (contactSidebar.contains(e.target) || contactTab.contains(e.target)) return;
+    toggleContact(false);
+  });
 
   /* ---- Scrollcue "Hier geht's weiter": schnelles Ausblenden bei Klick
          oder sobald zu scrollen begonnen wird. Der Klick scrollt gezielt
@@ -76,16 +84,18 @@
   /* ---- Eck-Logo: sitzt von Anfang an fixed an seiner finalen Position
          (scrollt nie mit), blendet sich aber erst ein, sobald die
          Santa-Fe-Fläche ("Fatherhood is not a Solo Mission", #mission)
-         bereits sichtbar ist — bleibt weiß, solange diese Fläche im
-         Hintergrund ist, und wechselt die Farbe erst auf dem folgenden
-         weißen Untergrund (.gold-section). Deshalb Trigger-Punkte an
-         #mission gemessen, nicht an der kurzen transparenten #start-Zone
-         davor.
+         bereits sichtbar ist — bleibt weiß, solange diese Fläche ODER der
+         anschließende dunkle Cutout ("Nach-Vätern", #goldCutoutShowcase)
+         im Hintergrund sind, und wechselt die Farbe erst danach, auf dem
+         weißen Reflexionstext. Deshalb wird distanceBottom (falls
+         vorhanden) am Ende des Cutouts gemessen, nicht am Ende von
+         #mission.
          Nur auf der Startseite vorhanden (dort gibt es #mission/#maskLogo).
          Auf Unterseiten ist das Eck-Logo stattdessen dauerhaft sichtbar
          per CSS positioniert (Klasse .static-fixed in index.html/den
          Unterseiten), daher wird dieser ganze Block dort übersprungen. */
   var pitchSection = document.getElementById("mission");
+  var goldCutout = document.getElementById("goldCutoutShowcase");
   var cornerLogo = document.getElementById("cornerLogo");
   var maskLogo = document.getElementById("maskLogo");
 
@@ -96,7 +106,12 @@
     var measurePitchSection = function () {
       var rect = pitchSection.getBoundingClientRect();
       distanceTop = rect.top + window.scrollY;
-      distanceBottom = distanceTop + pitchSection.offsetHeight;
+      if (goldCutout) {
+        var cutoutRect = goldCutout.getBoundingClientRect();
+        distanceBottom = cutoutRect.top + window.scrollY + goldCutout.offsetHeight;
+      } else {
+        distanceBottom = distanceTop + pitchSection.offsetHeight;
+      }
     };
 
     var updateCornerLogo = function () {
@@ -185,7 +200,7 @@
       var rect = nachvaternShowcase.getBoundingClientRect();
       if (rect.bottom > 0 && rect.top < window.innerHeight) {
         var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-        var shift = (progress - 0.5) * (rect.height * 0.35); /* deutlich verstärkt, an den größeren Foto-Puffer angepasst (±20%) */
+        var shift = (progress - 0.5) * (rect.height * 0.70); /* nochmals deutlich verstärkt, an den größeren Foto-Puffer angepasst (±35%) */
         nachvaternPhoto.style.transform = "translate3d(0," + shift.toFixed(1) + "px,0)";
       }
     };
@@ -204,6 +219,40 @@
     window.addEventListener("scroll", onNvScroll, { passive: true });
     window.addEventListener("resize", onNvScroll);
     updateNachvaternParallax();
+  }
+
+  /* ---- "Nach-Vätern"-Cutout im Abschnitt "Das Gold der Vaterschaft":
+         gleicher, deutlich verstärkter Parallax-Effekt wie oben, nur mit
+         einem größeren Foto-Puffer, da der Ausschnitt hier zusätzlich für
+         den kompakten Crop (siehe style.css) vorverschoben ist. ----------
+         Nur auf der Startseite vorhanden. */
+  var goldCutoutPhoto = document.getElementById("goldCutoutPhoto");
+  var goldCutoutShowcase = document.getElementById("goldCutoutShowcase");
+
+  if (goldCutoutPhoto && goldCutoutShowcase) {
+    var updateGoldCutoutParallax = function () {
+      var rect = goldCutoutShowcase.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        var shift = (progress - 0.5) * (rect.height * 0.70); /* nochmals deutlich verstärkt, an den Foto-Puffer (±35%) angepasst */
+        goldCutoutPhoto.style.transform = "translate3d(0," + shift.toFixed(1) + "px,0)";
+      }
+    };
+
+    var gcTicking = false;
+    var onGcScroll = function () {
+      if (!gcTicking) {
+        window.requestAnimationFrame(function () {
+          updateGoldCutoutParallax();
+          gcTicking = false;
+        });
+        gcTicking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onGcScroll, { passive: true });
+    window.addEventListener("resize", onGcScroll);
+    updateGoldCutoutParallax();
   }
 })();
 

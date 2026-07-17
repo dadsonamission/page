@@ -68,6 +68,9 @@
   <!-- ================= KONTAKT-AUSKLAPPER (unabhängig vom Hauptmenü) ================= -->
   <div class="contact-tab" id="contactTab" role="button" tabindex="0">Kontakt</div>
   <aside id="contactSidebar" aria-hidden="true">
+    <div class="contact-logo-mark" aria-hidden="true">
+      <svg viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg"><path d="M 148.70896,-16.777165 C 93.10625,-17.525572 46.773743,22.665106 46.773795,82.009605 c 3.36754,59.718675 36.229663,100.000145 96.696685,99.625915 54.85437,-2.99336 102.61941,-46.26826 100.37428,-101.870985 -4.1159,-47.37082 -39.53307,-93.174159 -95.1358,-96.5417 z m -5.378,15.209407 c 45.56339,7.2e-5 81.75144,40.678257 83.24822,86.241643 0.74829,37.331495 -36.18812,73.519545 -82.87404,79.506445 -43.6925,2.61918 -78.383846,-30.20128 -81.003159,-82.499865 6.8e-5,-45.563388 33.194708,-78.758028 80.628979,-83.248223 z" /><text style="font-size:56.4444px" x="73.889053" y="88.498436"><tspan style="font-weight:800;font-family:'Geom', sans-serif" x="73.889053" y="88.498436">Dads</tspan></text><text style="font-size:25.2236px" x="76.530113" y="113.72335"><tspan style="font-weight:400;font-family:'Geom', sans-serif" x="76.530113" y="113.72335">on a Mission</tspan></text></svg>
+    </div>
     <div class="close" id="contactClose" role="button" tabindex="0" aria-label="Kontakt schließen">&times;</div>
     <div class="contact-panel-inner">
       <div class="contact-panel-top">
@@ -161,55 +164,53 @@
       </div>
     </section>
 
-    <!-- DAS GOLD DER VATERSCHAFT: aus Folie 1 der PPTX, endet vor "Die Angebote" -->
+    <!-- NACH-VÄTERN-CUTOUT + REFLEXIONSTEXT: ersetzt die frühere "Gold der
+         Vaterschaft"-Sektion, zwischen "Fatherhood is not a Solo Mission"
+         und "Die Angebote". Cutout-Effekt nutzt dieselbe Technik wie auf
+         "Wie ich arbeite." (Foto + ausgestanztes Logo, gleicher verstärkter
+         Parallax-Effekt), aber kompakter zugeschnitten (nur der untere Teil
+         der hohen Vorlage wird gezeigt), mit der Überschrift "Nach-Vätern"
+         in Weiß im oberen grauen Bereich statt einer separaten
+         Überschriftenzeile davor. -->
     <section class="gold-section">
-      <div class="gold-intro">
-        <h2>Das <span class="gold-word">Gold</span> der Vaterschaft</h2>
-        <p>Kinder bringen das Beste in uns hervor: verantwortungsvolle, lebendige und liebevoll-präsente Väter. Kinder sind aber auch Trüffelschweine, die tief Vergrabenes ausgraben, von dem wir nicht wussten, dass es in uns verborgen ist, und von dem wir nicht wollten, dass es zu Tage tritt oder überhaupt da ist: Sie bringen uns zur Weißglut, zur Verzweiflung, sogar zur Flucht oder inneren Immigration. Zielsicher piksen sie uns genau an den Stellen, an denen wir verwundbar sind.</p>
+      <div class="nachvatern-cutout-wrap" id="goldCutoutShowcase">
+        <div class="nachvatern-cutout-photo" id="goldCutoutPhoto"></div>
+        <div class="nachvatern-cutout-mask"></div>
+        <h2 class="nachvatern-cutout-heading">Nach-Vatern</h2>
+        <blockquote class="nachvatern-quote">
+          &bdquo;Wir wurden alle von unseren Vätern beschenkt. Und wir haben alle etwas von unseren Vätern nicht bekommen.<br><br>
+          Um die Väter zu werden, die unsere Kinder brauchen, ist es notwendig <em>nachzuvatern</em>, d.h. uns selbst der Vater zu sein, den wir uns gewünscht hätten.&ldquo;
+        </blockquote>
+      </div>
+
+      <div class="gold-body">
+	</p> <br /></p>
+        <p>Kinder bringen das Beste in uns hervor: verantwortungsvolle, lebendige und liebevoll-präsente Väter.</p>
+        <p>Und sie bringen uns an unsere Grenzen. Sie konfrontieren uns mit unserer Ungeduld, unserer Wut, und unserer Angst. Manchmal schreien wir rum, obwohl wir ruhig bleiben wollten. Manchmal ziehen wir uns zurück, obwohl unser Kind uns braucht. Und manchmal erschrecken wir über uns selbst – gerade weil wir dieses Kind bedingungslos lieben.</p>
+        <p>Diese Momente brauchen keine Ausreden. Aber sie brauchen auch keine Selbstverurteilung.</p>
+        <p>Sie laden uns ein, ehrlich hinzuschauen: Was ist gerade lebendig in mir? Was hat mich aus meiner Klarheit, aus meiner Kraft und meiner Liebe gebracht? Und was brauche ich, um wieder der Vater zu sein, der ich sein möchte und den meine Kinder brauchen?</p>
       </div>
 
       <div class="gold-banner">
         <img src="assets/gold-banner.jpg" alt="Vater und Kind gemeinsam am Wasser">
       </div>
 
-      <div class="gold-quotes">
-        <div class="gold-quote-wrap">
-          <span class="gold-mark gold-mark-open">&bdquo;</span>
-          <p class="gold-quote-text">&bdquo;Du weißt erst was Stress ist,&ldquo; sagt Friedrich-Wilhelm, &bdquo;wenn dir dein kleines Kind mit einer Intensität und auf einer Frequenz, die du nicht für möglich gehalten hättest, GACK-GACK ins Ohr brüllt, und du in der ganzen bekackten Packung Zoo-Kekse keine einzige verfickte Ente mehr findest!&ldquo;</p>
-          <p class="gold-quote-source">Aus &bdquo;Die Känguru-Offenbarung&ldquo;</p>
-          <span class="gold-mark gold-mark-close">&ldquo;</span>
-        </div>
-        <div class="gold-text-block">
-          <p>Und darüber offenbaren wir etwas, das wir nicht wollen, dass wir das auch sind. Die Vaterschaft ist damit wie ein <strong>Schmelzofen</strong>. Alles Unnötige fällt ab und übrig bleibt unsere Essenz, unser <span class="gold-word">Gold</span>. Der Schmelzofen kann aber auch überhitzen. So sehr, dass auch unser <span class="gold-word">Gold</span> droht zu verdampfen.</p>
-          <p>Dieses <span class="gold-word">Gold</span> zu feiern, es zu bewahren und weiter freizulegen, ist Ziel der Angebote von <em>Dads on a Mission</em>. In der Gemeinschaft von Vätern, in intensiver Einzelbegleitung und vertiefenden Workshops finden wir unsere Antworten auf die drängenden Fragen der Vaterschaft:</p>
-        </div>
+      <div class="gold-body">
+        <p>Genau in diesen Momenten setzt das Nachvatern an: d.h. uns selbst so zu begegnen, wie ein guter Vater dies tun würde: mit Klarheit und Verantwortung und gleichzeitig mit Güte, Verständnis und Liebe. So können wir uns selbst das geben, was wir in diesen Momenten brauchen.</p>
+        <p>Was der gute Vater ist, den wir brauchen, steht in keinem Ratgeberbuch. Erziehungstipps helfen hier nicht weiter. Die Quelle für den guten Vater liegt in uns. Denn es gibt einen Ort in uns der ganz ist, aus dem heraus unsere Liebe, unsere Präsenz und Kraft erwächst. Egal, was wir von unseren Vätern bekommen und nicht bekommen haben. In jedem Moment haben wir die Möglichkeit, uns mit diesem Ort zu verbinden und damit zurückzukehren zu unserer Mitte. Nicht um der perfekte Daddy für Insta zu sein, sondern der Vater, den unsere Kinder brauchen.</p>
+        <p>Und dafür braucht es Training. Immer wieder: zurückkehren. Uns erinnern. Nachvatern. Genau zu diesem Training laden die Angebote von Dads on a Mission ein: in der Gemeinschaft von Vätern, in individueller Einzelbegleitung und in vertiefenden Workshops.</p>
+        <p>Darüber bearbeiten wir gemeinsam die drängenden Fragen der Vaterschaft:</p>
       </div>
 
-      <div class="gold-questions-wrap">
-        <div class="gold-illustration">
-          <img src="assets/gold-illustration.jpg" alt="Illustration zur Vaterschaft">
-        </div>
-        <ul class="gold-questions">
-          <li>Was heißt es ein guter Vater zu sein?</li>
-          <li>Wie kann ich Familie und Beruf zusammenkriegen?</li>
-          <li>Wie kann ich Partner bleiben?</li>
-          <li>Wie kann ich Raum für mich schaffen?</li>
-          <li>Wie kann ich im Alltag auf meine Gesundheit achten?</li>
-        </ul>
-      </div>
+      <ul class="gold-questions">
+        <li>Was heißt es, ein guter Vater zu sein?</li>
+        <li>Wie kann ich Familie und Beruf zusammenbringen?</li>
+        <li>Wie bleibe ich Partner und verliere mich nicht im Familienalltag?</li>
+        <li>Wie schaffe ich Raum für mich, ohne meine Familie aus dem Blick zu verlieren?</li>
+        <li>Wie finde ich auch in herausfordernden Momenten zurück zu meiner Kraft?</li>
+      </ul>
     </section>
-   <!-- Nachvater-Bild -->
-    <section>
-     <div class="nachvatern-photo-wrap" id="nachvaternShowcase">
-        <div class="nachvatern-photo" id="nachvaternPhoto"></div>
-        <div class="nachvatern-logo-cutout"></div>
-        <blockquote class="nachvatern-quote">
-          &bdquo;Wir wurden alle von unseren Vätern beschenkt. Und wir haben alle etwas von unseren Vätern nicht bekommen.<br><br>
-          Um die Väter zu werden, die unsere Kinder brauchen, ist es notwendig <em>nachzuvatern</em>, d.h. uns selbst der Vater zu sein, den wir gebraucht hätten.&ldquo;
-        </blockquote>
-      </div>
-      <div class="nachvatern-divider"></div>
-    </section>
+
     <!-- ANGEBOTE: Slider mit Programmpunkten/Angeboten -->
     <section id="angebote" class="section">
       <p class="eyebrow">Unsere Angebote</p>

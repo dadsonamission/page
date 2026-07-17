@@ -8,6 +8,80 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **„Nach-Vatern"-Cutout: weitere sechs Anpassungen**:
+  1. Überschrift heißt jetzt „Nach-Vatern" (ohne Umlaut, wie gewünscht) —
+     nur auf der index-Seite geändert, die Überschrift auf „Wie ich
+     arbeite." bleibt unverändert „Nach-Vätern".
+  2. Überschrift linksbündig statt zentriert (`left:10vw` statt
+     `left:50%`/`translateX(-50%)`, `text-align:left`).
+  3. Parallax-Effekt auf beiden Seiten nochmals deutlich verstärkt:
+     Faktor 0.35→0.70 (Wie ich arbeite, Puffer ±20%→±35%) bzw. 0.36→0.70
+     (Gold-Cutout, Puffer ±18%→±35%).
+  4. Das Zitat („Wir wurden alle von unseren Vätern beschenkt...") ist
+     jetzt auch im Cutout auf der index-Seite zu sehen, nicht mehr nur auf
+     „Wie ich arbeite." — gemeinsame Basis-CSS-Regel für beide Vorkommen,
+     nur die vertikale Position unterscheidet sich (58.7% vs. 57%, an den
+     kompakteren Cutout-Ausschnitt angepasst).
+  5. Zitat-Text auf beiden Seiten geändert: „...den wir gebraucht hätten"
+     → „...den wir uns gewünscht hätten".
+  6. Erster Absatz („Kinder bringen...") hat jetzt mehr Abstand zum Cutout
+     (5vw → 7vw) und ist fettgedruckt (`.gold-body:first-of-type
+     p:first-child`).
+- **„Nach-Vätern"-Cutout: sechs Feinjustierungen**:
+  1. Überschrift „Nach-Vätern" jetzt in derselben Größe wie „Fatherhood"
+     in der Pitch-Sektion (6vw statt 3vw, `.nachvatern-cutout-heading`).
+  2. Eck-Logo bleibt jetzt über dem gesamten Cutout weiß und wechselt
+     erst beim Übergang zum grauen Reflexionstext die Farbe — Trigger
+     dafür wird jetzt am Ende des Cutouts gemessen (`#goldCutoutShowcase`
+     in `script.js`), nicht mehr am Ende der Pitch-Sektion.
+  3. Parallax-Effekt ergänzt (war noch gar nicht vorhanden) und deutlich
+     verstärkt, gleiche Stärke wie auf „Wie ich arbeite." — Foto und
+     Maske sind jetzt getrennte Ebenen: Die Maske bleibt an der festen,
+     unverzerrten Crop-Position, nur das Foto bekommt zusätzlichen Puffer
+     (±18%) und scrollt per JS langsamer (`updateGoldCutoutParallax()`).
+  4. Textspalte (`.gold-body`, `.gold-questions`) doppelt so breit wie
+     zuvor (effektiv 32vw → 64vw) und in Cadet Gray statt Dark Leather.
+  5. Das Banner-Foto (Vater & Kind am Strand, `assets/gold-banner.jpg`)
+     ist wieder da, in der alten Vollbreiten-Optik (`.gold-banner`),
+     jetzt eingefügt nach dem Absatz „...möchte und den meine Kinder
+     brauchen?" — der Textblock ist dafür in zwei `.gold-body`-Divs
+     aufgeteilt.
+- **„Das Gold der Vaterschaft" komplett neu gestaltet**: Ersetzt Gold-Banner-
+  Foto, Känguru-Zitat, Schmelzofen-Text und Illustration vollständig.
+  Neue Struktur: (1) Cutout-Effekt als erstes Element — dieselbe
+  Foto+Ausstanz-Technik wie auf „Wie ich arbeite." (`.nachvatern-photo-wrap`
+  dort), aber deutlich kompakter zugeschnitten (`.nachvatern-cutout-wrap`,
+  `aspect-ratio:190.5/260.8` statt des vollen, sehr hohen
+  190.5:338.67-Verhältnisses — zeigt nur den Ausschnitt ab 15% der
+  Vorlagenhöhe, der vorher weitgehend leere graue Bereich darüber entfällt);
+  die Überschrift „Nach-Vätern" steht jetzt in Weiß direkt im verbleibenden
+  grauen Bereich oberhalb des Logos (`.nachvatern-cutout-heading`) statt in
+  einer separaten Zeile davor. (2) Der komplette neue Reflexionstext auf
+  weißem Untergrund (`.gold-body`). (3) Die aktualisierte Liste der
+  Väter-Fragen (`.gold-questions`, jetzt ohne Illustration daneben, dafür
+  zentriert unter dem Text). Nicht mehr benötigte Klassen entfernt:
+  `.gold-word`, `.gold-mark-*`, `.gold-quote-*`, `.gold-text-block`,
+  `.gold-intro`, `.gold-banner`, `.gold-illustration`, `.gold-questions-wrap`,
+  sowie die CSS-Variable `--gold-hatch`. Die Bilddateien
+  `assets/gold-banner.jpg`, `assets/gold-illustration.jpg` und
+  `assets/gold-hatch.png` sind nicht mehr eingebunden, liegen aber weiter
+  im `assets`-Ordner falls sie später anderswo gebraucht werden.
+- **Zitat über dem Cutout auf Mobil verkleinert**: 30px/40px → 20px/28px
+  (`.nachvatern-quote` im 900px-Media-Query in `style.css`) — war auf
+  schmalen Bildschirmen zu groß, Desktop-Größe (3.4vw) bleibt unverändert.
+- **Zitat über dem Cutout nochmal angepasst**: „hilft es nachzuvatern" →
+  „ist es notwendig nachzuvatern" (kursiv bleibt erhalten).
+- **Zitat über dem Cutout auf „Wie ich arbeite." angepasst**: Letzter Teil
+  nach „d.h." lautet jetzt „uns selbst der Vater zu sein, den wir
+  gebraucht hätten." (`nachvatern-quote` in `wie-ich-arbeite.html`).
+- **Kontakt-Fläche: Logo-Wasserzeichen + Klick-außerhalb schließt**: Auf
+  allen acht Seiten oben rechts auf `#contactSidebar` dieselbe bereits
+  beschnittene Logo-Vorlage wie in der Pitch-Sektion (Cream, 40%
+  Deckkraft, bündig `top:0/right:0`, kleiner: 20vw / mobil 140px). Neue
+  Klasse `.contact-logo-mark` in `style.css`. Zusätzlich schließt sich die
+  Kontakt-Fläche jetzt auch, wenn man irgendwo auf der noch sichtbaren
+  Seite daneben klickt (nicht nur über das ×), siehe neuer
+  `document`-Klick-Listener in `script.js`.
 - **Logo-Wasserzeichen durch bereits beschnittene Vorlage ersetzt**
   (Quelle: `Logo_DoaM_gelb_verschoben.svg`, liegt zusätzlich unter
   `assets/logo-pitch-watermark.svg`). Ring und Schriftzug sind in dieser
