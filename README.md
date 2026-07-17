@@ -8,6 +8,24 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Zwei Korrekturen**: „Nach-Vatern"-Überschrift ist wieder weiß (Größe
+  bleibt bei 2.4vw/3.4vw wie „Was wir gemeinsam bewegen", nur die Farbe
+  war auf dem Foto zu schlecht lesbar) — passender heller Text-Schatten
+  ist wieder dabei. Abstand zwischen Cutout und Textbeginn („Kinder
+  bringen...") sauber per CSS vergrößert (`.gold-body:first-of-type`
+  padding-top 7vw→11vw, mobil 12%→18%) statt der zuvor entfernten,
+  ungültigen `</p>`-Zeile, die genau diesem Zweck diente.
+- **„Nach-Vatern"-Überschrift an „Was wir gemeinsam bewegen" angeglichen**:
+  Größe und Farbe entsprechen jetzt exakt dem globalen h2-Standard
+  (2.4vw/3.4vw, `var(--c-ink)` statt zuvor 6vw/weiß). Der dunkle
+  Text-Schatten ist raus, da er nur für weißen Text auf dem Foto Sinn
+  ergab.
+- **Nutzer-Version von `index.html` übernommen**: Der erste Absatz („Kinder
+  bringen...") ist jetzt zusätzlich per `<b>`-Tag direkt im HTML fett
+  (bestehende CSS-Regel `.gold-body:first-of-type p:first-child` bleibt
+  zusätzlich bestehen, beides zusammen ist unproblematisch). Eine beim
+  Bearbeiten entstandene verwaiste, ungültige Zeile (`</p> <br /></p>`
+  ohne öffnendes Tag) direkt davor wurde entfernt.
 - **„Nach-Vatern"-Cutout: weitere sechs Anpassungen**:
   1. Überschrift heißt jetzt „Nach-Vatern" (ohne Umlaut, wie gewünscht) —
      nur auf der index-Seite geändert, die Überschrift auf „Wie ich

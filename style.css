@@ -1218,9 +1218,9 @@ p{hyphens:auto;}
   color:#fff;
   text-align:left;
   font-weight:800;
-  font-size:6vw; /* gleiche Größe wie "Fatherhood" in der Pitch-Sektion (.pitch-line1) */
-  line-height:0.98;
-  text-shadow:0 0.3vw 1.4vw rgba(0,0,0,.5);
+  font-size:2.4vw; /* gleiche Größe wie "Was wir gemeinsam bewegen" (globaler h2-Standard) */
+  line-height:3.4vw;
+  text-shadow:0 0.2vw 1vw rgba(0,0,0,.5);
 }
 
 .gold-body{
@@ -1228,7 +1228,7 @@ p{hyphens:auto;}
   margin:0 auto;
   padding:0 0 1vw;
 }
-.gold-body:first-of-type{padding-top:7vw;}
+.gold-body:first-of-type{padding-top:11vw;}
 .gold-body:first-of-type p:first-child{font-weight:700;}
 .gold-body p{color:var(--c-grey);margin-bottom:1.3vw;}
 .gold-body p:last-child{margin-bottom:0;}
@@ -1258,9 +1258,9 @@ p{hyphens:auto;}
 }
 
 @media (max-width:900px){
-  .nachvatern-cutout-heading{font-size:44px;top:16px;left:8%;}
+  .nachvatern-cutout-heading{font-size:20px;line-height:30px;top:16px;left:8%;}
   .gold-body{max-width:100%;padding:0 8% 2%;}
-  .gold-body:first-of-type{padding-top:12%;}
+  .gold-body:first-of-type{padding-top:18%;}
   .gold-body p{font-size:16px;line-height:24px;margin-bottom:16px;}
   .gold-banner{margin:6% 0;}
   .gold-questions{max-width:100%;padding:4% 8% 14%;}
