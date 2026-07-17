@@ -8,6 +8,71 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Nutzer-Textkürzung übernommen + neues Logo-Wasserzeichen links**:
+  `index.html` mit gekürztem Reflexionstext (drei Sätze gestrafft) als
+  neue Basis übernommen. Zusätzlich ein zweites, bereits beschnittenes
+  Logo-Wasserzeichen (`Logo_DoaM_gelb_verschoben_links.svg`, liegt auch
+  unter `assets/logo-pitch-watermark-links.svg`) in der Mitte des zweiten
+  Textblocks (nach dem Strandfoto) eingefügt: Cream, 40% Deckkraft, hinter
+  dem Text, dockt per CSS-„Breakout"-Trick (`left:50%` +
+  `transform:translateX(-50vw)`) exakt am linken Seitenrand an —
+  unabhängig von der schmalen, zentrierten Textspalte. Neue Klasse
+  `.gold-watermark-left` in `style.css`.
+- **Drei weitere Anpassungen**:
+  1. Scroll-Hinweis „Hier geht's weiter": Pfeil reagiert jetzt beim Hover
+     genauso wie der Schriftzug (`.scrollcue:hover .scrollcue-arrow`,
+     gleicher `translate3d`-Versatz, Rotation bleibt erhalten). Beide
+     zusammen 10px höher (`bottom:calc(4vh + 10px)`, mobil entsprechend
+     `+74px` statt `+64px`).
+  2. Fatherhood-Liste: Text jetzt grau statt Dark Leather, Bullet-Marker
+     bleibt Dark Leather (vorher hatte ich „Aufzählpunkte" fälschlich als
+     „die ganzen Listenpunkte" statt „nur die Bullet-Marker" verstanden).
+  3. Abstand zwischen Cutout und Textbeginn („Kinder bringen...") auf den
+     gleichen Wert wie zwischen Strandbild und nachfolgendem Text gesetzt
+     (3vw, mobil 6% — `.gold-banner` nutzt `margin:3vw 0`/`6% 0`, war
+     zuvor 11vw/18% und damit deutlich größer).
+- **Vier Anpassungen**:
+  1. Fatherhood-Liste geändert: erster Punkt erweitert um „...und Wege,
+     diese liebevoll, präsent und verantwortungsvoll auszufüllen,",
+     dritter Punkt („Familie und Beruf...") in zwei Punkte aufgeteilt,
+     neuer vierter Punkt „Deine eigenen Wünsche und Bedürfnisse nicht zu
+     vergessen." ergänzt.
+  2. Text-Schatten bei „Nach-Vatern: ..." entfernt.
+  3. Illustration (`assets/gold-illustration.jpg`) rechts neben die
+     Väter-Fragenliste gesetzt (neuer Flex-Wrapper `.gold-questions-wrap`,
+     Liste dafür von voller Breite auf 58% reduziert, Illustration 34%).
+  4. Manuelle Zeilenumbrüche (`<br class="lb">`) bei den drei längeren
+     Fragen ergänzt, damit sie in der schmaleren Spalte sauber umbrechen —
+     auf Mobil ausgeblendet, da dort wieder die volle Breite zur Verfügung
+     steht (gleiches Muster wie zuvor beim jetzt entfernten Manifest-Text).
+- **„Nach-Vatern"-Überschrift erweitert**: „Nach-Vatern: Der Weg zu dem
+  Vater, den Deine Kinder brauchen" (war nur „Nach-Vatern"), mit
+  `max-width:60vw` für vernünftigen Umbruch bei der längeren Zeile.
+- **„Fatherhood is not a Solo Mission"-Sektion: Farbkonzept umgebaut**:
+  Die Santa-Fe-Fläche gilt jetzt nur noch auf Höhe der Headline
+  (neue Klasse `.pitch-heading-band`, enthält auch das Logo-Wasserzeichen)
+  — darunter (`.pitch-content`) ist der Untergrund jetzt weiß. Text dort
+  in Cadet Gray, die Listenpunkte in Dark Leather (Text + Bullet-Marker).
+  Die Buttons sind jetzt standardmäßig Santa Fe mit weißer Schrift, beim
+  Hover Dark Leather (Schrift bleibt weiß) — der Farbwechsel-Mechanismus
+  bleibt, nur die Basisfarbe hat sich geändert. Spalten `.pitch-story`/
+  `.pitch-offer` jetzt exakt gleich breit (je 50% statt 52/40).
+  Eck-Logo-Trigger entsprechend angepasst: wechselt jetzt schon am Ende
+  des Headline-Bands auf Dark Leather (`#pitchHeadingBand` in
+  `script.js`, statt am Ende des weiter unten liegenden Cutouts) und
+  bleibt ab dort dauerhaft Dark Leather (`.corner-logo.swap` in
+  `style.css`, Farbe von Cadet Gray auf Dark Leather geändert).
+- **„Fatherhood is not a Solo Mission"-Sektion neu getextet und
+  umgestaltet**: Kein Zitat mehr — Anführungszeichen und das Kästchen
+  (`.pitch-quote` mit Hintergrund/Schatten/dekorativem Anführungszeichen)
+  sind raus. Weiterhin zweispaltig, aber jetzt ein durchgehender
+  Erzähltext: links die persönliche Geschichte (`.pitch-story`, neue
+  Klasse, schlichter Fließtext ohne Kursivierung), rechts ab „Dads on a
+  Mission bietet deshalb Räume, um" der Angebots-Text mit Liste (jetzt
+  drei statt vier Punkte, „Dein Gold..." raus), einem neuen Hinweissatz
+  (`.pitch-note`) und den beiden unveränderten Buttons. Spaltenverhältnis
+  von 40/52 auf 52/40 gedreht (Story links jetzt breiter, da sie den
+  längeren Text trägt).
 - **Zwei Korrekturen**: „Nach-Vatern"-Überschrift ist wieder weiß (Größe
   bleibt bei 2.4vw/3.4vw wie „Was wir gemeinsam bewegen", nur die Farbe
   war auf dem Foto zu schlecht lesbar) — passender heller Text-Schatten

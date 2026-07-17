@@ -84,18 +84,20 @@
   /* ---- Eck-Logo: sitzt von Anfang an fixed an seiner finalen Position
          (scrollt nie mit), blendet sich aber erst ein, sobald die
          Santa-Fe-Fläche ("Fatherhood is not a Solo Mission", #mission)
-         bereits sichtbar ist — bleibt weiß, solange diese Fläche ODER der
-         anschließende dunkle Cutout ("Nach-Vätern", #goldCutoutShowcase)
-         im Hintergrund sind, und wechselt die Farbe erst danach, auf dem
-         weißen Reflexionstext. Deshalb wird distanceBottom (falls
-         vorhanden) am Ende des Cutouts gemessen, nicht am Ende von
-         #mission.
+         bereits sichtbar ist — bleibt weiß, solange nur das Santa-Fe-
+         Headline-Band (#pitchHeadingBand) im Hintergrund ist, und
+         wechselt auf Dark Leather, sobald direkt danach die erste weiße
+         Fläche erreicht ist. Diese Farbe bleibt dann bis zum Ende der
+         Seite bestehen (keine weiteren Wechsel mehr nötig, da alles
+         Folgende auf hellem Untergrund liegt). Deshalb wird
+         distanceBottom am Ende von #pitchHeadingBand gemessen, nicht am
+         Ende von #mission.
          Nur auf der Startseite vorhanden (dort gibt es #mission/#maskLogo).
          Auf Unterseiten ist das Eck-Logo stattdessen dauerhaft sichtbar
          per CSS positioniert (Klasse .static-fixed in index.html/den
          Unterseiten), daher wird dieser ganze Block dort übersprungen. */
   var pitchSection = document.getElementById("mission");
-  var goldCutout = document.getElementById("goldCutoutShowcase");
+  var pitchHeadingBand = document.getElementById("pitchHeadingBand");
   var cornerLogo = document.getElementById("cornerLogo");
   var maskLogo = document.getElementById("maskLogo");
 
@@ -106,9 +108,9 @@
     var measurePitchSection = function () {
       var rect = pitchSection.getBoundingClientRect();
       distanceTop = rect.top + window.scrollY;
-      if (goldCutout) {
-        var cutoutRect = goldCutout.getBoundingClientRect();
-        distanceBottom = cutoutRect.top + window.scrollY + goldCutout.offsetHeight;
+      if (pitchHeadingBand) {
+        var bandRect = pitchHeadingBand.getBoundingClientRect();
+        distanceBottom = bandRect.top + window.scrollY + pitchHeadingBand.offsetHeight;
       } else {
         distanceBottom = distanceTop + pitchSection.offsetHeight;
       }
