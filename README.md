@@ -8,6 +8,53 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **„Fatherhood is not a Solo Mission": komplett neuer, durchgehender
+  Text**: Keine Liste/Angebots-Absatz mehr — stattdessen ein einziger
+  fließender Erzähltext, ausgewogen auf beide gleichbreiten Spalten
+  verteilt (links vier, rechts drei Absätze plus CTA/Buttons, nach
+  Zeichenlänge ca. 50/50 balanciert). `.pitch-offer` sieht jetzt genauso
+  aus wie `.pitch-story` (gleiche Cadet-Gray-Absatzformatierung). Nicht
+  mehr benötigte Klassen entfernt: `.pitch-intro`, `.pitch-list`
+  (inkl. `::before`-Bullet-Marker), `.pitch-note`.
+- **Fünf weitere Anpassungen**:
+  1. Logo-Wasserzeichen links (zwischen den beiden Absätzen nach dem
+     Cutout) wieder entfernt, inkl. der zugehörigen CSS-Regel.
+  2. Nach-Vatern-Unterüberschrift: Text geändert zu „Die Möglichkeit zu
+     unserer Mitte zurückzukehren", Schriftgröße von 6vw auf 3vw verkleinert
+     (jetzt kleiner als die Hauptüberschrift, wie gewünscht).
+  3. Scroll-Hinweis „Hier geht's weiter" (Schriftzug + Pfeil) nochmal 15px
+     höher (Desktop `4vh + 25px`, mobil `+89px`).
+  4. **„Angebote"-Sektion neu aufgebaut**, gleiches Prinzip wie Fatherhood/
+     Nach-Vatern: dunkles Dark-Leather-Header-Band (`.angebote-heading-band`,
+     bricht per negativem Margin aus dem `.section`-Padding aus) mit
+     Hauptüberschrift „Angebote" (weiß, 800, 6vw) und Unterüberschrift
+     „Gemeinsam, individuell, intensiv" (Cream, Light, 3vw). Alte
+     Überschriften „Unsere Angebote"/„Was wir gemeinsam bewegen" entfernt,
+     `.section .eyebrow`/`.section h2`-Regeln dafür bereinigt.
+  5. Der dunkle Trenner am Ende der Nach-Vatern-Sektion (`.gold-section
+     border-bottom`) ist raus — das neue Angebote-Header-Band übernimmt
+     diese trennende Funktion jetzt selbst.
+- **„Nach-Vatern"-Bereich grafisch neu strukturiert**: Der Cutout sitzt
+  jetzt mitten im Text statt am Anfang. Neue Reihenfolge: (1) graues
+  Header-Band (`.nachvatern-heading-band`, ahmt `.pitch-heading-band`
+  nach — gleiche Maße, nur grau statt Santa-Fe) mit „Nach-Vatern" (weiß,
+  800, 6vw, wie „Fatherhood") und darunter „Der Weg zu dem Vater, den
+  Deine Kinder brauchen" (Cream `#FBCD82`, Geom Light/300, ebenfalls 6vw);
+  (2) Textblock auf Weiß bis „...Genau in diesen Momenten setzt das
+  Nach-Vatern an." (3) Cutout — jetzt ohne Überschrift, dafür oben
+  nochmal stärker beschnitten, sodass grauer Rand oben/unten gleich groß
+  ist (Ausschnitt jetzt ab 25,3% statt 15% der Vorlagenhöhe,
+  `aspect-ratio:190.5/225.9` statt `190.5/260.8`; Zitat-Position dadurch
+  von top:57% auf top:50% verschoben; Parallax-Puffer entsprechend
+  mitverschoben, Stärke unverändert). (4) Zweiter Textblock (beginnt mit
+  „D.h. uns selbst...", der Rest des zuvor an dieser Stelle gekürzten
+  Satzes) bis „...zurückkehren zu unserer Mitte." — das Logo-Wasserzeichen
+  links sitzt jetzt hier, zwischen den beiden Absätzen. (5) Strandfoto.
+  (6) Rest wie gehabt (Training-Absatz, Fragenliste + Illustration).
+  Technischer Hinweis: `.gold-body:first-of-type` funktionierte nach dem
+  neuen Header-Band davor nicht mehr zuverlässig (das Band ist jetzt das
+  erste `<div>`, nicht mehr `.gold-body`) — durch robustere, explizite
+  Klassen `.gold-body-intro`/`.gold-body-after-cutout` ersetzt.
 - **Nutzer-Textkürzung übernommen + neues Logo-Wasserzeichen links**:
   `index.html` mit gekürztem Reflexionstext (drei Sätze gestrafft) als
   neue Basis übernommen. Zusätzlich ein zweites, bereits beschnittenes

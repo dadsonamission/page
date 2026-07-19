@@ -474,7 +474,7 @@ p{hyphens:auto;}
 .scrollcue{
   position:absolute;
   z-index:20;
-  left:5vw; bottom:calc(4vh + 10px); /* 10px höher als zuvor */
+  left:5vw; bottom:calc(4vh + 25px); /* nochmal 15px höher als zuvor */
   display:flex;
   flex-direction:column;
   align-items:center; /* Schriftzug + Pfeil zentriert, wie gewünscht */
@@ -529,7 +529,7 @@ p{hyphens:auto;}
 
 @media (max-width:900px){
   #video{width:100vw;}
-  .scrollcue{left:20px;right:auto;bottom:calc(var(--header-h-mobile) + 74px);} /* nochmal 10px höher */
+  .scrollcue{left:20px;right:auto;bottom:calc(var(--header-h-mobile) + 89px);} /* nochmal 15px höher */
   .scrollcue-text{font-size:32px;}
   .scrollcue-arrow{width:34px;margin-top:4px;}
   .mask-logo{top:42%;width:60vw;height:60vw;} /* etwas höher (vorher top:50% geerbt) */
@@ -671,38 +671,11 @@ p{hyphens:auto;}
 .pitch-story p:last-child{margin-bottom:0;}
 
 .pitch-offer{flex:1 1 50%;}
-.pitch-intro{
+.pitch-offer p{
   color:var(--c-grey);
-  font-size:1.15vw;
-  line-height:1.9vw;
-  margin:0 0 1.8vw;
-}
-.pitch-list{
-  list-style:none;
-  text-align:left;
-  margin:0 0 1.8vw;
-  padding:0;
-}
-.pitch-list li{
-  position:relative;
-  padding-left:1.3vw;
-  color:var(--c-grey);
-  font-size:1.15vw;
-  line-height:1.9vw;
-  margin-bottom:0.4vw;
-}
-.pitch-list li::before{
-  content:'';
-  position:absolute;
-  left:0; top:0.75vw;
-  width:0.4vw; height:0.4vw;
-  background-color:var(--c-ink);
-}
-.pitch-note{
-  color:var(--c-grey);
-  font-size:1.15vw;
-  line-height:1.9vw;
-  margin:0 0 1.6vw;
+  font-size:1.1vw;
+  line-height:1.85vw;
+  margin:0 0 1.1vw;
 }
 .pitch-cta{
   color:var(--c-grey);
@@ -736,14 +709,10 @@ p{hyphens:auto;}
   .pitch-line1,.pitch-line3{font-size:44px;line-height:44px;}
   .pitch-line2{font-size:22px;line-height:26px;margin:8px 0;}
   .pitch-content{padding:8% 8% 16%;flex-direction:column;gap:10%;}
-  .pitch-intro{max-width:100%;font-size:17px;line-height:26px;margin-bottom:6%;}
-  .pitch-list{margin-bottom:6%;}
-  .pitch-list li{font-size:17px;line-height:26px;padding-left:22px;margin-bottom:8px;}
-  .pitch-note{font-size:17px;line-height:26px;margin-bottom:6%;}
   .pitch-cta{font-size:17px;line-height:26px;margin-bottom:6%;}
   .pitch-buttons{flex-direction:column;gap:12px;width:100%;}
   .pitch-btn{padding:14px 20px;text-align:center;}
-  .pitch-story p{font-size:17px;line-height:26px;margin-bottom:16px;}
+  .pitch-story p,.pitch-offer p{font-size:17px;line-height:26px;margin-bottom:16px;}
 }
 
 /* ==========================================================================
@@ -757,19 +726,37 @@ p{hyphens:auto;}
      transparenten #start-Effekt über dem fixen Hero-Foto. */
 }
 .section{padding:9vw 10vw;background-color:var(--c-bg);}
-.section .eyebrow{
-  font-family:var(--font-accent);
-  color:var(--c-accent);
-  letter-spacing:0.1em;
-  font-size:1vw;
-  margin-bottom:1vw;
+/* Dunkles Header-Band, ahmt .pitch-heading-band/.nachvatern-heading-band
+   nach (gleiche Maße), hier in Dark Leather. Bricht per negativem Margin
+   aus dem Padding von .section aus, um trotzdem volle Sektionsbreite und
+   einen randlosen oberen Abschluss zu erreichen. */
+.angebote-heading-band{
+  margin:-9vw -10vw 5vw;
+  padding:7vw 10vw 5vw;
+  background-color:var(--c-ink);
 }
-.section h2{margin-bottom:3vw;}
+.angebote-heading-band-title{margin:0;}
+.angebote-heading-band-title span{display:block;}
+.angebote-heading-main{
+  color:#fff;
+  font-weight:800;
+  font-size:6vw;
+  line-height:0.98;
+  letter-spacing:-0.01em;
+}
+.angebote-heading-sub{
+  color:var(--c-cream);
+  font-weight:300;
+  font-size:3vw;
+  line-height:1.15;
+  margin-top:0.6vw;
+}
 @media (max-width:900px){
   #container{margin-right:0;}
   .section{padding:16% 8%;}
-  .section .eyebrow{font-size:13px;margin-bottom:10px;}
-  .section h2{margin-bottom:8%;}
+  .angebote-heading-band{margin:-16% -8% 8%;padding:16% 8% 8%;}
+  .angebote-heading-main{font-size:32px;line-height:36px;}
+  .angebote-heading-sub{font-size:20px;line-height:26px;margin-top:8px;}
 }
 
 /* ==========================================================================
@@ -1122,7 +1109,7 @@ p{hyphens:auto;}
   text-shadow:0 0.3vw 1.4vw rgba(0,0,0,.6);
 }
 .nachvatern-photo-wrap blockquote.nachvatern-quote{top:58.7%;} /* auf die Mitte des Logo-Cutouts zentriert (per Pixel-Analyse ermittelt) */
-.nachvatern-cutout-wrap blockquote.nachvatern-quote{top:57%;} /* entsprechend an den kompakteren Cutout-Ausschnitt angepasst */
+.nachvatern-cutout-wrap blockquote.nachvatern-quote{top:50%;} /* entsprechend an den kompakteren Cutout-Ausschnitt angepasst */
 .nachvatern-photo-wrap blockquote.nachvatern-quote em,
 .nachvatern-cutout-wrap blockquote.nachvatern-quote em{
   font-style:italic;
@@ -1140,7 +1127,7 @@ p{hyphens:auto;}
     line-height:28px;
   }
   .nachvatern-photo-wrap blockquote.nachvatern-quote{top:58.7%;}
-  .nachvatern-cutout-wrap blockquote.nachvatern-quote{top:57%;}
+  .nachvatern-cutout-wrap blockquote.nachvatern-quote{top:50%;}
 }
 
 /* ==========================================================================
@@ -1161,15 +1148,37 @@ p{hyphens:auto;}
   position:relative;
   z-index:30;
   background-color:var(--c-bg);
-  border-bottom:6vw solid var(--c-ink);
-  padding-bottom:6vw;
+}
+
+/* Graues Header-Band, ahmt .pitch-heading-band nach (gleiche Maße/Padding),
+   nur grau statt Santa-Fe. Hauptzeile "Nach-Vatern" exakt wie
+   .pitch-line1 (weiß, 800, 6vw), Unterzeile in Cream mit Geom Light. */
+.nachvatern-heading-band{
+  background-color:var(--c-grey);
+  padding:7vw 10vw 5vw;
+}
+.nachvatern-heading-band-title{margin:0;}
+.nachvatern-heading-band-title span{display:block;}
+.nachvatern-heading-main{
+  color:#fff;
+  font-weight:800;
+  font-size:6vw;
+  line-height:0.98;
+  letter-spacing:-0.01em;
+}
+.nachvatern-heading-sub{
+  color:var(--c-cream);
+  font-weight:300;
+  font-size:3vw;
+  line-height:1.15;
+  margin-top:0.6vw;
 }
 
 .nachvatern-cutout-wrap{
   position:relative;
   overflow:hidden;
   width:100%;
-  aspect-ratio:190.5/260.8; /* kompakter Ausschnitt statt des vollen (190.5:338.67) Vorlagen-Verhältnisses */
+  aspect-ratio:190.5/225.9; /* oben nochmal stärker beschnitten, damit oben/unten gleich viel grauer Rand bleibt (vorher 190.5/260.8) */
 }
 /* Maske bleibt an der festen Crop-Position (unverzerrt) — nur das Foto
    dahinter bekommt zusätzlichen Puffer und scrollt per JS langsamer als
@@ -1177,8 +1186,8 @@ p{hyphens:auto;}
    arbeite."). */
 .nachvatern-cutout-photo{
   position:absolute;
-  top:-54.5%; left:0;
-  width:100%; height:200%; /* Crop-Puffer (-19.5%/130%) + nochmals deutlich vergrößerter Parallax-Spielraum (±35%) */
+  top:-73%; left:0;
+  width:100%; height:220%; /* Crop-Puffer (-38%/150%) + gleich großer Parallax-Spielraum wie zuvor (±35%) */
   background-image:var(--nachvatern-photo);
   background-size:cover;
   background-position:center;
@@ -1186,8 +1195,8 @@ p{hyphens:auto;}
 }
 .nachvatern-cutout-mask{
   position:absolute;
-  top:-19.5%; left:0;
-  width:100%; height:130%; /* exakter Crop-Puffer, unverzerrt — bewegt sich NICHT mit dem Parallax-Foto */
+  top:-38%; left:0;
+  width:100%; height:150%; /* exakter Crop-Puffer, unverzerrt — bewegt sich NICHT mit dem Parallax-Foto */
   background-color:var(--c-grey);
   -webkit-mask-image:var(--nachvatern-cutout-svg);
   mask-image:var(--nachvatern-cutout-svg);
@@ -1199,57 +1208,22 @@ p{hyphens:auto;}
   mask-position:center;
   pointer-events:none;
 }
-.nachvatern-cutout-heading{
-  position:absolute;
-  top:5%; left:10vw;
-  right:10vw;
-  max-width:60vw;
-  z-index:2;
-  margin:0;
-  color:#fff;
-  text-align:left;
-  font-weight:800;
-  font-size:2.4vw; /* gleiche Größe wie "Was wir gemeinsam bewegen" (globaler h2-Standard) */
-  line-height:3.4vw;
-}
 
 .gold-body{
-  max-width:64vw; /* doppelt so breit wie zuvor effektiv (52vw Box − 2×10vw Padding = 32vw) */
+  max-width:64vw;
   margin:0 auto;
   padding:0 0 1vw;
 }
-.gold-body:first-of-type{padding-top:3vw;} /* gleicher Abstand wie zwischen Strandbild und nachfolgendem Text (.gold-banner margin:3vw 0) */
-.gold-body:first-of-type p:first-child{font-weight:700;}
+/* Eigene Klassen statt :first-of-type — seit dem Header-Band davor ist
+   .gold-body nicht mehr das erste <div> in der Sektion, :first-of-type
+   würde also gar nicht mehr greifen. */
+.gold-body-intro{padding-top:5vw;} /* Abstand zum Header-Band davor, analog .pitch-content */
+.gold-body-intro p:first-child{font-weight:700;}
+.gold-body-after-cutout{padding-top:3vw;} /* gleicher Abstand wie zwischen Strandbild und nachfolgendem Text (.gold-banner margin:3vw 0) */
 .gold-body p{color:var(--c-grey);margin-bottom:1.3vw;}
 .gold-body p:last-child{margin-bottom:0;}
 
 .gold-banner{width:100%;line-height:0;margin:3vw 0;}
-
-/* Dekoratives Logo-Wasserzeichen in der Mitte des zweiten Textblocks,
-   dockt am echten linken Seitenrand an (nicht nur am Rand der schmalen
-   Textspalte) — klassischer "Breakout"-Trick: left:50% + translateX(-50vw)
-   verschiebt vom Zentrum der (zentrierten) Textspalte exakt bis zum
-   linken Viewport-Rand, unabhängig von deren Breite. Ring + Schriftzug
-   in Cream (#FBCD82), 40% Deckkraft, liegt dank negativem z-index hinter
-   dem Text. Nimmt selbst keine Höhe im Textfluss ein (height:0) — die
-   vertikale Position ergibt sich rein aus der Stelle im HTML, an der der
-   Anker-Div zwischen den Absätzen sitzt. */
-.gold-watermark-left{
-  position:relative;
-  height:0;
-  overflow:visible;
-}
-.gold-watermark-left svg{
-  position:absolute;
-  z-index:-1;
-  top:50%; left:50%;
-  transform:translate(-50vw,-50%);
-  width:38vw; height:38vw;
-  color:var(--c-cream);
-  opacity:0.4;
-  fill:currentColor;
-  pointer-events:none;
-}
 .gold-banner img{width:100%;height:auto;display:block;}
 
 .gold-questions-wrap{
@@ -1284,9 +1258,12 @@ p{hyphens:auto;}
 .gold-illustration img{width:100%;height:auto;display:block;}
 
 @media (max-width:900px){
-  .nachvatern-cutout-heading{font-size:20px;line-height:30px;top:16px;left:8%;right:8%;max-width:100%;}
+  .nachvatern-heading-band{padding:16% 8% 8%;}
+  .nachvatern-heading-main{font-size:32px;line-height:36px;}
+  .nachvatern-heading-sub{font-size:20px;line-height:26px;margin-top:8px;}
   .gold-body{max-width:100%;padding:0 8% 2%;}
-  .gold-body:first-of-type{padding-top:6%;}
+  .gold-body-intro{padding-top:8%;}
+  .gold-body-after-cutout{padding-top:6%;}
   .gold-body p{font-size:16px;line-height:24px;margin-bottom:16px;}
   .gold-banner{margin:6% 0;}
   .gold-questions-wrap{max-width:100%;padding:4% 8% 14%;flex-direction:column;gap:6%;}
