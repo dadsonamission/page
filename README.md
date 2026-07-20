@@ -8,6 +8,9 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Mobile Schriftgröße von „Fatherhood..." korrigiert**: War auf Mobil
+  mit 18px/28px größer als der Nach-Vatern-Text (16px/24px) — jetzt
+  angeglichen auf 16px/24px.
 - **Buttons in „Fatherhood is not a Solo Mission" entfernt**: „Tübingen
   (und Umgebung)" und „Online-Gruppe" sind raus, `.pitch-cta` ist jetzt
   der letzte Text-Baustein. Nicht mehr verwendete Klassen `.pitch-buttons`/
