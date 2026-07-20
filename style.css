@@ -669,6 +669,45 @@ p{hyphens:auto;}
 }
 .pitch-story p:last-child{margin-bottom:0;}
 
+/* Handgezeichnet wirkende Hervorhebungen: Kreis um "an unsere Grenzen",
+   Unterstreichung unter "in unsere Kraft" — beide in Cream (#FBCD82), als
+   organisch-unregelmäßiger SVG-Strich statt geometrisch perfekter Form.
+   "Zeichnen sich selbst" per stroke-dashoffset-Animation, sobald der
+   Abschnitt beim Scrollen ins Bild kommt (Trigger: IntersectionObserver
+   setzt Klasse .is-drawn, siehe script.js). Liegt per z-index:-1 hinter
+   dem Text (Highlighter-Optik). */
+.highlight-circle,
+.highlight-underline{
+  position:relative;
+  white-space:nowrap;
+}
+.highlight-svg{
+  position:absolute;
+  z-index:-1;
+  overflow:visible;
+  pointer-events:none;
+}
+.highlight-circle .highlight-svg{left:-7%; right:-7%; top:-32%; bottom:-28%; width:114%; height:160%;}
+.highlight-underline .highlight-svg{left:-4%; right:-4%; bottom:-0.24em; width:108%; height:0.32em;}
+.highlight-svg path{
+  fill:none;
+  stroke:#FBCD82;
+  stroke-width:8;
+  stroke-linecap:round;
+  stroke-dasharray:600;
+  stroke-dashoffset:600;
+  transition:stroke-dashoffset 1.1s ease-out; /* zurück auf Original-Geschwindigkeit (vorher testweise 2.2s) */
+}
+.highlight-circle.is-drawn .highlight-svg path{stroke-dashoffset:0;}
+/* Unterstreichung als Hin- und Her-Bewegung: erster Strich ("Hin") startet
+   0.5s nachdem der Kreis fertig gezeichnet ist (1.1s + 0.5s); der
+   Rückstrich ("Her", eigener, leicht tiefer versetzter Pfad, in
+   Gegenrichtung gezeichnet) folgt direkt danach, sobald der erste Strich
+   fertig ist. */
+.highlight-underline .highlight-stroke-forth{transition-delay:1.6s;}
+.highlight-underline .highlight-stroke-back{transition-delay:2.7s;}
+.highlight-underline.is-drawn .highlight-svg path{stroke-dashoffset:0;}
+
 .pitch-cta{
   color:var(--c-grey);
   font-size:1.45vw;

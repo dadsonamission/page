@@ -256,5 +256,27 @@
     window.addEventListener("resize", onGcScroll);
     updateGoldCutoutParallax();
   }
+
+  /* ---- Handgezeichnete Hervorhebungen (Kreis/Unterstreichung): "zeichnen
+         sich" per stroke-dashoffset-Übergang (siehe style.css), sobald sie
+         beim Scrollen ins Bild kommen. Einmalig pro Element — danach
+         nicht mehr beobachtet, damit es nicht bei jedem erneuten
+         Vorbeiscrollen nochmal "zeichnet". Nur auf Seiten mit
+         entsprechend markierten Elementen aktiv. */
+  var highlightEls = document.querySelectorAll("[data-highlight]");
+  if (highlightEls.length && "IntersectionObserver" in window) {
+    var highlightObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-drawn");
+          highlightObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    highlightEls.forEach(function (el) { highlightObserver.observe(el); });
+  } else {
+    // Fallback ohne IntersectionObserver-Unterstützung: direkt anzeigen.
+    highlightEls.forEach(function (el) { el.classList.add("is-drawn"); });
+  }
 })();
 

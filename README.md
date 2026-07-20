@@ -8,6 +8,33 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Zeichenanimation der Hervorhebungen: vier Anpassungen**:
+  1. Beide Animationen halb so schnell (Dauer 1.1s → 2.2s).
+  2. Striche doppelt so dick (`stroke-width` 4 → 8).
+  3. Unterstreichung von „in unsere Kraft" jetzt als Hin- und
+     Her-Bewegung: zweiter, eigener Pfad (`.highlight-stroke-back`) in
+     Gegenrichtung gezeichnet, leicht tiefer versetzt (nicht exakt auf
+     der ersten Strichbewegung), startet erst wenn der erste Strich
+     (`.highlight-stroke-forth`) fertig ist.
+  4. Timing gestaffelt: Unterstreichung startet jetzt eine Sekunde,
+     nachdem der Kreis fertig gezeichnet ist (Delay 3.2s = 2.2s
+     Kreis-Dauer + 1s Pause), der Rückstrich direkt danach (Delay 5.4s).
+- **Hervorhebungen zeichnen sich jetzt live beim Reinscrollen**: Umgestellt
+  von statischem CSS-Hintergrundbild auf echtes Inline-SVG mit
+  `stroke-dashoffset`-Animation (Pfadlängen ~490/~213, Dasharray 600 für
+  beide). Ein `IntersectionObserver` in `script.js` (neuer Block,
+  `[data-highlight]`) fügt die Klasse `.is-drawn` hinzu, sobald der
+  jeweilige Abschnitt zu 60% sichtbar ist — danach nicht mehr beobachtet,
+  damit es nicht bei jedem Vorbeiscrollen erneut zeichnet. Unterstreichung
+  startet mit 0,15s Verzögerung nach dem Kreis. Reduced-Motion-Nutzer
+  bekommen dank der bereits bestehenden globalen Regel
+  (`*{transition-duration:0.001ms}`) den Endzustand sofort ohne Animation.
+- **Handgezeichnete Hervorhebungen ergänzt**: Kreis um „an unsere Grenzen"
+  und Unterstreichung unter „in unsere Kraft" im Fatherhood-Text, beide in
+  Cream (`#FBCD82`), als organisch-unregelmäßiger SVG-Strich (kein
+  perfekter Kreis/Strich, wirkt wie mit der Hand gezeichnet). Neue Klassen
+  `.highlight-circle`/`.highlight-underline` in `style.css`, liegen per
+  `z-index:-1` hinter dem Text.
 - **Tatsächliche Ursache für „immer noch größer" gefunden**: Nicht der
   Fließtext (der war schon korrekt bei 16px), sondern die CTA-Zeile
   „Willkommen bei Dads on a Mission." stand auf Mobil noch bei 19px/28px.
