@@ -618,7 +618,7 @@ p{hyphens:auto;}
   position:relative;
   z-index:1; /* eigener Stacking-Context, damit .pitch-logo-mark (z-index:-1) hinter dieser Fläche liegt, statt hinter der ganzen .pitch-Sektion */
   background-color:#B46E54;
-  padding:7vw 10vw 5vw;
+  padding:5vw 10vw; /* oben/unten jetzt gleich groß (vorher 7vw/5vw) */
 }
 .pitch-heading{
   margin:0;
@@ -660,11 +660,11 @@ p{hyphens:auto;}
 .pitch-content{
   padding:5vw 10vw 7vw;
 }
-.pitch-story{max-width:60vw;}
+.pitch-story{max-width:60vw;margin:0 auto;}
 .pitch-story p{
   color:var(--c-grey);
-  font-size:1.35vw; /* etwas größer als zuvor (1.1vw), da jetzt einspaltig */
-  line-height:2.05vw;
+  font-size:1.4vw; /* gleiche Größe wie der Nach-Vatern-Text (Body-Standard) */
+  line-height:2.4vw;
   margin:0 0 1.3vw;
 }
 .pitch-story p:last-child{margin-bottom:0;}
@@ -674,37 +674,15 @@ p{hyphens:auto;}
   font-size:1.45vw;
   line-height:2.05vw;
   font-weight:800;
-  margin-bottom:1.8vw;
-}
-.pitch-buttons{
-  display:flex;
-  justify-content:flex-start;
-  gap:1vw;
-  flex-wrap:wrap;
-}
-.pitch-btn{
-  display:inline-block;
-  padding:0.9vw 1.6vw;
-  background-color:var(--c-accent);
-  color:#fff;
-  font-family:var(--font-accent);
-  font-weight:700;
-  text-decoration:none;
-  transition:background-color .25s ease-out;
-}
-.pitch-btn:hover{
-  background-color:var(--c-ink);
 }
 
 @media (max-width:900px){
-  .pitch-heading-band{padding:16% 8% 8%;}
+  .pitch-heading-band{padding:8%;}
   .pitch-line1,.pitch-line3{font-size:44px;line-height:44px;}
   .pitch-line2{font-size:22px;line-height:26px;margin:8px 0;}
   .pitch-content{padding:8% 8% 16%;}
   .pitch-story{max-width:100%;}
-  .pitch-cta{font-size:19px;line-height:28px;margin-bottom:6%;}
-  .pitch-buttons{flex-direction:column;gap:12px;width:100%;}
-  .pitch-btn{padding:14px 20px;text-align:center;}
+  .pitch-cta{font-size:19px;line-height:28px;}
   .pitch-story p{font-size:18px;line-height:28px;margin-bottom:16px;}
 }
 

@@ -8,6 +8,23 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Buttons in „Fatherhood is not a Solo Mission" entfernt**: „Tübingen
+  (und Umgebung)" und „Online-Gruppe" sind raus, `.pitch-cta` ist jetzt
+  der letzte Text-Baustein. Nicht mehr verwendete Klassen `.pitch-buttons`/
+  `.pitch-btn` (inkl. Hover- und Mobil-Regeln) entfernt.
+- **Vier weitere Anpassungen an „Fatherhood is not a Solo Mission"**:
+  1. Schriftgröße des Texts an den Nach-Vatern-Text angeglichen (1.35vw →
+     1.4vw/2.4vw, Body-Standard).
+  2. Santa-Fe-Band symmetrisch verkleinert: Padding oben/unten jetzt
+     gleich groß (5vw/5vw statt 7vw/5vw; mobil einheitlich 8% statt
+     16%/8%) — die Überschrift hat jetzt oben und unten gleichen Abstand.
+  3. Zwei Absätze überarbeitet: „...liebevoll und präsent begegnen
+     wollen" → „...liebevoll und präsent für unsere Kinder und Partner da
+     sein wollen"; „...zusammenschließen uns gegenseitig helfen..." →
+     „...zusammenschließen und uns gegenseitig helfen..." (fehlendes
+     „und" ergänzt).
+  4. Textspalte zentriert (`.pitch-story{margin:0 auto;}`), wie beim
+     Nach-Vatern-Text (`.gold-body`).
 - **„Fatherhood is not a Solo Mission": neuer Text, jetzt einspaltig**:
   Komplett neuer Text („Eine der größten Fallen für Väter...") ersetzt
   den bisherigen zweispaltigen Aufbau. `.pitch-content` ist kein
