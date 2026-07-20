@@ -679,6 +679,7 @@ p{hyphens:auto;}
 .highlight-circle,
 .highlight-underline{
   position:relative;
+  display:inline-block; /* statt normalem inline — behebt Firefox/Gecko-Inkonsistenz bei absolut positionierten Kindern in inline-Elementen (Chrome war hier toleranter) */
   white-space:nowrap;
 }
 .highlight-svg{
@@ -687,8 +688,8 @@ p{hyphens:auto;}
   overflow:visible;
   pointer-events:none;
 }
-.highlight-circle .highlight-svg{left:-7%; right:-7%; top:-32%; bottom:-28%; width:114%; height:160%;}
-.highlight-underline .highlight-svg{left:-4%; right:-4%; bottom:-0.24em; width:108%; height:0.32em;}
+.highlight-circle .highlight-svg{left:-7%; top:-32%; width:114%; height:160%;}
+.highlight-underline .highlight-svg{left:-4%; bottom:-0.24em; width:108%; height:0.32em;}
 .highlight-svg path{
   fill:none;
   stroke:#FBCD82;

@@ -8,6 +8,25 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Firefox-Mobile-Darstellungsfehler bei den Hervorhebungen behoben**:
+  Funktionierte auf dem Handy nur in Chrome, nicht in Firefox. Ursache:
+  `.highlight-circle`/`.highlight-underline` sind `<span>`-Elemente
+  (normal *inline*) mit `position:relative` — absolut positionierte
+  Kind-Elemente (unsere SVGs) werden von Chrome/Blink und Firefox/Gecko
+  in diesem Fall unterschiedlich behandelt, ein bekannter
+  Cross-Browser-Unterschied. Fix: beide Spans jetzt `display:inline-block`
+  statt normalem `inline` — dadurch haben sie eine eindeutig definierte
+  Box, auf die sich die absolut positionierten SVGs überall gleich
+  verlässlich beziehen (dank `white-space:nowrap` weiterhin ohne
+  Zeilenumbruch-Risiko). Nebenbei die widersprüchliche
+  `left`+`right`+`width`-Überbestimmung bereinigt (nur noch `left`+`width`
+  bzw. `bottom`+`height`).
+- **Zeichenanimation: Geschwindigkeit zurückgesetzt, Abstand verkürzt**:
+  Dauer wieder auf Original 1.1s (war testweise 2.2s), Pause zwischen
+  Kreis und Unterstreichung von 1s auf 0.5s reduziert. Timing jetzt: Kreis
+  0s–1.1s, Unterstreichung „Hin" ab 1.6s (1.1s + 0.5s), „Her" ab 2.7s
+  direkt im Anschluss. Strichdicke (8) und die Hin-/Her-Bewegung selbst
+  bleiben wie zuletzt.
 - **Zeichenanimation der Hervorhebungen: vier Anpassungen**:
   1. Beide Animationen halb so schnell (Dauer 1.1s → 2.2s).
   2. Striche doppelt so dick (`stroke-width` 4 → 8).
