@@ -480,6 +480,7 @@ p{hyphens:auto;}
   align-items:center; /* Schriftzug + Pfeil zentriert, wie gewünscht */
   text-decoration:none;
   opacity:1;
+  transform:rotate(-15deg); /* 10° zurückgedreht (vorher -25°) */
   transition:opacity .18s ease-out; /* schnelles Faden beim Klick/Scrollen */
 }
 .scrollcue.is-hidden{
@@ -504,7 +505,7 @@ p{hyphens:auto;}
   transition:transform .2s ease-out;
 }
 .scrollcue:hover .scrollcue-text{transform:translate3d(0,0.4vw,0);}
-.scrollcue:hover .scrollcue-arrow{transform:rotate(180deg) translate3d(0,0.4vw,0);}
+.scrollcue:hover .scrollcue-arrow{transform:translate3d(0,0.4vw,0) rotate(180deg);} /* Translate zuerst (im Bildschirm-Koordinatensystem) — sonst kehrt die 180°-Drehung die Bewegungsrichtung um */
 
 /* ---- Logo über dem Hero-Foto -------------------------------------------
    Logo "Dads on a Mission" (Ring + Schriftzug, beide weiß) über dem
@@ -658,29 +659,20 @@ p{hyphens:auto;}
 
 .pitch-content{
   padding:5vw 10vw 7vw;
-  display:flex;
-  gap:6vw;
 }
-.pitch-story{flex:1 1 50%;}
+.pitch-story{max-width:60vw;}
 .pitch-story p{
   color:var(--c-grey);
-  font-size:1.1vw;
-  line-height:1.85vw;
-  margin:0 0 1.1vw;
+  font-size:1.35vw; /* etwas größer als zuvor (1.1vw), da jetzt einspaltig */
+  line-height:2.05vw;
+  margin:0 0 1.3vw;
 }
 .pitch-story p:last-child{margin-bottom:0;}
 
-.pitch-offer{flex:1 1 50%;}
-.pitch-offer p{
-  color:var(--c-grey);
-  font-size:1.1vw;
-  line-height:1.85vw;
-  margin:0 0 1.1vw;
-}
 .pitch-cta{
   color:var(--c-grey);
-  font-size:1.2vw;
-  line-height:1.9vw;
+  font-size:1.45vw;
+  line-height:2.05vw;
   font-weight:800;
   margin-bottom:1.8vw;
 }
@@ -708,11 +700,12 @@ p{hyphens:auto;}
   .pitch-heading-band{padding:16% 8% 8%;}
   .pitch-line1,.pitch-line3{font-size:44px;line-height:44px;}
   .pitch-line2{font-size:22px;line-height:26px;margin:8px 0;}
-  .pitch-content{padding:8% 8% 16%;flex-direction:column;gap:10%;}
-  .pitch-cta{font-size:17px;line-height:26px;margin-bottom:6%;}
+  .pitch-content{padding:8% 8% 16%;}
+  .pitch-story{max-width:100%;}
+  .pitch-cta{font-size:19px;line-height:28px;margin-bottom:6%;}
   .pitch-buttons{flex-direction:column;gap:12px;width:100%;}
   .pitch-btn{padding:14px 20px;text-align:center;}
-  .pitch-story p,.pitch-offer p{font-size:17px;line-height:26px;margin-bottom:16px;}
+  .pitch-story p{font-size:18px;line-height:28px;margin-bottom:16px;}
 }
 
 /* ==========================================================================

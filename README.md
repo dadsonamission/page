@@ -8,6 +8,30 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **„Fatherhood is not a Solo Mission": neuer Text, jetzt einspaltig**:
+  Komplett neuer Text („Eine der größten Fallen für Väter...") ersetzt
+  den bisherigen zweispaltigen Aufbau. `.pitch-content` ist kein
+  Flex-Container mehr, `.pitch-story` (jetzt mit `max-width:60vw`) trägt
+  den gesamten Text allein. Schrift etwas größer als zuvor (1.1vw →
+  1.35vw, CTA 1.2vw → 1.45vw). Nicht mehr benötigte `.pitch-offer`-Regeln
+  entfernt. CTA-Satz jetzt „Willkommen bei Dads on a Mission.", Buttons
+  unverändert.
+- **Scroll-Hinweis-Drehung um 10° zurückgenommen**: -25° → -15°.
+- **Scroll-Hinweis um 25° nach links gedreht**: `transform:rotate(-25deg)`
+  auf `.scrollcue` selbst (statt auf Text und Pfeil einzeln) — dadurch
+  drehen sich Schriftzug und Pfeil als starre Einheit, der Pfeil bleibt
+  automatisch mittig zum Textfeld, ohne dass die Zentrierung separat
+  nachgeführt werden muss.
+- **Scroll-Hinweis: Text geändert + Pfeil-Richtungsfehler behoben**:
+  „Hier geht's / weiter" → „Entdecke / Dads on a Mission!" (Umbruch nach
+  „Entdecke"). Der Pfeil bewegte sich beim Hover entgegengesetzt zum Text
+  (aufeinander zu statt gemeinsam nach unten) — Ursache war die
+  Reihenfolge der Transform-Funktionen: `rotate(180deg)
+  translate3d(...)` wendet die Verschiebung VOR der Drehung an, wodurch
+  die 180°-Rotation ihre Richtung umkehrt. Jetzt `translate3d(...)
+  rotate(180deg)` (Verschiebung zuerst), damit die Bewegung im
+  Bildschirm-Koordinatensystem stattfindet und nicht vom gedrehten
+  Ausgangszustand des Pfeils beeinflusst wird.
 - **„Fatherhood is not a Solo Mission": komplett neuer, durchgehender
   Text**: Keine Liste/Angebots-Absatz mehr — stattdessen ein einziger
   fließender Erzähltext, ausgewogen auf beide gleichbreiten Spalten
