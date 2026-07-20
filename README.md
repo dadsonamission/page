@@ -8,6 +8,11 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Tatsächliche Ursache für „immer noch größer" gefunden**: Nicht der
+  Fließtext (der war schon korrekt bei 16px), sondern die CTA-Zeile
+  „Willkommen bei Dads on a Mission." stand auf Mobil noch bei 19px/28px.
+  Jetzt ebenfalls auf 16px/24px angeglichen — Betonung kommt jetzt nur
+  noch über die Fettschrift, nicht mehr über eine größere Schrift.
 - **Mobile Schriftgröße von „Fatherhood..." korrigiert**: War auf Mobil
   mit 18px/28px größer als der Nach-Vatern-Text (16px/24px) — jetzt
   angeglichen auf 16px/24px.
