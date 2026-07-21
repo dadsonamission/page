@@ -8,6 +8,23 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Silhouetten: Firefox-Darstellungsfehler bei echtem Server-Upload
+  behoben**: Funktionierte in Chrome überall (auch nach Server-Upload)
+  sowie in Firefox bei lokalem Öffnen, aber NICHT in Firefox, sobald die
+  Dateien auf einen echten Webserver hochgeladen wurden — ein bekanntes
+  Muster: externe SVGs, die per `<img src="...">` eingebunden sind,
+  hängen vom `Content-Type`-Header des Servers ab. Liefert der Server
+  `.svg`-Dateien mit falschem/fehlendem MIME-Type aus (kommt bei manchen
+  einfachen Hosting-Konfigurationen vor), zeigt Chrome sie trotzdem an
+  (toleranter), Firefox dagegen nicht. Beim lokalen Öffnen (`file://`)
+  gibt es gar keinen `Content-Type`-Header, daher trat der Fehler dort
+  nicht auf. Fix: alle drei Silhouetten (`assets/silhouette-*.svg`,
+  bisher als externer `<img src>`-Link eingebunden) sind jetzt als
+  Base64-Daten-URI direkt in `index.html` eingebettet — dadurch entfällt
+  die separate HTTP-Anfrage inkl. Content-Type-Abhängigkeit komplett.
+  Die Quelldateien bleiben zusätzlich im `assets`-Ordner erhalten. Der
+  vorherige Changelog-Eintrag dazu ("als externe Bilddateien...") ist
+  durch diesen Fix überholt.
 - **Nach-Vatern-/Mission-Silhouetten verkleinert und zentriert**: Werte per
   Positionsanalyse der PPTX-Vorlage ermittelt (Bild-Position relativ zur
   Kartenfläche in beiden Folien ausgemessen: ca. 78% Kartenbreite, Start
