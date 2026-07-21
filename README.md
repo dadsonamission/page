@@ -8,6 +8,37 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Testweise: dunkelbraune Silhouette bei Mission statt schwarz**: Neue
+  Datei (`assets/silhouette-mission-darkleather.png`, aus
+  `Vater_Tochter_Mission_dark_leather.svg` gerendert, Farbe `#502F20`
+  Dark Leather) ersetzt versuchsweise `silhouette-mission.png` in der
+  Mission-Karte. Die schwarze Originaldatei bleibt unverändert im
+  `assets`-Ordner, falls die dunkelbraune Version nicht überzeugt und ein
+  Rückwechsel gewünscht ist.
+- **JS-Touch-Erkennung wieder entfernt — hat Desktop-Regression verursacht**:
+  `ontouchstart`/`navigator.maxTouchPoints` prüfen nur, ob ein Gerät
+  *technisch* Touch-Hardware besitzt, nicht ob es *gerade* per Maus oder
+  Finger bedient wird. Viele Windows-Laptops haben einen Touchscreen,
+  werden aber ganz normal mit der Maus benutzt — dort meldeten beide
+  Werte fälschlich „Touch-Gerät", wodurch auf einmal auch am Desktop
+  (Firefox und Chrome gleichermaßen) dauerhaft der aufgeklappte Zustand
+  ohne Verlauf/Hover erschien. Komplett zurückgenommen (`script.js` und
+  die zugehörigen `html.is-touch`-Regeln in `style.css`); es gilt wieder
+  ausschließlich die schon zuvor korrekt gescopte CSS-Regel
+  `@media (hover:none), (pointer:coarse)`, die genau die *aktuell*
+  primäre Eingabefähigkeit abfragt statt nur die Hardware-Ausstattung.
+  Der ursprüngliche Handy-Fall bleibt vorerst ungeklärt — dort am besten
+  zuerst Browser-Cache leeren bzw. privates Fenster testen, bevor wir
+  weiter an der Erkennung selbst schrauben.
+- **JS-basierte Touch-Erkennung als robusterer zweiter Trigger ergänzt**:
+  Die CSS-Abfrage `@media (hover:none), (pointer:coarse)` greift auf
+  manchen mobilen Browsern offenbar nicht zuverlässig. Neuer Block in
+  `script.js` erkennt Touch-Fähigkeit stattdessen per JavaScript
+  (`ontouchstart`, `navigator.maxTouchPoints`, `matchMedia("(hover:
+  hover)")`) und setzt bei Bedarf die Klasse `.is-touch` auf `<html>`.
+  Dieselben CSS-Regeln (Verlauf/Silhouette aus, Text dauerhaft sichtbar)
+  greifen jetzt zusätzlich über `html.is-touch ...` — CSS-Media-Query und
+  JS-Erkennung wirken parallel, die zuverlässigere der beiden greift.
 - **Eigentliche Ursache gefunden: Touch-Fallback war an Fensterbreite statt
   Eingabefähigkeit gekoppelt**: Der „dauerhaft aufgeklappte" Zustand
   (kein Verlauf, keine Silhouette, Text immer sichtbar) steckte bisher im
