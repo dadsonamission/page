@@ -838,6 +838,23 @@ p{hyphens:auto;}
   .info-card{background:#FBF8F2 !important;color:var(--c-ink);}
   .info-card h2{color:var(--c-grey);}
   .info-card-silhouette{opacity:0;}
+  /* TEMPORÄRER TEST-MARKER — bitte nach dem Test wieder entfernen (siehe
+     Anleitung). Zeigt einen auffälligen roten Balken oben auf JEDER
+     Seite, wenn genau diese Media Query zutrifft — unabhängig von den
+     Karten, rein zur Diagnose, ob "hover:none"/"pointer:coarse" auf dem
+     jeweiligen Gerät überhaupt erkannt wird. */
+  body::before{
+    content:"TEST: hover:none / pointer:coarse ERKANNT";
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:99999;
+    background:red;
+    color:#fff;
+    text-align:center;
+    padding:10px 6px;
+    font-size:16px;
+    font-weight:800;
+  }
 }
 
 /* ==========================================================================

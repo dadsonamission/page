@@ -8,6 +8,12 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **TEMPORÄRER Test-Marker zur Diagnose des Handy-Problems** (bitte nach
+  dem Test wieder entfernen lassen): Roter Balken oben auf jeder Seite,
+  sichtbar genau dann, wenn `@media (hover:none), (pointer:coarse)`
+  zutrifft — unabhängig von den Karten. Zeigt eindeutig, ob dein Handy
+  überhaupt als "kein Hover" erkannt wird, bevor wir weiter an den
+  Karten selbst schrauben.
 - **Testweise: dunkelbraune Silhouette bei Mission statt schwarz**: Neue
   Datei (`assets/silhouette-mission-darkleather.png`, aus
   `Vater_Tochter_Mission_dark_leather.svg` gerendert, Farbe `#502F20`
