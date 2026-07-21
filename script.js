@@ -191,43 +191,11 @@
     slider.addEventListener("mouseenter", function () { window.clearInterval(autoplay); });
   }
 
-  /* ---- "Nach-Vätern"-Bildsektion: Foto scrollt langsamer als die Seite
-         (Parallax) --------------------------------------------------------
-         Nur auf "wie-ich-arbeite.html" vorhanden. */
-  var nachvaternPhoto = document.getElementById("nachvaternPhoto");
-  var nachvaternShowcase = document.getElementById("nachvaternShowcase");
-
-  if (nachvaternPhoto && nachvaternShowcase) {
-    var updateNachvaternParallax = function () {
-      var rect = nachvaternShowcase.getBoundingClientRect();
-      if (rect.bottom > 0 && rect.top < window.innerHeight) {
-        var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-        var shift = (progress - 0.5) * (rect.height * 0.70); /* nochmals deutlich verstärkt, an den größeren Foto-Puffer angepasst (±35%) */
-        nachvaternPhoto.style.transform = "translate3d(0," + shift.toFixed(1) + "px,0)";
-      }
-    };
-
-    var nvTicking = false;
-    var onNvScroll = function () {
-      if (!nvTicking) {
-        window.requestAnimationFrame(function () {
-          updateNachvaternParallax();
-          nvTicking = false;
-        });
-        nvTicking = true;
-      }
-    };
-
-    window.addEventListener("scroll", onNvScroll, { passive: true });
-    window.addEventListener("resize", onNvScroll);
-    updateNachvaternParallax();
-  }
-
-  /* ---- "Nach-Vätern"-Cutout im Abschnitt "Das Gold der Vaterschaft":
-         gleicher, deutlich verstärkter Parallax-Effekt wie oben, nur mit
-         einem größeren Foto-Puffer, da der Ausschnitt hier zusätzlich für
-         den kompakten Crop (siehe style.css) vorverschoben ist. ----------
-         Nur auf der Startseite vorhanden. */
+  /* ---- "Nach-Vatern"-Cutout: deutlich verstärkter Parallax-Effekt (Foto
+         scrollt langsamer als die Seite). Steht am Anfang von
+         "Wie ich arbeite." (ursprünglich auf der Startseite, dorthin
+         verlagert). ------------------------------------------------------
+         Nur auf Seiten mit dieser Sektion vorhanden. */
   var goldCutoutPhoto = document.getElementById("goldCutoutPhoto");
   var goldCutoutShowcase = document.getElementById("goldCutoutShowcase");
 

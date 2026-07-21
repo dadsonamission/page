@@ -658,7 +658,7 @@ p{hyphens:auto;}
 .pitch-logo-mark svg{display:block;width:100%;height:100%;fill:currentColor;}
 
 .pitch-content{
-  padding:5vw 10vw 7vw;
+  padding:5vw 10vw 3.5vw; /* unterer Abstand halbiert (vorher 7vw) */
 }
 .pitch-story{max-width:60vw;margin:0 auto;}
 .pitch-story p{
@@ -720,10 +720,118 @@ p{hyphens:auto;}
   .pitch-heading-band{padding:8%;}
   .pitch-line1,.pitch-line3{font-size:44px;line-height:44px;}
   .pitch-line2{font-size:22px;line-height:26px;margin:8px 0;}
-  .pitch-content{padding:8% 8% 16%;}
+  .pitch-content{padding:8% 8% 8%;}
   .pitch-story{max-width:100%;}
   .pitch-cta{font-size:16px;line-height:24px;}
   .pitch-story p{font-size:16px;line-height:24px;margin-bottom:16px;}
+}
+
+/* ==========================================================================
+   GEMEINSCHAFT / NACH-VATERN / MISSION — drei Teaser-Karten zwischen
+   "Fatherhood is not a Solo Mission" und "Angebote", nach der gelieferten
+   PPTX-Vorlage ("Karten.pptx"): Ausgangszustand je Karte ein eigener
+   Farbverlauf mit nur der weißen Überschrift; beim Hover wechselt die
+   Fläche zu Weißlich, Überschrift wird Cadet Gray, Reflexionstext +
+   kursive Tagline (Dark Leather, rechtsbündig unten) blenden ein. Format
+   angelehnt an die Kartenmaße der Vorlage (ca. 3:4, hochformatig).
+   ========================================================================== */
+.cards-section{
+  padding:4.5vw 10vw 9vw; /* oberer Abstand halbiert (vorher 9vw), unterer bleibt */
+  background-color:var(--c-bg);
+  display:flex;
+  gap:3vw;
+}
+.info-card{
+  position:relative;
+  overflow:hidden;
+  flex:1 1 33.333%;
+  display:flex;
+  flex-direction:column;
+  aspect-ratio:3/4;
+  padding:3vw;
+  color:#fff;
+  text-decoration:none;
+  transition:background .4s ease-out;
+}
+.info-card-silhouette{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center bottom;
+  opacity:1;
+  transition:opacity .4s ease-out;
+  pointer-events:none;
+}
+.info-card:hover .info-card-silhouette{opacity:0;}
+/* Nach-Vatern und Mission: kleiner und zentriert statt vollflächig, wie in
+   der PPTX-Vorlage — beginnt deutlich unterhalb des Schriftzugs (ca. 18%
+   der Kartenhöhe), volle eigene Bildproportion (kein Zuschnitt), am
+   unteren Kartenrand verankert, horizontal zentriert. */
+.info-card--nachvatern .info-card-silhouette,
+.info-card--mission .info-card-silhouette{
+  inset:auto;
+  top:18%;
+  left:50%;
+  transform:translateX(-50%);
+  width:78%;
+  height:auto;
+  object-fit:contain;
+}
+.info-card h2{
+  position:relative;
+  z-index:1;
+  flex-shrink:0;
+  color:inherit;
+  font-size:2.2vw;
+  line-height:1.1;
+  margin:0 0 1.2vw;
+  transition:color .4s ease-out;
+}
+.info-card-reveal{
+  position:relative;
+  z-index:1;
+  opacity:0;
+  transform:translateY(0.6vw);
+  transition:opacity .35s ease-out, transform .35s ease-out;
+  display:flex;
+  flex-direction:column;
+  flex-grow:1;
+}
+.info-card-reveal p{
+  color:var(--c-grey);
+  margin:0 0 1.2vw;
+  font-size:1vw;
+  line-height:1.6vw;
+}
+.info-card-reveal .info-card-tagline{
+  margin-top:auto;
+  margin-bottom:0;
+  text-align:right;
+  color:var(--c-ink);
+}
+.info-card:hover{background:#FBF8F2;}
+.info-card:hover h2{color:var(--c-grey);}
+.info-card:hover .info-card-reveal{opacity:1; transform:translateY(0);}
+
+/* Je Karte ein eigener Verlauf, wie in der Vorlage (linear, 90°/von oben
+   nach unten, drei unterschiedliche Farbkombinationen aus der Palette). */
+.info-card--gemeinschaft{background:linear-gradient(180deg, #B46E54 11%, #FBCD82 74%, #502F20 100%);}
+.info-card--nachvatern{background:linear-gradient(180deg, #90A1B1 0%, #90A1B1 55%, #FBCD82 100%);}
+.info-card--mission{background:linear-gradient(180deg, #995138 0%, #FBCD82 39%, #FBCD82 100%);}
+
+@media (max-width:900px){
+  .cards-section{padding:8% 8% 16%;flex-direction:column;gap:8%;}
+  .info-card{padding:8%;aspect-ratio:auto;}
+  .info-card h2{font-size:28px;margin-bottom:16px;}
+  .info-card-reveal p{font-size:16px;line-height:24px;}
+  /* Auf Mobil sind Zeiger-Hover-Effekte unzuverlässig (Touch) — Reveal-Text
+     dort direkt sichtbar statt an :hover gekoppelt. */
+  .info-card-reveal{opacity:1;transform:none;}
+  .info-card{background:#FBF8F2 !important;color:var(--c-ink);}
+  .info-card h2{color:var(--c-grey);}
+  .info-card-silhouette{opacity:0;}
 }
 
 /* ==========================================================================
@@ -1051,62 +1159,17 @@ p{hyphens:auto;}
 }
 
 /* ==========================================================================
-   NACH-VÄTERN — zweiter Teil von Folie 2 der PPTX, auf der Unterseite
-   "Wie ich arbeite." Großformatiges Sonnenuntergangsfoto (Vater wirft Kind
-   in die Luft) mit verstärktem Parallax-Effekt (Foto scrollt deutlich
-   langsamer als die Seite). Darüber liegt das ECHTE, vom Nutzer gelieferte
-   Cutout-Layer (Logo_DoaM_ausgeschnitten_blue.svg): eine volle Fläche, aus
-   der Ring + "Dads"/"on a Mission" ausgestanzt sind — nur an genau diesen
-   Stellen ist das Foto zu sehen, der Rest der Fläche ist blickdicht.
-   Das Layer füllt die volle Seitenbreite; die Bildsektion übernimmt dafür
-   das (hohe) Seitenverhältnis der Vorlage (190.5mm : 338.67mm), damit die
-   Maske nicht verzerrt wird.
+   Zitat-Styling für den Nach-Vatern-Cutout (.nachvatern-cutout-wrap,
+   siehe weiter unten) — war früher zusätzlich für eine hohe,
+   unbeschnittene Parallax-Sektion (.nachvatern-photo-wrap) auf "Wie ich
+   arbeite." mitgenutzt; diese Sektion ist inzwischen entfernt (ersetzt
+   durch die komplette Nach-Vatern-Sektion von der Startseite, siehe
+   weiter unten), daher nur noch eine Selektor-Variante nötig.
    ========================================================================== */
-.nachvatern-section{margin-top:6vw;}
-.nachvatern-intro{padding:0 10vw 3vw;}
-.nachvatern-intro h2{color:var(--c-ink);}
-.nachvatern-placeholder{color:var(--c-grey);max-width:40vw;}
-
-.nachvatern-photo-wrap{
-  position:relative;
-  overflow:hidden;
-  width:100%;
-  aspect-ratio:190.5/338.67001; /* exaktes Seitenverhältnis der Cutout-Vorlage */
-}
-.nachvatern-divider{
-  width:100%;
-  height:6vw;
-  background-color:var(--c-ink);
-}
-.nachvatern-photo-wrap .nachvatern-photo{
-  position:absolute;
-  top:-35%; left:0;
-  width:100%; height:170%; /* nochmals deutlich vergrößerter Puffer (±35%), für stark sichtbaren Parallax-Weg */
-  background-image:var(--nachvatern-photo);
-  background-size:cover;
-  background-position:center; /* neues Foto ist bereits mittig komponiert (Silhouette bei ~48%, Sonne bei ~51%) */
-  will-change:transform;
-}
-/* Ausgestanztes Logo-Layer (echtes SVG aus der Vorlage) — deckt die volle
-   Fläche blickdicht ab, nur an den ausgestanzten Formen (Ring, "Dads",
-   "on a Mission") ist das Foto darunter sichtbar. */
-.nachvatern-photo-wrap .nachvatern-logo-cutout{
-  position:absolute; inset:0;
-  background-color:var(--c-grey);
-  -webkit-mask-image:var(--nachvatern-cutout-svg);
-  mask-image:var(--nachvatern-cutout-svg);
-  -webkit-mask-repeat:no-repeat;
-  mask-repeat:no-repeat;
-  -webkit-mask-size:100% 100%;
-  mask-size:100% 100%;
-  -webkit-mask-position:center;
-  mask-position:center;
-  pointer-events:none;
-}
-.nachvatern-photo-wrap blockquote.nachvatern-quote,
 .nachvatern-cutout-wrap blockquote.nachvatern-quote{
   position:absolute;
   left:50%;
+  top:50%; /* an den kompakten Cutout-Ausschnitt angepasst */
   transform:translate(-50%,-50%); /* zentriert den Textblock selbst auf diesen Punkt, nicht nur seinen oberen Rand */
   z-index:2;
   width:85%;
@@ -1119,41 +1182,34 @@ p{hyphens:auto;}
   text-align:center;
   text-shadow:0 0.3vw 1.4vw rgba(0,0,0,.6);
 }
-.nachvatern-photo-wrap blockquote.nachvatern-quote{top:58.7%;} /* auf die Mitte des Logo-Cutouts zentriert (per Pixel-Analyse ermittelt) */
-.nachvatern-cutout-wrap blockquote.nachvatern-quote{top:50%;} /* entsprechend an den kompakteren Cutout-Ausschnitt angepasst */
-.nachvatern-photo-wrap blockquote.nachvatern-quote em,
 .nachvatern-cutout-wrap blockquote.nachvatern-quote em{
   font-style:italic;
   font-weight:800;
 }
 
 @media (max-width:900px){
-  .nachvatern-intro{padding:0 8% 8%;}
-  .nachvatern-placeholder{max-width:100%;font-size:16px;line-height:24px;}
-  .nachvatern-photo-wrap blockquote.nachvatern-quote,
   .nachvatern-cutout-wrap blockquote.nachvatern-quote{
     max-width:100%;
     width:92%;
+    top:50%;
     font-size:20px;
     line-height:28px;
   }
-  .nachvatern-photo-wrap blockquote.nachvatern-quote{top:58.7%;}
-  .nachvatern-cutout-wrap blockquote.nachvatern-quote{top:50%;}
 }
 
 /* ==========================================================================
-   NACH-VÄTERN-CUTOUT + REFLEXIONSTEXT — ersetzt die frühere "Gold der
-   Vaterschaft"-Sektion, zwischen "Fatherhood is not a Solo Mission" und
-   "Die Angebote". Cutout-Effekt nutzt dieselbe Foto+Ausstanz-Technik wie
-   auf "Wie ich arbeite." (.nachvatern-photo-wrap dort), aber deutlich
-   kompakter zugeschnitten: Nur der untere Ausschnitt der hohen Vorlage
-   (ab 15% ihrer Höhe) wird gezeigt, der davor liegende, weitgehend leere
-   graue Bereich entfällt — an seiner Stelle steht jetzt die Überschrift
-   "Nach-Vätern" in Weiß direkt im verbleibenden grauen Bereich oberhalb
-   des Logos, in derselben Größe wie "Fatherhood" in der Pitch-Sektion
-   (6vw). Danach folgt auf weißem Untergrund der graue Reflexionstext
-   (unterbrochen vom Banner-Foto), dann die Liste der Väter-Fragen. Der
-   dunkle Trennbalken am Ende der Sektion bleibt wie zuvor erhalten.
+   NACH-VÄTERN-CUTOUT + REFLEXIONSTEXT — steht jetzt am Anfang von "Wie
+   ich arbeite." (ursprünglich auf der Startseite zwischen "Fatherhood is
+   not a Solo Mission" und "Die Angebote", dorthin verlagert; ersetzt dort
+   die frühere, nie ausgefüllte Platzhalter-Nach-Vätern-Sektion). Graues
+   Header-Band zu Beginn ahmt die Pitch-Heading-Band auf der Startseite
+   nach (gleiche Größe/Farbe für die Hauptzeile, nur grau statt Santa-Fe).
+   Cutout-Effekt (Foto + ausgestanztes Logo, verstärkter Parallax) sitzt
+   mitten im Text, kompakt zugeschnitten (nur der untere Ausschnitt der
+   hohen Vorlage ab 15% ihrer Höhe wird gezeigt, oben/unten gleich viel
+   grauer Rand). Danach folgt auf weißem Untergrund der graue
+   Reflexionstext (unterbrochen vom Banner-Foto), dann die Liste der
+   Väter-Fragen.
    ========================================================================== */
 .gold-section{
   position:relative;

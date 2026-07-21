@@ -8,6 +8,64 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Nach-Vatern-/Mission-Silhouetten verkleinert und zentriert**: Werte per
+  Positionsanalyse der PPTX-Vorlage ermittelt (Bild-Position relativ zur
+  Kartenfläche in beiden Folien ausgemessen: ca. 78% Kartenbreite, Start
+  bei ca. 18% der Kartenhöhe von oben, mittig). Statt vollflächigem
+  Zuschnitt (`object-fit:cover`) jetzt eigene Bildproportion
+  (`object-fit:contain`, `height:auto`), horizontal zentriert
+  (`left:50%` + `translateX(-50%)`). Gemeinschaft bleibt unverändert
+  vollflächig, wie in der Vorlage.
+- **Drei Anpassungen an den Karten + Fatherhood-Abstand**:
+  1. Silhouetten ergänzt: `assets/silhouette-gemeinschaft.svg` (Gruppe),
+     `assets/silhouette-nachvatern.svg` (kniender Vater mit Kind),
+     `assets/silhouette-mission.svg` (Vater mit Tochter an der Hand) —
+     als externe Bilddateien (nicht inline, da recht groß/detailreich),
+     liegen als Hintergrund im Ausgangszustand hinter der Überschrift,
+     blenden beim Hover zusammen mit dem Farbverlauf aus (auf Mobil
+     dauerhaft ausgeblendet, da dort ohnehin die „Hover"-Ansicht dauerhaft
+     sichtbar ist).
+  2. Farbverläufe von Nach-Vatern und Mission getauscht: Nach-Vatern hat
+     jetzt Cadet-Gray→Cream, Mission jetzt Swiss-Chocolate→Cream.
+  3. Abstand zwischen dem Fatherhood-Text und den Karten halbiert (16vw
+     → 8vw gesamt, je zur Hälfte aus `.pitch-content` unterem und
+     `.cards-section` oberem Padding, mobil entsprechend mitgezogen).
+- **Drei Karten statt zwei, komplett neu gestaltet nach PPTX-Vorlage**
+  (Quelle: `Karten.pptx`, Werte per XML-Analyse exakt ausgelesen — Farben,
+  Verlaufsstopps, Textinhalte). Neue Reihenfolge: Gemeinschaft →
+  Nach-Vatern → Mission. Jede Karte startet mit einem eigenen
+  Farbverlauf (Gemeinschaft: Santa Fe→Cream→Dark Leather; Nach-Vatern:
+  Swiss Chocolate→Cream; Mission: Cadet Gray→Cream) und zeigt nur die
+  weiße Überschrift. Beim Hover wechselt die Fläche zu Weißlich, die
+  Überschrift wird Cadet Gray, und der Reflexionstext plus eine kursive
+  Tagline (Dark Leather, rechtsbündig unten) blenden ein
+  (`.info-card-reveal`, Opacity-Übergang). Format jetzt hochformatig
+  (`aspect-ratio:3/4`, wie in der Vorlage), alle drei nebeneinander in
+  einer Reihe (kein Höhenversatz mehr). „Gemeinschaft" verlinkt (als
+  sinnvolle Annahme) auf `vision-mitmachen.html`. Auf Mobil ist der
+  Reveal-Text direkt sichtbar statt an `:hover` gekoppelt, da
+  Touch-Geräte keinen zuverlässigen Hover-Zustand kennen.
+  Nicht übernommen: die kleine rotierte „Kontakt"-Beschriftung aus der
+  Vorlage — ihr genauer Zweck war nicht eindeutig, sag Bescheid falls sie
+  doch gewünscht ist.
+- **Nach-Vatern-Sektion von der Startseite auf „Wie ich arbeite." verlagert**:
+  Die komplette Sektion (graues Header-Band, Reflexionstext, Cutout,
+  Strandfoto, Fragenliste) steht jetzt ganz am Anfang von
+  `wie-ich-arbeite.html`, vor der bisherigen Seite (Cohen-Zitat + Bild).
+  Ersetzt dort die frühere, nie ausgefüllte Platzhalter-Nach-Vätern-Sektion
+  — **wichtiger Nebenfund**: dadurch wurde die alte, hohe
+  Parallax-Sektion (`.nachvatern-photo-wrap`, `nachvaternPhoto`/
+  `nachvaternShowcase`) komplett verwaist; CSS und der zugehörige
+  JS-Block in `script.js` sind entfernt, ebenso die verwaiste
+  `.nachvatern-photo-wrap`-Variante der gemeinsamen Zitat-CSS-Regel.
+  Auf der Startseite stehen an der Stelle jetzt zwei neue Teaser-Karten
+  (`.cards-section`, `.info-card--nachvatern`/`.info-card--mission`):
+  links „Nach-Vatern" mit dem neuen Kurztext, rechts „Mission" mit
+  Platzhalter-Text, um ein Drittel ihrer eigenen Höhe nach unten versetzt
+  (`margin-top:7vw`, geschätzt passend zur Textlänge — ggf. nachjustieren).
+  Beide Karten sind Links (Nach-Vatern → `wie-ich-arbeite.html`, Mission →
+  `warum-mission.html`, als sinnvolle Annahme ergänzt) und invertieren
+  beim Hover ihre Farben (grau/dark-leather Hintergrund, weiße Schrift).
 - **Firefox-Mobile-Darstellungsfehler bei den Hervorhebungen behoben**:
   Funktionierte auf dem Handy nur in Chrome, nicht in Firefox. Ursache:
   `.highlight-circle`/`.highlight-underline` sind `<span>`-Elemente
