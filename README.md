@@ -8,6 +8,70 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Eigentliche Ursache gefunden: Touch-Fallback war an Fensterbreite statt
+  Eingabefähigkeit gekoppelt**: Der „dauerhaft aufgeklappte" Zustand
+  (kein Verlauf, keine Silhouette, Text immer sichtbar) steckte bisher im
+  selben `@media (max-width:900px)`-Block wie die Layout-Anpassungen —
+  dadurch griff er auch in einem schmalen **Desktop**-Browserfenster
+  (Maus vorhanden, aber schmal), nicht nur auf echten Touch-Geräten. Das
+  erklärt, warum in Edge/Firefox/Chrome auf dem Desktop plötzlich Verlauf
+  und Silhouetten fehlten, obwohl das mobile Kartengrößen-Fix (letzter
+  Schritt) sichtbar korrekt griff. Fix: Touch-Fallback-Regeln in einen
+  separaten `@media (hover:none), (pointer:coarse)`-Block verschoben,
+  der Layout-Block (`max-width:900px`) enthält nur noch die reinen
+  Größen-/Abstands-Anpassungen. Ein schmales Desktop-Fenster mit Maus
+  zeigt jetzt auch unterhalb von 900px weiterhin Verlauf + Hover-Effekt;
+  nur echte Touch-Geräte bekommen den dauerhaften Text-Zustand.
+- **Silhouetten von SVG auf PNG umgestellt**: Als externe Datei-Referenz
+  (`assets/silhouette-*.png`, mit Transparenz, 900×1273px), nicht mehr
+  als Base64-SVG — `index.html` dadurch wieder deutlich kleiner (194 KB →
+  21 KB). Die SVG-Quelldateien bleiben zusätzlich im `assets`-Ordner
+  erhalten. **Wichtig:** Falls sich nach diesem Wechsel auf dem
+  Server/Handy weiterhin nichts ändert (wie bei den letzten drei
+  CSS-Versuchen auch schon), unbedingt vor dem nächsten Test einmal
+  Browser-Cache leeren bzw. im privaten/Inkognito-Fenster testen — dass
+  drei inhaltlich unterschiedliche, tatsächlich wirksame Fixes
+  nacheinander null sichtbaren Unterschied gemacht haben, spricht eher
+  für eine gecachte alte Version als dafür, dass alle drei Fixes zufällig
+  wirkungslos waren.
+- **Festes Seitenverhältnis für die Karten auch auf Mobil**: Statt rein
+  textabhängiger Höhe (`aspect-ratio:auto`) jetzt `aspect-ratio:3/4` wie
+  auf Desktop — alle drei Karten damit gleich groß und konsistent
+  proportioniert, unabhängig von der jeweiligen Textlänge.
+  `overflow:visible` als Sicherheitsnetz ergänzt, falls der Text auf
+  einem sehr schmalen Bildschirm doch mehr Platz braucht, als das
+  Verhältnis vorgibt — die Karte wächst dann einfach etwas, statt Text
+  abzuschneiden.
+- **Tatsächliche Ursache für flache Karten + fehlenden Abstand auf Mobil
+  gefunden und behoben**: Der vorherige Fix (Prozent-`gap` → px) war zwar
+  richtig, aber nicht ausreichend. Der eigentliche Übeltäter: `.info-card`
+  erbt von der Desktop-Regel `flex:1 1 33.333%` — gedacht als Breiten-Anteil
+  für die Drei-Spalten-Reihe. Da `.cards-section` auf Mobil aber auf
+  `flex-direction:column` wechselt, wirkt derselbe Wert dort plötzlich auf
+  die **Höhe** statt die Breite — 33.333% einer nicht festgelegten
+  (automatischen) Container-Höhe ist eine unsichere Bezugsgröße, die
+  Browser unterschiedlich behandeln (im schlimmsten Fall wie 0), was
+  genau zu den beobachteten extrem flachen, quasi berührenden Karten
+  passt. Fix: `.info-card{flex:none;}` auf Mobil ergänzt. Beim
+  Durchsuchen nach demselben Muster zwei weitere, bisher unbemerkte
+  Instanzen gefunden und ebenfalls behoben: `.wia-quotes` (`flex:1 1 55%`)
+  und `.wia-image` (`flex:1 1 30%`) auf „Wie ich arbeite." — deren
+  Eltern-Container `.wia-content`/`.wia-quotes` wechseln auf Mobil
+  ebenfalls auf `flex-direction:column`. `.gold-questions`/
+  `.gold-illustration` waren bereits korrekt auf `flex:1 1 auto` gesetzt.
+- **Fehlender Abstand zwischen gestapelten Karten auf Mobil behoben** (trat
+  in Firefox UND Chrome auf Android gleichermaßen auf — kein
+  browserspezifischer Bug, sondern eine generelle CSS-Unzuverlässigkeit):
+  Prozent-Werte für `gap` in einem `flex-direction:column`-Container ohne
+  feste Höhe werden von mobilen Browsern inkonsistent aufgelöst (die
+  Prozent-Basis hängt zirkulär von der Höhe ab, die der Gap selbst mit
+  beeinflusst) — im schlimmsten Fall wird der Gap wie 0 behandelt, genau
+  das gemeldete Symptom. Alle sechs betroffenen Stellen im Mobil-Bereich
+  auf feste px-Werte umgestellt: `.cards-section` (8%→28px),
+  `.wia-content`/`.wia-quotes` (12%→40px), `.daniel-content` (8%→28px),
+  `.gold-questions-wrap` (6%→20px), vorsorglich auch `.finance-section`
+  (8%→24px, gleiches Muster, nicht explizit gemeldet aber selbe Ursache
+  denkbar).
 - **Silhouetten: Firefox-Darstellungsfehler bei echtem Server-Upload
   behoben**: Funktionierte in Chrome überall (auch nach Server-Upload)
   sowie in Firefox bei lokalem Öffnen, aber NICHT in Firefox, sobald die

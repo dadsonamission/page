@@ -822,12 +822,18 @@ p{hyphens:auto;}
 .info-card--mission{background:linear-gradient(180deg, #995138 0%, #FBCD82 39%, #FBCD82 100%);}
 
 @media (max-width:900px){
-  .cards-section{padding:8% 8% 16%;flex-direction:column;gap:8%;}
-  .info-card{padding:8%;aspect-ratio:auto;}
+  .cards-section{padding:8% 8% 16%;flex-direction:column;gap:28px;}
+  .info-card{padding:8%;aspect-ratio:3/4;flex:none;overflow:visible;} /* festes Seitenverhältnis wie Desktop statt rein textabhängiger Höhe — overflow:visible als Sicherheitsnetz, falls Text bei sehr schmalen Screens doch mehr Platz braucht, als 3:4 hergibt */
   .info-card h2{font-size:28px;margin-bottom:16px;}
   .info-card-reveal p{font-size:16px;line-height:24px;}
-  /* Auf Mobil sind Zeiger-Hover-Effekte unzuverlässig (Touch) — Reveal-Text
-     dort direkt sichtbar statt an :hover gekoppelt. */
+}
+
+/* Dauerhaft "aufgeklappter" Zustand (Verlauf/Silhouette aus, Text sichtbar)
+   NUR für Geräte ohne zuverlässigen Hover (Touch) — bewusst an die
+   Eingabefähigkeit gekoppelt, nicht an die Fensterbreite. Ein schmales
+   Desktop-Fenster mit Maus zeigt dadurch weiterhin ganz normal Verlauf +
+   Hover-Effekt, auch unterhalb von 900px Breite. */
+@media (hover:none), (pointer:coarse){
   .info-card-reveal{opacity:1;transform:none;}
   .info-card{background:#FBF8F2 !important;color:var(--c-ink);}
   .info-card h2{color:var(--c-grey);}
@@ -1078,14 +1084,14 @@ p{hyphens:auto;}
 .wia-image img{width:100%;height:auto;display:block;}
 
 @media (max-width:900px){
-  .wia-content{padding:0 8% 16%;flex-direction:column;gap:12%;}
-  .wia-quotes{flex-direction:column;gap:12%;}
+  .wia-content{padding:0 8% 16%;flex-direction:column;gap:40px;}
+  .wia-quotes{flex-direction:column;gap:40px;flex:none;}
+  .wia-image{max-width:70%;margin:0 auto;flex:none;}
   .wia-quote-block{padding-top:40px;}
   .wia-quote-block .wia-mark{font-size:70px;top:-30px;left:-6px;}
   .wia-text-en,.wia-text-de{font-size:16px;line-height:24px;}
   .wia-attribution{font-size:14px;margin-top:12px;}
   .wia-quote-de{padding:24px 20px;}
-  .wia-image{max-width:70%;margin:0 auto;}
 }
 
 /* ==========================================================================
@@ -1118,7 +1124,7 @@ p{hyphens:auto;}
 }
 
 @media (max-width:900px){
-  .finance-section{padding:14% 8%;gap:8%;}
+  .finance-section{padding:14% 8%;gap:24px;}
   .finance-section h2{margin-bottom:5%;}
   .finance-meta{font-size:15px;line-height:22px;}
   .finance-right p{font-size:16px;line-height:24px;margin-bottom:16px;}
@@ -1153,7 +1159,7 @@ p{hyphens:auto;}
 
 @media (max-width:900px){
   .daniel-headline{padding:8% 8%;}
-  .daniel-content{padding:10% 8%;gap:8%;flex-direction:column-reverse;}
+  .daniel-content{padding:10% 8%;gap:28px;flex-direction:column-reverse;}
   .daniel-text p{margin-bottom:16px;}
   .daniel-photo{flex:0 1 auto;max-width:70%;margin:0 auto;}
 }
@@ -1333,7 +1339,7 @@ p{hyphens:auto;}
   .gold-body-after-cutout{padding-top:6%;}
   .gold-body p{font-size:16px;line-height:24px;margin-bottom:16px;}
   .gold-banner{margin:6% 0;}
-  .gold-questions-wrap{max-width:100%;padding:4% 8% 14%;flex-direction:column;gap:6%;}
+  .gold-questions-wrap{max-width:100%;padding:4% 8% 14%;flex-direction:column;gap:20px;}
   .gold-questions{flex:1 1 auto;}
   .gold-illustration{flex:1 1 auto;max-width:60%;margin:0 auto;}
   .gold-questions li br.lb{display:none;}
