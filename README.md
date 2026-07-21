@@ -8,6 +8,19 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Karten-Verhalten auf Touch-Geräten geklärt und neu gebaut**: Die
+  Diagnose ergab: die Erkennung funktionierte die ganze Zeit korrekt
+  (Test-Marker war sichtbar) — der "permanent aufgeklappte" Zustand ohne
+  Verlauf war einfach nicht das gewünschte Verhalten. Gewünscht:
+  Handy soll wie Desktop zuerst Verlauf+Silhouette zeigen, Text erst
+  durchs Antippen. Umgesetzt als echte Tippen-Interaktion: erstes Tippen
+  auf eine Karte setzt per JS die Klasse `.is-active` (verhält sich
+  optisch identisch zu `:hover`), zweites Tippen auf dieselbe, bereits
+  aktive Karte folgt dann dem Link; Tippen außerhalb schließt eine
+  offene Vorschau wieder. Nur aktiv, wenn `matchMedia("(hover: none),
+  (pointer: coarse)")` zutrifft — auf Geräten mit Maus bleibt `:hover`
+  unangetastet. Der alte „dauerhaft aufgeklappt"-Block und der
+  Test-Marker sind komplett entfernt.
 - **TEMPORÄRER Test-Marker zur Diagnose des Handy-Problems** (bitte nach
   dem Test wieder entfernen lassen): Roter Balken oben auf jeder Seite,
   sichtbar genau dann, wenn `@media (hover:none), (pointer:coarse)`

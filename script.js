@@ -246,5 +246,35 @@
     // Fallback ohne IntersectionObserver-Unterstützung: direkt anzeigen.
     highlightEls.forEach(function (el) { el.classList.add("is-drawn"); });
   }
+
+  /* ---- Info-Karten (Gemeinschaft/Nach-Vatern/Mission) auf Touch-Geräten:
+         Da :hover dort nie zuverlässig auslösbar ist, übernimmt das erste
+         Tippen auf eine Karte dessen Rolle (Klasse .is-active, siehe
+         style.css) — zeigt Verlauf→Vorschau-Text, genau wie :hover am
+         Desktop. Erst ein zweites Tippen auf dieselbe, bereits aktive
+         Karte folgt dann dem Link ganz normal. Tippen außerhalb schließt
+         eine offene Vorschau wieder. Nur relevant, wenn kein zuverlässiger
+         Hover vorhanden ist — auf Geräten mit Maus bleibt :hover
+         unangetastet, dieser Code greift dort gar nicht ein. */
+  var infoCards = document.querySelectorAll(".info-card");
+  var noReliableHover = window.matchMedia &&
+    window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  if (infoCards.length && noReliableHover) {
+    infoCards.forEach(function (card) {
+      card.addEventListener("click", function (e) {
+        if (!card.classList.contains("is-active")) {
+          e.preventDefault();
+          infoCards.forEach(function (c) { c.classList.remove("is-active"); });
+          card.classList.add("is-active");
+        }
+        // Karte war schon aktiv: kein preventDefault, Link öffnet normal.
+      });
+    });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".info-card")) {
+        infoCards.forEach(function (c) { c.classList.remove("is-active"); });
+      }
+    });
+  }
 })();
 

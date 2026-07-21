@@ -828,34 +828,15 @@ p{hyphens:auto;}
   .info-card-reveal p{font-size:16px;line-height:24px;}
 }
 
-/* Dauerhaft "aufgeklappter" Zustand (Verlauf/Silhouette aus, Text sichtbar)
-   NUR für Geräte ohne zuverlässigen Hover (Touch) — bewusst an die
-   Eingabefähigkeit gekoppelt, nicht an die Fensterbreite. Ein schmales
-   Desktop-Fenster mit Maus zeigt dadurch weiterhin ganz normal Verlauf +
-   Hover-Effekt, auch unterhalb von 900px Breite. */
-@media (hover:none), (pointer:coarse){
-  .info-card-reveal{opacity:1;transform:none;}
-  .info-card{background:#FBF8F2 !important;color:var(--c-ink);}
-  .info-card h2{color:var(--c-grey);}
-  .info-card-silhouette{opacity:0;}
-  /* TEMPORÄRER TEST-MARKER — bitte nach dem Test wieder entfernen (siehe
-     Anleitung). Zeigt einen auffälligen roten Balken oben auf JEDER
-     Seite, wenn genau diese Media Query zutrifft — unabhängig von den
-     Karten, rein zur Diagnose, ob "hover:none"/"pointer:coarse" auf dem
-     jeweiligen Gerät überhaupt erkannt wird. */
-  body::before{
-    content:"TEST: hover:none / pointer:coarse ERKANNT";
-    position:fixed;
-    top:0; left:0; right:0;
-    z-index:99999;
-    background:red;
-    color:#fff;
-    text-align:center;
-    padding:10px 6px;
-    font-size:16px;
-    font-weight:800;
-  }
-}
+/* Tippen-Interaktion für Touch-Geräte: Klasse .is-active wird per JS beim
+   ersten Antippen einer Karte gesetzt (siehe script.js) und verhält sich
+   optisch genau wie :hover — erst der Verlauf, nach dem Tippen die
+   weißliche Fläche mit Text. Zweites Tippen auf dieselbe (bereits
+   aktive) Karte folgt dann ganz normal dem Link. */
+.info-card.is-active{background:#FBF8F2;}
+.info-card.is-active h2{color:var(--c-grey);}
+.info-card.is-active .info-card-reveal{opacity:1; transform:translateY(0);}
+.info-card.is-active .info-card-silhouette{opacity:0;}
 
 /* ==========================================================================
    ALLGEMEINE INHALTS-SEKTIONEN (Container rechts um die Header-Spalte)
