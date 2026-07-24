@@ -1584,7 +1584,12 @@ p{hyphens:auto;}
   color:var(--c-grey);
   font-size:1.2vw;
   line-height:1.95vw;
+  margin-bottom:1.95vw; /* entspricht einer Zeilenhöhe = sichtbare Leerzeile zwischen den Absätzen */
 }
+.mission-body p:last-child{margin-bottom:0;}
+.mission-body-link{font-weight:800;}
+.mission-body-link a{color:var(--c-accent);text-decoration:underline;}
+.mission-body-link a:hover{color:var(--c-ink);}
 .under-construction{
   text-align:center;
   margin-top:5vw;
@@ -1596,15 +1601,18 @@ p{hyphens:auto;}
   display:inline-block;
 }
 @media (max-width:900px){
+  .under-construction{margin-top:10%;}
+  .under-construction img{width:60%;}
+}
+@media (max-width:900px){
   .mission-heading-band{padding:16% 8% 8%;}
   .mission-heading-band-title{font-size:44px;line-height:44px;}
   .mission-content{max-width:100%;padding:8% 8% 12%;}
-  .mission-poem{padding-left:8%;margin-bottom:8%;}
+  .mission-poem{max-width:100%;padding-left:4%;margin-bottom:8%;} /* eigene feste vw-Breite (48vw) entfernt — sonst blieb das Gedicht auf Mobil viel zu schmal; Einrückung von 8% auf 4% verkleinert, damit mehr vom schmalen Bildschirm genutzt wird */
   .mission-poem p{font-size:16px;line-height:24px;}
   .mission-poem-attribution{font-size:14px;}
-  .mission-body p{font-size:16px;line-height:25px;}
-  .under-construction{margin-top:10%;}
-  .under-construction img{width:60%;}
+  .mission-body{max-width:100%;} /* eigene feste vw-Breite (60vw) entfernt — gleicher Fehler wie beim Gedicht */
+  .mission-body p{font-size:16px;line-height:25px;margin-bottom:25px;}
 }
 
 @media (max-width:900px){

@@ -8,6 +8,64 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Mission-Seite: zwei Korrekturen von der Korrekturliste zurückgenommen**:
+  1. „Wir wollen alles..." → „Wir wollen **alle** für unsere Kinder da
+     sein." (andere, tatsächlich gemeinte Bedeutung: alle Väter wollen
+     das, nicht „alles sein").
+  2. Doppelte Verneinung „Ohne nicht auch..." wieder hergestellt, wie
+     ursprünglich geschrieben — war doch beabsichtigt, keine Korrektur
+     nötig.
+- **Mission-Seite: Korrekturlesen**: Das Gedicht selbst (Rilke-Zitat mit
+  historischer Schreibweise wie „daß"/„ziehn") und offensichtlich
+  bewusste Stilmittel (kurze Fragment-Sätze wie „Funktioniert.
+  Durchgehalten." an anderer Stelle der Seite, die wiederkehrende Phrase
+  „Kirche wo im Osten steht" als Anspielung aufs Gedicht) wurden dabei
+  NICHT angetastet. Sechs Korrekturen im Fließtext:
+  1. „größerem" → „Größerem" (wie gewünscht).
+  2. „Etwas das über uns als einzelne hinausweist" → „Etwas, das über
+     uns als Einzelne hinausweist" (Komma ergänzt, „Einzelne" als
+     Substantivierung großgeschrieben).
+  3. „Wir wollen allen für unsere Kinder da sein" → „Wir wollen alles
+     für unsere Kinder da sein" („allen" passte grammatisch nicht).
+  4. „Zigarettenholen geht" → „Zigaretten holen geht" (zwei Wörter).
+  5. „Ohne nicht auch nach unserer Kirche..." → „Ohne auch nach unserer
+     Kirche..." (doppelte Verneinung entfernt).
+  6. „zwischen meiner Lebensmission und meiner Rolle als Vater" →
+     „zwischen unserer Lebensmission und unserer Rolle als Vater"
+     (Perspektivwechsel korrigiert, der restliche Absatz ist durchgehend
+     in „wir/unsere").
+- **Mission-Seite: Verlinkung zu den Angeboten ergänzt**: „Hier geht es
+  zu den Angeboten." als letzter Absatz, verlinkt auf `angebote.html`,
+  fett hervorgehoben.
+- **Mission-Seite: fehlende Leerzeilen zwischen den Absätzen behoben**:
+  `.mission-body p` hatte gar keinen `margin-bottom` (globaler Reset setzt
+  alle Margins auf 0), dadurch liefen die 13 Absätze optisch zusammen wie
+  ein einziger Textblock. Jetzt `margin-bottom` in Höhe einer Zeile
+  ergänzt (Desktop 1.95vw, Mobil 25px) — dadurch entsteht zwischen den
+  Absätzen eine sichtbare Leerzeile, wie gewünscht.
+- **Mission-Seite überarbeitet**:
+  1. **Mobile Breiten-Bug behoben**: `.mission-poem` (48vw) und
+     `.mission-body` (60vw) hatten eigene, feste Desktop-Breiten, die nie
+     für Mobil überschrieben wurden — der äußere Container ging zwar
+     korrekt auf 100%, die beiden inneren Blöcke blieben aber auf ihrer
+     schmalen Desktop-Breite hängen (48vw/60vw eines schmalen
+     Handybildschirms sind absolut sehr wenig). Jetzt beide auf
+     `max-width:100%` für Mobil gesetzt, wie es bei „Nach-Vatern"
+     (`.gold-body`) schon richtig gemacht war. Gedicht-Einrückung auf
+     Mobil zusätzlich von 8% auf 4% verkleinert, damit mehr vom schmalen
+     Bildschirm für die Zeilen selbst bleibt.
+  2. Under-Construction-Bild entfernt (globale `.under-construction`-
+     Mobile-Regeln dabei versehentlich mitgelöscht und wiederhergestellt
+     — die werden noch auf „Das bin ich."/„Angebote" gebraucht).
+  3. Neuer, vollständiger Text eingefügt (13 Absätze, jeder Zeilenumbruch
+     als eigener Absatz mit Leerzeile). Ersetzt den bisherigen, kürzeren
+     Absatz. Offensichtliche Tippfehler beim Abtippen mitkorrigiert
+     („Fuballclubs"→„Fußballclubs", „notdürfte"→„notdürftige", „wonach
+     wir uns sehen"→„sehnen", „keine heroischer"→„kein heroischer", „Es
+     kein Dienst"→„Es ist kein Dienst", „Mit unser Mission"→„Mit unserer
+     Mission") — bei inhaltlichen/stilistischen Fragen sonst nichts
+     verändert. Zitat-Anführungszeichen an die bestehende Konvention
+     („...") angeglichen.
 - **Zwei weitere Anpassungen**:
   1. Abstand zwischen Unterstreichung und Kreis im Fatherhood-Text von
      0.5s auf 0.25s reduziert (Kreis startet jetzt bei 3.45s statt 3.7s).
