@@ -8,6 +8,193 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Zwei weitere Anpassungen**:
+  1. Abstand zwischen Unterstreichung und Kreis im Fatherhood-Text von
+     0.5s auf 0.25s reduziert (Kreis startet jetzt bei 3.45s statt 3.7s).
+  2. Angebote-Slider: Autoplay startete bisher sofort beim Laden der
+     Seite (per `setInterval`), unabhängig vom Scroll-Stand — dadurch
+     war der Slider beim Erreichen des Bereichs oft schon mitten im oder
+     durch den ersten Zyklus. Jetzt per `IntersectionObserver` an das
+     tatsächliche Sichtbarwerden des Sliders gekoppelt (analog zu den
+     Zeichenanimationen) — der automatische Durchlauf beginnt jetzt
+     wirklich erst, wenn man zum Bereich runterscrollt.
+- **Fahrplan & Newsletter: eigentliche Ursache für „transparent" behoben**:
+  Gemeint war der Hintergrund der GESAMTEN Sektion, nicht nur des
+  Platzhalter-Kastens. `.fahrplan-section` hatte (anders als die anderen
+  Sektionen, die alle `.section` mit eigener Hintergrundfarbe nutzen oder
+  diese explizit selbst setzen) noch gar keine eigene Hintergrundfarbe —
+  dadurch schien das fest positionierte Hero-Foto von ganz oben durch.
+  Jetzt `background-color:var(--c-bg)` ergänzt, wie bei allen anderen
+  Sektionen auch.
+- **Fahrplan & Newsletter: Reihenfolge getauscht, Platzhalter weiß**:
+  Newsletter-Feld steht jetzt zuerst, der Fahrplan-Bild-Platzhalter
+  danach (vorher umgekehrt). Platzhalter-Kasten hat jetzt einen expliziten
+  weißen Hintergrund (vorher keiner gesetzt, dadurch nur die gestrichelte
+  Umrandung ohne eigene Fläche).
+- **Neue Sektion „Fahrplan & Newsletter" nach „Angebote" eingefügt**:
+  Graues Header-Band (wie `.nachvatern-heading-band`, weiße Schrift),
+  darunter der gelieferte Einführungstext (kleine Grammatik-Korrektur:
+  „schreib trag Dich..." → „trag Dich...", offensichtlicher
+  Tipp-Rest), ein gestrichelter Platzhalter-Kasten fürs noch folgende
+  Fahrplan-Bild, und die Substack-Newsletter-Einbettung — diese wurde
+  aus „Angebote" hierher verschoben (thematisch passender als vor dem
+  Slider). E-Mail-Adresse im Text als `mailto:`-Link verlinkt.
+- **Slider-Illustrationen wirklich vertikal zentriert**: Der Rahmen war
+  oben/unten unterschiedlich groß (8%/22%, um Platz für die
+  Bildunterschrift einzuplanen), wodurch die Bilder zu weit oben saßen.
+  Jetzt symmetrisch (`inset:12%` statt `top:8%;...;bottom:22%`) — dadurch
+  wirklich mittig statt nur mittig innerhalb eines nach oben verschobenen
+  Rahmens.
+- **Angebote-Slider mit echten Inhalten bestückt**: Die drei gelieferten
+  weißen Line-Art-Illustrationen (`assets/slide-vaeterkreis.png`,
+  `slide-einzelbegleitung.png`, `slide-missionsworkshop.png`, SVG-Quellen
+  ebenfalls abgelegt) ersetzen die leeren Platzhalter-Folien, in der
+  Reihenfolge Väterkreis → Einzelbegleitung → Missionsworkshop. Captions
+  von „Angebot 1/2/3 — PLATZHALTER-Name" auf die echten Namen geändert.
+  Farbverlauf-Hintergrund bewusst unverändert gelassen. Jede Folie
+  (`<div class="slide">` → `<a class="slide" href="angebote.html">`)
+  verlinkt jetzt auf die Angebote-Unterseite; Pfeile/Pager bleiben
+  unabhängig davon funktionsfähig (Slider nutzt keine Swipe-Gesten, daher
+  kein Konflikt mit dem Link).
+- **Silhouetten von Gemeinschaft und Nach-Vatern: schwarz → Dark Leather**:
+  Beide Karten nutzen jetzt die gelieferten, bereits in Dark Leather
+  (`#502F20`) eingefärbten SVGs. `assets/silhouette-gemeinschaft.svg`/`.png`
+  und `assets/silhouette-nachvatern.svg`/`.png` ersetzt (Dateinamen
+  unverändert, daher keine HTML-Änderung nötig).
+- **Vier weitere Anpassungen an Mission- und Vision-Seite**:
+  1. Zusätzliche Leerzeile vor „Und seine Kinder segnen ihn wie tot."
+     ergänzt (zusätzlich zur bereits vorhandenen danach).
+  2. Grauer Textblock auf der Mission-Seite um ein weiteres Viertel
+     verbreitert (48vw → 60vw).
+  3. Gedichtblock jetzt relativ zum (jetzt breiteren) Textblock zentriert
+     (`margin:0 auto` statt linksbündig), Zeilenbreite selbst unverändert
+     bei 48vw, Einrückung der ersten Zeile bleibt erhalten.
+  4. Textblock auf „Vision & Mitmachen" genauso verbreitert (60vw
+     Inhaltsbreite) und zentriert wie auf der Mission-Seite.
+- **Mission-Seite: Gedicht/Textblock verbreitert, Strophenpause ergänzt**:
+  `.mission-content` von 52vw auf 76vw verbreitert. Gedicht (inkl. Titel)
+  jetzt bei `max-width:48vw` (abzüglich 8vw Einrückung = 40vw
+  Textbreite) — jede Zeile passt jetzt ohne Umbruch in eine Zeile.
+  Textblock separat auf `max-width:48vw` gesetzt (50% breiter als die
+  vorherigen 32vw). Nach „ihn wie tot." zusätzlicher Zeilenumbruch für
+  die Strophenpause zwischen den beiden Vierzeilern eingefügt.
+- **Vision & Mitmachen: neues Header-Band + Struktur**: Kopf jetzt wie bei
+  „Nach-Vatern" aufgebaut (`.nachvatern-heading-band`-Vorlage), aber in
+  Santa-Fe (`#B46E54`) statt Grau, Schrift weiß (wie im Original). Im
+  Textblock davor eine neue Zwischenüberschrift „Gemeinschaft" (Größe/
+  Farbe der bisherigen Seiten-H1: 2.4vw, Dark Leather), der bestehende
+  Fließtext bleibt unverändert, danach neu „Vision" als Überschrift ohne
+  weiteren Text, stattdessen das Under-Construction-Bild.
+- **Newsletter-Embed: Höhen-Erhöhung war ein Rückschritt, Strategie
+  geändert**: Die Erhöhung auf 450px hat laut Rückmeldung alles wieder
+  sichtbar gemacht (Überschrift-Rest, Untertitel, Autorenzeile) — vermutlich
+  weil Substack sein internes Layout bei mehr verfügbarer Höhe neu
+  verteilt/zentriert und dadurch alle Positionen verschiebt, was den
+  bewährten 175px-Crop ungültig machte. Zurückgerudert: Iframe-Eigenhöhe
+  wieder bei 320px (dem Wert, bei dem der obere Zuschnitt nachweislich
+  passte). Stattdessen die Spalte von 480px auf 700px verbreitert, in der
+  Annahme, dass der Hinweistext dann auf weniger Zeilen umbricht und so
+  eher in die bestehende Höhe passt, ohne das Layout durch eine
+  Höhenänderung zu destabilisieren.
+- **Newsletter-Embed: Hinweistext wurde noch abgeschnitten**: Vermutung —
+  in der schmaleren 480px-Spalte bricht der Text auf mehr Zeilen um als
+  in den bisherigen, breiteren Referenz-Screenshots. Iframe-Eigenhöhe von
+  320px auf 450px erhöht (`--nl-iframe-height`), damit Substack den Text
+  überhaupt vollständig rendert, und das sichtbare Fenster entsprechend
+  mitgewachsen (weiterhin ab 175px von oben, aber jetzt bis 450px statt
+  320px). Weiterhin Schätzung ohne eigene Sichtprüfung.
+- **Newsletter-Embed-Zuschnitt: oberer Wert bestätigt, unten wieder
+  offen**: 175px oben passt laut Rückmeldung. Der Hinweistext unter dem
+  Eingabefeld soll bewusst sichtbar bleiben, das Substack-Logo am Ende
+  ist nicht weiter wichtig — daher untere Begrenzung wieder entfernt,
+  zeigt jetzt alles ab 175px bis zum natürlichen Ende (320px).
+- **Newsletter-Embed-Zuschnitt nachjustiert (3. Versuch, jetzt oben UND
+  unten begrenzt)**: Laut zweitem Screenshot war 250px zu viel — landet
+  beim rechtlichen Hinweis + Substack-Logo, Eingabefeld nicht mehr zu
+  sehen. Daraus folgt: das Eingabefeld liegt zwischen 90px und 250px von
+  oben. Bisher wurde nur oben abgeschnitten, wodurch die Ansicht immer
+  bis zum unteren Rand (320px) durchrutschte — jetzt zusätzlich auch
+  unten begrenzt (`--nl-crop-top: 175px`, `--nl-crop-bottom: 245px`,
+  zeigt nur noch dieses 70px-Fenster). Weiterhin Schätzung ohne eigene
+  Sichtprüfung.
+- **Newsletter-Embed-Zuschnitt nachjustiert (2. Versuch)**: Laut
+  Screenshot war der erste Schnitt (90px) deutlich zu wenig — Überschrift,
+  Untertitel und Autorenzeile waren alle noch sichtbar. `--nl-crop` jetzt
+  auf 250px erhöht (nur noch 70px sichtbar, für Eingabefeld + Button).
+  Weiterhin reines Schätzen ohne eigene Sichtprüfung — bitte erneut
+  kontrollieren.
+- **Newsletter-Embed: Zuschnitt-Versuch + Datenschutz-Hinweis**:
+  1. Oberer Bereich des Substack-Embeds (Überschrift/Branding) per
+     `overflow:hidden` + negativ positioniertem iframe optisch
+     ausgeblendet (`.newsletter-embed-crop`, geschätzt 90px oberer
+     Bereich, zentral über `--nl-crop` in `style.css` anpassbar) — reine
+     Schätzung ohne visuelle Kontrolle, da der iframe-Inhalt einer
+     fremden Domain nicht einsehbar ist. Braucht nach echtem Test
+     wahrscheinlich Nachjustierung.
+  2. Neuer, konkreter Abschnitt „Newsletter (Substack)" auf der
+     Datenschutzseite ergänzt (statt eines weiteren Platzhalters, da es
+     sich um eine echte Funktion handelt) — mit Link zu Substacks eigener
+     Datenschutzerklärung.
+- **Substack-Newsletter-Einbettung bei „Angebote" ergänzt**: Direkt nach
+  dem kurzen Angebote-Text, vor dem Slider (`.newsletter-embed`).
+  Anpassung gegenüber dem gelieferten Code: feste Breite (480px) durch
+  `width:100%` mit `max-width:480px` als Obergrenze ersetzt — sonst wäre
+  das Formular auf schmalen Handybildschirmen über den Rand
+  hinausgeragt, da die ganze Seite sonst durchgehend responsiv aufgebaut
+  ist. Höhe (320px) unverändert wie von Substack vorgegeben belassen, da
+  nicht einschätzbar war, ob der Inhalt bei weniger Höhe abgeschnitten
+  würde. Zusätzlich ein `title`-Attribut für Screenreader ergänzt.
+  `frameborder`/`scrolling`-Attribute unverändert übernommen, um am
+  extern vorgegebenen Embed-Code nicht unnötig herumzuändern.
+- **Fünf weitere Änderungen**:
+  1. Mission-Seite (`warum-mission.html`) neu aufgebaut: Header-Band wie
+     bei Fatherhood/Nach-Vatern/Angebote, hier in Cream mit
+     Dark-Leather-Schrift, Überschrift „Mission" (noch ohne Unterzeile,
+     Struktur ist dafür vorbereitet). Darunter eingerücktes Rilke-Gedicht
+     „Manchmal steht einer auf beim Abendbrot" (erste Zeile als
+     Gedicht-Titel fett), dann in normaler Textbreite der Reflexionstext
+     (grau), dann zentriert das Under-Construction-Bild.
+  2. Neues Bild `assets/under-construction.png` (aus
+     `under-construction_geek_man_01.svg` gerendert, Quelle zusätzlich
+     als `assets/under-construction.svg` abgelegt) auch auf „Das bin
+     ich." und „Angebote" (Unterseite) ergänzt, jeweils unter dem
+     bestehenden Platzhaltertext.
+  3. E-Mail-Adresse auf allen acht Seiten (Kontakt-Fläche + Footer) von
+     `info@dadsonamission.de` auf `dan.goldmann@web.de` geändert.
+  4. Substack-Link im Footer auf allen acht Seiten auf
+     `https://danielgoldmann.substack.com/` aktualisiert.
+  5. „Blog"-Link im Menü (zeigte bisher nur auf `index.html`) verlinkt
+     jetzt auf denselben Substack-Link.
+- **Neun Textergänzungen und Anpassungen**:
+  1. Mission-Karte: Platzhaltertext durch echten Text ersetzt.
+  2. Gemeinschaft-Karte: Text aktualisiert.
+  3. Angebote-Sektion: neuer Absatz zwischen Header-Band und Slider
+     (`.angebote-intro`).
+  4. Kreis und Unterstreichung im Fatherhood-Text getauscht: „an unsere
+     Grenzen" jetzt unterstrichen (Hin+Her-Bewegung), „in unsere Kraft"
+     jetzt eingekreist. Neues Timing: Unterstreichung startet 1s nach
+     Sichtbarwerden des Abschnitts, „Hin" 1s–2,1s, „Her" 2,1s–3,2s, Kreis
+     0,5s danach ab 3,7s.
+  5. Silhouetten auf den hellen Kartenzuständen (Hover/Touch-aktiv)
+     bleiben jetzt als Schatten sichtbar (`opacity:0.15` = 85%
+     Transparenz statt komplett ausgeblendet), an derselben Position wie
+     im Ausgangszustand.
+  6. Finanzierungs-Sektion: „Die nächste Bieterrunde erfolgt..."-Block
+     entfernt (inkl. nicht mehr benötigter `.finance-meta`-CSS-Regeln),
+     „Die Finanzierung..."-Block um 2cm nach unten versetzt
+     (`.finance-right{margin-top:2cm;}`, mobil 1cm), CSX-Satz um Link zu
+     `https://csx-netzwerk.de/` ergänzt.
+  7. „Über mich": fehlendes Komma zwischen „Enkel" und „Leiter" ergänzt.
+  8. „Vision & Mitmachen": kompletter Fließtext eingefügt (ersetzt den
+     Platzhalterhinweis), in der etablierten grauen Optik (neue Klasse
+     `.vision-content`, `color:var(--c-grey)`).
+- **Gemeinschaft-Silhouette aktualisiert**: Neue, leicht überarbeitete
+  Version (Unterschied liegt in einem kleinen Bereich bei der
+  Hand-/Arm-Verbindung zwischen zwei der Figuren, per Pixel-Vergleich
+  lokalisiert) — sowohl `assets/silhouette-gemeinschaft.svg`
+  (Quelldatei) als auch `assets/silhouette-gemeinschaft.png` (in der
+  Karte verwendet) ersetzt. Dateinamen unverändert, daher keine
+  HTML-Änderung nötig.
 - **Karten-Verhalten auf Touch-Geräten geklärt und neu gebaut**: Die
   Diagnose ergab: die Erkennung funktionierte die ganze Zeit korrekt
   (Test-Marker war sichtbar) — der "permanent aufgeklappte" Zustand ohne

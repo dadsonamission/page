@@ -186,9 +186,32 @@
 
     goTo(0);
 
-    // Optional: automatischer Wechsel alle 6 Sekunden
-    var autoplay = window.setInterval(function () { goTo(current + 1); }, 6000);
-    slider.addEventListener("mouseenter", function () { window.clearInterval(autoplay); });
+    // Automatischer Wechsel alle 6 Sekunden — startet erst, sobald der
+    // Slider tatsächlich in den Sichtbereich scrollt (nicht sofort beim
+    // Laden der Seite), damit man den ersten Durchlauf von Anfang an sieht
+    // statt beim Ankommen schon mitten im Zyklus zu landen.
+    var autoplay = null;
+    function startAutoplay() {
+      if (autoplay) return;
+      autoplay = window.setInterval(function () { goTo(current + 1); }, 6000);
+    }
+    if ("IntersectionObserver" in window) {
+      var sliderObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            startAutoplay();
+            sliderObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      sliderObserver.observe(slider);
+    } else {
+      // Fallback ohne IntersectionObserver-Unterstützung: wie zuvor sofort.
+      startAutoplay();
+    }
+    slider.addEventListener("mouseenter", function () {
+      if (autoplay) { window.clearInterval(autoplay); autoplay = null; }
+    });
   }
 
   /* ---- "Nach-Vatern"-Cutout: deutlich verstärkter Parallax-Effekt (Foto
