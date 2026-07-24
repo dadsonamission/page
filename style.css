@@ -1563,6 +1563,7 @@ p{hyphens:auto;}
   margin:0 auto;
   padding:5vw 10vw 6vw;
 }
+.mission-content-poem{padding-bottom:3vw;} /* Weißraum zum folgenden Bild halbiert (6vw -> 3vw) */
 .mission-poem{
   max-width:48vw; /* Zeilenbreite bleibt wie zuvor, jetzt aber zentriert statt linksbündig */
   margin:0 auto 3vw; /* zentriert das Gedicht in Relation zum (jetzt breiteren) Textblock */
@@ -1590,6 +1591,45 @@ p{hyphens:auto;}
 .mission-body-link{font-weight:800;}
 .mission-body-link a{color:var(--c-accent);text-decoration:underline;}
 .mission-body-link a:hover{color:var(--c-ink);}
+
+/* Parallax-Banner (Gruppenfoto bei Sonnenuntergang) — Herleitung:
+   Bild hat Seitenverhältnis 3:2 (1800x1200), bei voller Breite also eine
+   Eigenhöhe von 2/3 der Breite. Sichtfenster soll nur 1/4 der Bildhöhe
+   zeigen -> Fensterhöhe = (2/3 der Breite) / 4 = Breite/6 ->
+   aspect-ratio:6/1 für den Container. Das Bild selbst ist damit 400%
+   der Fensterhöhe groß. Damit im Ruhezustand die UNTERE Bildhälfte (also
+   der Bereich von 50%-100% der Bildhöhe) zentriert im Fenster erscheint,
+   muss das Bild um -250% verschoben werden (Rechnung: Fenstermitte bei
+   50% Fensterhöhe soll auf 75% Bildhöhe [Mitte der unteren Hälfte]
+   treffen -> top = 50% - 75%*4 = -250%). Die Parallax-Verschiebung per
+   JS (siehe script.js) bewegt sich um diesen Wert herum und bleibt dabei
+   rechnerisch innerhalb der unteren Bildhälfte. */
+.mission-banner{
+  position:relative;
+  overflow:hidden;
+  width:100%; /* jetzt direktes Kind von .subpage-main (nicht mehr in .mission-content verschachtelt) — 100% ergibt dadurch automatisch die volle Seitenbreite */
+  aspect-ratio:6/1;
+  margin:0;
+}
+.mission-banner img{
+  position:absolute;
+  top:-250%;
+  left:0;
+  width:100%;
+  height:auto;
+  will-change:transform;
+}
+/* Familie-Banner: eigenes Seitenverhältnis (1800x978 statt 1800x1200),
+   gleiche Ausschnittshöhe (1/4 der Bildhöhe), aber zentrierte statt
+   untere Position — Bild zeigt die Familie über die ganze Breite verteilt,
+   ohne eine "untere Hälfte" im Sinne des anderen Fotos. Zentriert per
+   Standardformel: top = -(400%-100%)/2 = -150%. */
+.mission-banner-family{aspect-ratio:1200/163;}
+.mission-banner-family img{top:-40%;} /* wieder etwas nach unten korrigiert (-10% war zu weit oben) */
+@media (max-width:900px){
+  .mission-banner{aspect-ratio:3/1;margin:0;} /* auf Mobil etwas höheres Fenster (deutlich schmalerer Viewport, sonst wirkt der Streifen zu dünn); Margin entfernt, da umgebende mission-content-Blöcke jetzt eigenes Padding beisteuern */
+}
+
 .under-construction{
   text-align:center;
   margin-top:5vw;
@@ -1608,6 +1648,7 @@ p{hyphens:auto;}
   .mission-heading-band{padding:16% 8% 8%;}
   .mission-heading-band-title{font-size:44px;line-height:44px;}
   .mission-content{max-width:100%;padding:8% 8% 12%;}
+  .mission-content-poem{padding-bottom:6%;}
   .mission-poem{max-width:100%;padding-left:4%;margin-bottom:8%;} /* eigene feste vw-Breite (48vw) entfernt — sonst blieb das Gedicht auf Mobil viel zu schmal; Einrückung von 8% auf 4% verkleinert, damit mehr vom schmalen Bildschirm genutzt wird */
   .mission-poem p{font-size:16px;line-height:24px;}
   .mission-poem-attribution{font-size:14px;}

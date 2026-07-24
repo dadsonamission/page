@@ -248,6 +248,76 @@
     updateGoldCutoutParallax();
   }
 
+  /* ---- Mission-Banner (Gruppenfoto bei Sonnenuntergang): Parallax
+         innerhalb der unteren Bildhälfte (Basis-Position -250% per CSS,
+         siehe style.css für die Herleitung). factor:1.0, da hier —
+         anders als bei den anderen Parallax-Fotos — die Bewegung genau
+         eine Fensterhöhe (rect.height) durchlaufen soll, um innerhalb
+         der unteren Bildhälfte zu bleiben. Nur auf "Warum Mission?"
+         vorhanden. */
+  var missionBannerImg = document.getElementById("missionBannerImg");
+  var missionBanner = document.getElementById("missionBanner");
+
+  if (missionBannerImg && missionBanner) {
+    var updateMissionBannerParallax = function () {
+      var rect = missionBanner.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        var shift = (progress - 0.5) * (rect.height * 1.0);
+        missionBannerImg.style.transform = "translate3d(0," + shift.toFixed(1) + "px,0)";
+      }
+    };
+
+    var mbTicking = false;
+    var onMbScroll = function () {
+      if (!mbTicking) {
+        window.requestAnimationFrame(function () {
+          updateMissionBannerParallax();
+          mbTicking = false;
+        });
+        mbTicking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onMbScroll, { passive: true });
+    window.addEventListener("resize", onMbScroll);
+    updateMissionBannerParallax();
+  }
+
+  /* ---- Zweiter Mission-Banner (Familie, direkt unter dem Gedicht):
+         gleiche Ausschnittshöhe, aber zentrierte statt untere Position
+         (Basis -150% per CSS) — daher moderater, symmetrischer
+         Bewegungsfaktor (0.7) statt des vollen 1.0 des anderen Banners,
+         der genau die untere Bildhälfte ausschöpfen musste. */
+  var missionBannerFamilyImg = document.getElementById("missionBannerFamilyImg");
+  var missionBannerFamily = document.getElementById("missionBannerFamily");
+
+  if (missionBannerFamilyImg && missionBannerFamily) {
+    var updateMissionBannerFamilyParallax = function () {
+      var rect = missionBannerFamily.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        var shift = (progress - 0.5) * (rect.height * 0.4); /* verdoppelt (vorher 0.2) — mehr Bild bzw. schnelleres Scrollen */
+        missionBannerFamilyImg.style.transform = "translate3d(0," + shift.toFixed(1) + "px,0)";
+      }
+    };
+
+    var mbfTicking = false;
+    var onMbfScroll = function () {
+      if (!mbfTicking) {
+        window.requestAnimationFrame(function () {
+          updateMissionBannerFamilyParallax();
+          mbfTicking = false;
+        });
+        mbfTicking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onMbfScroll, { passive: true });
+    window.addEventListener("resize", onMbfScroll);
+    updateMissionBannerFamilyParallax();
+  }
+
   /* ---- Handgezeichnete Hervorhebungen (Kreis/Unterstreichung): "zeichnen
          sich" per stroke-dashoffset-Übergang (siehe style.css), sobald sie
          beim Scrollen ins Bild kommen. Einmalig pro Element — danach

@@ -8,6 +8,70 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Drei weitere Anpassungen am Familie-Banner**:
+  1. Position wieder etwas nach unten korrigiert (`top:-10%` war zu weit
+     oben) auf `top:-40%`.
+  2. Parallax-Bewegungsfaktor verdoppelt (0.2 → 0.4) für mehr Bild/
+     schnelleres Scrollen.
+  3. Weißraum zwischen Gedicht und Bild halbiert: neue Klasse
+     `.mission-content-poem` speziell für den Gedicht-Container (der
+     jetzt einzige seiner drei `.mission-content`-Instanzen, dessen
+     Bottom-Padding gezielt reduziert wird, ohne die anderen beiden zu
+     beeinflussen) — 6vw auf 3vw (mobil 12% auf 6%).
+- **Familie-Banner: Ausschnitt weiter nach oben verschoben**: Gesicht des
+  Mädchens war nicht vollständig sichtbar. Position von `top:-150%`
+  (zentriert) auf `top:-10%` geändert (nah am oberen Bildrand) und
+  Parallax-Bewegungsfaktor von 0.7 auf 0.2 reduziert, damit die Bewegung
+  den Ausschnitt nicht wieder aus dem Gesichtsbereich herausträgt.
+  Rechnerisch zeigt das Fenster jetzt durchgehend 0%–20% der oberen
+  Bildhöhe (vorher 115%–285%). Schätzung anhand typischer
+  Gruppenfoto-Proportionen (Kind kleiner als Erwachsene, Kopf daher
+  etwas tiefer als bei diesen, aber insgesamt oberes Bilddrittel) — bei
+  Bedarf gerne weiter nachjustieren.
+- **Zweiter Parallax-Banner direkt unter dem Gedicht ergänzt**: Neues
+  Bild (`assets/mission-banner-family.jpg`, Familie mit zwei Kindern und
+  Hund im Retro-Illustrationsstil, von PNG auf 254KB komprimiertes JPG,
+  1800px Breite) zwischen Gedicht und Fließtext eingefügt, ebenfalls
+  außerhalb von `.mission-content` für volle Seitenbreite. Gleiche
+  Ausschnittshöhe wie beim anderen Banner (ein Viertel der Bildhöhe,
+  `aspect-ratio:1200/163` passend zum eigenen Seitenverhältnis dieses
+  Bildes). Da hier keine „untere Hälfte" wie beim anderen Foto gefordert
+  war, zentrierte Ruheposition gewählt (`top:-150%` statt `-250%`) mit
+  moderatem, symmetrischem Bewegungsfaktor (0.7 statt 1.0) — rechnerisch
+  bleibt der sichtbare Bereich zwischen 115%-285% der Bildhöhe, komfortabel
+  innerhalb der Bildgrenzen.
+- **Mission-Banner auf volle Seitenbreite vergrößert**: Bild saß bisher
+  innerhalb der schmalen Textspalte (`.mission-content`, max. 60vw
+  Inhaltsbreite). Statt einer CSS-Ausbruchstechnik (unzuverlässig bei
+  zentrierten Containern mit variabler Elternbreite) den Textblock an
+  der Bannerstelle aufgeteilt: `.mission-content`/`.mission-body` enden
+  jetzt vor dem Banner und öffnen sich danach neu — der Banner steht
+  dazwischen als direktes Kind von `.subpage-main` und nutzt dadurch ganz
+  automatisch die volle Seitenbreite. Da Ausschnitt und Höhe weiterhin
+  über `aspect-ratio:6/1` (nicht über einen festen Pixelwert) bestimmt
+  werden, wächst die Bildhöhe automatisch proportional mit — Ausschnitt
+  (ein Viertel der Bildhöhe) und Parallax-Bereich (untere Bildhälfte)
+  bleiben dabei unverändert korrekt, keine weiteren Anpassungen nötig.
+- **Zwei Textstreichungen auf der Mission-Seite**: „Und mit anderen
+  zusammen." am Ende des ersten Absatzes gestrichen; „aber" im Satz „Sie
+  sind aber kein Ersatz dafür..." gestrichen.
+- **Parallax-Bildbanner auf der Mission-Seite ergänzt**: Neues Foto
+  (`assets/mission-banner.jpg`, von 2.2MB auf 208KB komprimiert/verkleinert
+  auf 1800px Breite, passend zur Größe anderer Bilder auf der Seite)
+  nach dem Satz „Darum etwas Gutes in die Welt zu bringen." eingefügt.
+  Sichtfenster zeigt rechnerisch exakt ein Viertel der Bildhöhe
+  (`aspect-ratio:6/1`, da Bild 3:2 ist), die Parallax-Bewegung bleibt
+  dabei durchgehend innerhalb der unteren Bildhälfte (rechnerisch
+  verifiziert: Fenster durchläuft 200%–400% Bildtiefe, nie den oberen
+  Bereich). Genaue Herleitung als Kommentar in `style.css` hinterlegt.
+  **Wichtiger Hinweis**: Deine hochgeladene `warum-mission.html` war eine
+  sehr viel ältere Version (vor der kompletten Überarbeitung mit
+  Header-Band, Gedicht, den 13 Textabsätzen, allen Korrekturen und dem
+  Angebote-Link) — die habe ich NICHT übernommen, um diese Arbeit nicht
+  zu verlieren. Der Parallax-Banner ist stattdessen in die aktuelle,
+  vollständige Version eingebaut. Falls du noch eine bestimmte
+  Textänderung an der aktuellen Version wolltest, sag mir gerne genau,
+  welche Stelle gemeint war.
 - **Mission-Seite: zwei Korrekturen von der Korrekturliste zurückgenommen**:
   1. „Wir wollen alles..." → „Wir wollen **alle** für unsere Kinder da
      sein." (andere, tatsächlich gemeinte Bedeutung: alle Väter wollen
