@@ -1624,10 +1624,19 @@ p{hyphens:auto;}
    untere Position — Bild zeigt die Familie über die ganze Breite verteilt,
    ohne eine "untere Hälfte" im Sinne des anderen Fotos. Zentriert per
    Standardformel: top = -(400%-100%)/2 = -150%. */
-.mission-banner-family{aspect-ratio:1200/163;}
+.mission-banner-family{aspect-ratio:7200/973;} /* an neue Bildmaße nach dem Zuschnitt des weißen Randes angepasst (1800x973 statt 1800x978) */
 .mission-banner-family img{top:-70%;} /* deutlich größerer Sprung (vorher -40% +10px, kaum merkbar und vermutlich falsche Richtung) — zeigt jetzt einen spürbar tieferen Bildausschnitt */
 @media (max-width:900px){
   .mission-banner{aspect-ratio:3/1;margin:0;} /* auf Mobil etwas höheres Fenster (deutlich schmalerer Viewport, sonst wirkt der Streifen zu dünn); Margin entfernt, da umgebende mission-content-Blöcke jetzt eigenes Padding beisteuern */
+  /* Die Desktop-top-Werte (-250%/-70%) sind für das Desktop-Seitenverhältnis
+     kalibriert (Bild = 4x Fensterhöhe). Bei 3:1 auf Mobil ist das Bild aber
+     nur ca. 1.6-2x so hoch wie das Fenster — die Desktop-Werte würden das
+     Bild dadurch teils komplett aus dem Fenster schieben. Neu berechnet:
+     Sunset zeigt weiterhin exakt die untere Bildhälfte (Bild=2x
+     Fensterhöhe -> top:-100%); Familie zeigt dieselbe relative Bildtiefe
+     wie am Desktop (17.5% der Bildhöhe -> bei 1.62x Bildhöhe: -28%). */
+  #missionBannerImg{top:-100%;}
+  #missionBannerFamilyImg{top:-28%;}
 }
 
 .under-construction{
