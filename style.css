@@ -1635,7 +1635,7 @@ p{hyphens:auto;}
      Sunset zeigt weiterhin exakt die untere Bildhälfte (Bild=2x
      Fensterhöhe -> top:-100%); Familie zeigt dieselbe relative Bildtiefe
      wie am Desktop (17.5% der Bildhöhe -> bei 1.62x Bildhöhe: -28%). */
-  #missionBannerImg{top:-100%;}
+  #missionBannerImg{top:-90%;} /* von -100% auf -90% angepasst, um Sicherheitsabstand für die verdoppelte Bewegung zu schaffen (siehe script.js) */
   #missionBannerFamilyImg{top:-28%;}
 }
 
@@ -1658,7 +1658,7 @@ p{hyphens:auto;}
   .mission-heading-band-title{font-size:44px;line-height:44px;}
   .mission-content{max-width:100%;padding:8% 8% 12%;}
   .mission-content-poem{padding-bottom:6%;}
-  .mission-poem{max-width:100%;padding-left:4%;margin-bottom:8%;} /* eigene feste vw-Breite (48vw) entfernt — sonst blieb das Gedicht auf Mobil viel zu schmal; Einrückung von 8% auf 4% verkleinert, damit mehr vom schmalen Bildschirm genutzt wird */
+  .mission-poem{max-width:100%;padding-left:2%;margin-bottom:8%;} /* Einrückung weiter verkleinert (4% -> 2%), damit das Gedicht noch etwas mehr Breite bekommt */
   .mission-poem p{font-size:16px;line-height:24px;}
   .mission-poem-attribution{font-size:14px;}
   .mission-body{max-width:100%;} /* eigene feste vw-Breite (60vw) entfernt — gleicher Fehler wie beim Gedicht */

@@ -263,7 +263,7 @@
       var rect = missionBanner.getBoundingClientRect();
       if (rect.bottom > 0 && rect.top < window.innerHeight) {
         var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-        var mbFactor = window.innerWidth <= 900 ? 0.1 : 1.0; /* auf Mobil ist das Bild nur ~2x die Fensterhöhe (untere Hälfte füllt das Fenster exakt, kein Spielraum) — kleinerer Faktor, sonst würde die Bewegung aus der unteren Hälfte herauslaufen */
+        var mbFactor = window.innerWidth <= 900 ? 0.2 : 1.0; /* auf Mobil verdoppelt (vorher 0.1, war kaum sichtbar) — Ruheposition in style.css dafür leicht angepasst (-90% statt -100%), damit trotz stärkerer Bewegung kein Rand ins Leere zeigt */
         var shift = (progress - 0.5) * (rect.height * mbFactor);
         missionBannerImg.style.transform = "translate3d(0," + shift.toFixed(1) + "px,0)";
       }
@@ -298,7 +298,7 @@
       var rect = missionBannerFamily.getBoundingClientRect();
       if (rect.bottom > 0 && rect.top < window.innerHeight) {
         var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-        var mbfFactor = window.innerWidth <= 900 ? 0.16 : 0.4; /* verdoppelt war der Desktop-Wert (vorher 0.2 -> 0.4) — auf Mobil proportional umgerechnet, da das Bild dort nur ~1.6x statt 4x die Fensterhöhe hat */
+        var mbfFactor = window.innerWidth <= 900 ? 0.32 : 0.4; /* auf Mobil verdoppelt (vorher 0.16, war kaum sichtbar) — passt ohne weitere Anpassung sicher in den vorhandenen Spielraum */
         var shift = (progress - 0.5) * (rect.height * mbfFactor);
         missionBannerFamilyImg.style.transform = "translate3d(0," + shift.toFixed(1) + "px,0)";
       }

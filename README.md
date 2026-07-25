@@ -8,6 +8,44 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Gedicht: mehr Breite auf Mobil, Bindestrich gestrichen**: Einrückung
+  auf Mobil weiter verkleinert (4% → 2%) für etwas mehr nutzbare Breite.
+  Bindestrich am Ende von „und geht und geht, -" entfernt.
+- **Parallax-Bewegung auf Mobil verdoppelt, Desktop unverändert**:
+  Sunset-Banner-Faktor 0.1→0.2, Familie-Banner-Faktor 0.16→0.32 (jeweils
+  nur für `window.innerWidth<=900`). Da die Ausgangswerte bewusst knapp
+  bemessen waren (kein Spielraum, ohne einen Rand ins Leere zu zeigen),
+  musste für den Sunset-Banner zusätzlich die Ruheposition leicht
+  angepasst werden (-100%→-90%), um Platz für die stärkere Bewegung zu
+  schaffen, ohne die Bildunterkante zu überschreiten (rechnerisch
+  geprüft: Fenster bleibt zwischen 80%-100% der Bildhöhe). Beim
+  Familie-Banner passte der verdoppelte Wert ohne weitere Anpassung
+  sicher in den vorhandenen Spielraum (12%-44% von 62% verfügbarem
+  Bereich).
+- **Mobile Darstellung beider Banner behoben (grundlegendes
+  Rechenproblem)**: Die `top`-Werte (-250%/-70%) sind für das
+  Desktop-Seitenverhältnis kalibriert, bei dem das Bild exakt 4x die
+  Fensterhöhe misst. Auf Mobil wurde aus optischen Gründen aber ein
+  anderes Fenster-Seitenverhältnis verwendet (3:1 statt der exakten
+  Rechen-Ratio), wodurch das Bild dort nur ca. 1.6-2x die Fensterhöhe
+  misst — die Desktop-Werte schoben das Bild dadurch teils komplett aus
+  dem sichtbaren Fenster (daher „gar nicht zu sehen" beim Sunset-Banner)
+  bzw. auf eine falsche Tiefe (Familie-Banner „zu weit unten"). Neu
+  berechnet und per ID-Selektor gezielt für Mobil gesetzt: Sunset
+  `top:-100%` (zeigt weiterhin exakt die untere Bildhälfte, die auf
+  Mobil zufällig genau die Fensterhöhe füllt), Familie `top:-28%`
+  (gleiche relative Bildtiefe wie am Desktop). Zusätzlich die
+  Parallax-Bewegungsstärke in `script.js` für Mobil separat reduziert
+  (Sunset 1.0→0.1, Familie 0.4→0.16, per `window.innerWidth`-Prüfung),
+  da auf Mobil deutlich weniger Spielraum besteht, bevor die Bewegung aus
+  dem gewünschten Bildbereich herausläuft.
+- **Ursache für den Rand am Familie-Bild gefunden: kein CSS-Fehler,
+  sondern ein weißer Rand im Bild selbst**: Per Pixel-Messung bestätigt
+  — die Originaldatei hatte einen ca. 3-4px breiten weißen Rand
+  (abgerundete Ecken bis zu 5px), der bei voller Bildbreite als
+  unerwünschter "Abstand" zum Seitenrand erschien. Rand mit 6px Sicherheit
+  weggeschnitten (neue Maße 1800x973 statt 1800x978), `aspect-ratio` im
+  CSS entsprechend angepasst. Bild reicht jetzt echt bis zum Rand.
 - **Familie-Banner: deutlich größerer Sprung statt 10px**: Die 10px waren
   kaum wahrnehmbar und laut Rückmeldung vermutlich auch die falsche
   Richtung. Jetzt von `-40%` auf `-70%` geändert — spürbar tieferer
