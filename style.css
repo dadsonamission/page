@@ -1625,7 +1625,7 @@ p{hyphens:auto;}
    ohne eine "untere Hälfte" im Sinne des anderen Fotos. Zentriert per
    Standardformel: top = -(400%-100%)/2 = -150%. */
 .mission-banner-family{aspect-ratio:1200/163;}
-.mission-banner-family img{top:-40%;} /* wieder etwas nach unten korrigiert (-10% war zu weit oben) */
+.mission-banner-family img{top:-70%;} /* deutlich größerer Sprung (vorher -40% +10px, kaum merkbar und vermutlich falsche Richtung) — zeigt jetzt einen spürbar tieferen Bildausschnitt */
 @media (max-width:900px){
   .mission-banner{aspect-ratio:3/1;margin:0;} /* auf Mobil etwas höheres Fenster (deutlich schmalerer Viewport, sonst wirkt der Streifen zu dünn); Margin entfernt, da umgebende mission-content-Blöcke jetzt eigenes Padding beisteuern */
 }

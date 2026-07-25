@@ -8,6 +8,13 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Familie-Banner: deutlich größerer Sprung statt 10px**: Die 10px waren
+  kaum wahrnehmbar und laut Rückmeldung vermutlich auch die falsche
+  Richtung. Jetzt von `-40%` auf `-70%` geändert — spürbar tieferer
+  Bildausschnitt, damit sich eine echte Einschätzung treffen lässt.
+- **Familie-Banner: 10px-Feinjustierung**: Position um zusätzliche 10px
+  nach unten verschoben (`top:calc(-40% + 10px)`), damit vom Gesicht des
+  Mädchens etwas mehr zu sehen ist.
 - **Drei weitere Anpassungen am Familie-Banner**:
   1. Position wieder etwas nach unten korrigiert (`top:-10%` war zu weit
      oben) auf `top:-40%`.
