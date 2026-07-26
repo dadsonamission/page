@@ -983,10 +983,14 @@ p{hyphens:auto;}
 }
 .product-slider .slide.active{opacity:1;}
 .product-slider .slide .caption{
-  padding:1.5vw 2vw;
+  padding:1.5vw 2vw 1.5vw;
   background:linear-gradient(0deg,rgba(0,51,45,.6),transparent);
   color:#fff;
   font-family:var(--font-accent);
+  font-weight:400; /* regulär statt semi-bold (600), verhindert Überlappung mit den Symbolen */
+  font-size:2.8vw; /* um ein Drittel verringert (4.2vw -> 2.8vw) */
+  line-height:1.15;
+  text-align:center;
   width:100%;
 }
 .product-slider .arrows{
@@ -1023,6 +1027,7 @@ p{hyphens:auto;}
 
 @media (max-width:900px){
   .product-slider{width:100%;}
+  .product-slider .slide .caption{font-size:32px;font-weight:400;line-height:1.15;padding:16px 20px 16px;}
   .product-slider .arrows button{width:36px;height:36px;font-size:16px;}
   .product-slider .pager{margin-top:16px;}
 }
@@ -1044,7 +1049,7 @@ p{hyphens:auto;}
   gap:4vw;
 }
 #footer .column{width:50%;}
-#footer h3{font-size:1.1vw;line-height:1.6vw;color:var(--c-ink);margin-bottom:1vw;}
+#footer h3{font-size:1.4vw;line-height:2vw;color:var(--c-ink);margin-bottom:1vw;} /* auf die Schriftgröße der Adresse vergrößert (vorher 1.1vw; Adresse hat keine eigene Angabe und nutzt den globalen Body-Standard 1.4vw) */
 #footer a{text-decoration:none;color:var(--c-accent);}
 #footer .socials li{display:inline-block;margin-right:1.2vw;}
 #footer .fineprint{margin-top:2vw;font-size:.85vw;}
@@ -1128,8 +1133,8 @@ p{hyphens:auto;}
 }
 .wia-quote-block p{position:relative;z-index:1;}
 .wia-text-en{
-  font-size:1.05vw;
-  line-height:1.7vw;
+  font-size:1.2vw;
+  line-height:1.95vw;
   color:var(--c-grey);
 }
 .wia-attribution{
@@ -1143,8 +1148,8 @@ p{hyphens:auto;}
 }
 .wia-quote-de .wia-mark{color:#fff;opacity:0.5;}
 .wia-text-de{
-  font-size:1.05vw;
-  line-height:1.7vw;
+  font-size:1.2vw;
+  line-height:1.95vw;
   color:#fff;
 }
 .wia-image{
@@ -1404,7 +1409,7 @@ p{hyphens:auto;}
 }
 
 .gold-body{
-  max-width:64vw;
+  max-width:49vw; /* vereinheitlicht mit Mission-Textblock (Substack-Referenzbreite) */
   margin:0 auto;
   padding:0 0 1vw;
 }
@@ -1414,7 +1419,7 @@ p{hyphens:auto;}
 .gold-body-intro{padding-top:5vw;} /* Abstand zum Header-Band davor, analog .pitch-content */
 .gold-body-intro p:first-child{font-weight:700;}
 .gold-body-after-cutout{padding-top:3vw;} /* gleicher Abstand wie zwischen Strandbild und nachfolgendem Text (.gold-banner margin:3vw 0) */
-.gold-body p{color:var(--c-grey);margin-bottom:1.3vw;}
+.gold-body p{color:var(--c-grey);font-size:1.2vw;line-height:1.95vw;margin-bottom:1.3vw;} /* Schriftgröße mit Mission-Textblock vereinheitlicht (vorher ohne eigene Angabe, geerbt vom globalen Body-Standard 1.4vw/2.4vw) */
 .gold-body p:last-child{margin-bottom:0;}
 
 .gold-banner{width:100%;line-height:0;margin:3vw 0;}
@@ -1440,11 +1445,13 @@ p{hyphens:auto;}
   color:var(--c-grey);
   margin-bottom:0.6vw;
   font-weight:700;
+  font-size:1.2vw; /* an den Textblock davor angeglichen (vorher ohne eigene Angabe, geerbt vom globalen Body-Standard 1.4vw) */
+  line-height:1.95vw;
 }
 .gold-questions li::before{
   content:'';
   position:absolute;
-  left:0; top:0.9vw;
+  left:0; top:0.73vw; /* proportional zur neuen, kleineren Zeilenhöhe angepasst (vorher 0.9vw bei 2.4vw Zeilenhöhe) */
   width:0.5vw; height:0.5vw;
   background-color:var(--c-accent);
 }
@@ -1505,19 +1512,19 @@ p{hyphens:auto;}
   letter-spacing:-0.01em;
 }
 .vision-content{
-  max-width:80vw; /* verbreitert wie beim Textblock der Mission-Seite (Inhaltsbreite dadurch 60vw) */
-  margin:0 auto; /* zentriert, genauso wie auf der Mission-Seite */
+  max-width:69vw; /* angepasst für 49vw Inhaltsbreite (wie Mission/Nach-Vätern) */
+  margin:0 auto;
   padding:5vw 10vw 8vw;
 }
 .vision-content p{
   color:var(--c-grey);
-  font-size:1.05vw;
-  line-height:1.75vw;
+  font-size:1.2vw; /* an Mission/Nach-Vätern angeglichen (vorher 1.05vw) */
+  line-height:1.95vw;
   margin:0 0 1.3vw;
 }
 .vision-cta{
   font-weight:800;
-  font-size:1.15vw;
+  font-size:1.3vw; /* proportional mit angehoben, damit sie weiterhin größer als der Fließtext bleibt */
 }
 /* Zwischenüberschriften "Gemeinschaft"/"Vision" — gleiche Größe/Farbe wie
    die frühere, jetzt ersetzte Seiten-H1 (globale h1,h2,h3-Regel). */
@@ -1580,7 +1587,7 @@ p{hyphens:auto;}
   color:var(--c-grey);
   font-size:1.05vw;
 }
-.mission-body{max-width:60vw;margin:0 auto;} /* nochmals um 1/4 breiter (48vw -> 60vw) */
+.mission-body{max-width:49vw;margin:0 auto;} /* Breite an Substack-Referenzbild angeglichen (~77 Zeichen/Zeile bei dieser Schriftgröße) */
 .mission-body p{
   color:var(--c-grey);
   font-size:1.2vw;

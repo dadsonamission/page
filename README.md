@@ -8,6 +8,54 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Footer: „Kontakt"/„Folgen" vergrößert**: Von 1.1vw auf 1.4vw
+  (Schriftgröße der Adresse, die keine eigene Angabe hat und den
+  globalen Body-Standard nutzt).
+- **Nach-Vatern: Untertitel geändert**: „Die Möglichkeit zu unserer Mitte
+  zurückzukehren" → „Eine Möglichkeit in unsere Kraft zurückzukehren".
+- **Mission-Seite: Absatz umformuliert**: „Und sie ist immer eine Mission
+  des Dienens..." zu „Und es geht nie um unser Ego... Unsere Mission ist
+  immer eine Mission des Dienens." umgestellt.
+- **Fragenliste (Nach-Vätern) und Vision & Mitmachen ebenfalls
+  vereinheitlicht**:
+  1. Fragenliste am Ende von „Nach-Vätern" (`.gold-questions li`) auf die
+     Schriftgröße des Textblocks davor angeglichen (1.2vw/1.95vw statt
+     geerbtem 1.4vw), Fettschrift bleibt erhalten. Bullet-Position
+     proportional zur neuen, kleineren Zeilenhöhe mitangepasst.
+  2. „Vision & Mitmachen" auf dieselbe Breite (49vw Inhaltsbreite) und
+     Schriftgröße (1.2vw/1.95vw) wie Mission/Nach-Vätern gebracht.
+     Abschließende CTA-Zeile proportional mit angehoben (1.15vw → 1.3vw),
+     damit sie weiterhin größer als der Fließtext bleibt.
+- **Textblöcke von „Wie ich arbeite", „Nach-Vätern" und „Mission"
+  vereinheitlicht**: Zielbreite aus dem gelieferten Substack-Screenshot
+  ermittelt (Zeichenanzahl der vollen Zeilen gezählt: ~77-79 Zeichen,
+  per Schriftbreiten-Messung mit einer vergleichbaren Sans-Serif-Schrift
+  auf eine Breite von ~49vw bei Missions Schriftgröße umgerechnet).
+  Mission-Textblock von 60vw auf 49vw verschmälert, Nach-Vätern
+  (`.gold-body`) von 64vw auf 49vw und Schriftgröße von (bisher geerbten)
+  1.4vw/2.4vw auf Missions 1.2vw/1.95vw vereinheitlicht. Bei „Wie ich
+  arbeite" (Cohen-Zitat) nur die Schriftgröße angeglichen (1.05vw/1.7vw
+  → 1.2vw/1.95vw) — die Breite habe ich dort bewusst nicht erzwungen, da
+  die Struktur (Zitat + Bild nebeneinander) grundlegend anders ist als
+  eine einspaltige Textspalte und eine exakte Breitenangleichung das
+  Zitat-Bild-Layout verzerrt hätte.
+- **Angebote-Slider: Überlappung mit den Symbolen behoben**: Schriftgröße
+  um ein Drittel verringert (4.2vw → 2.8vw, mobil 48px → 32px),
+  Schriftschnitt von semi-bold (600) auf regulär (400) geändert, und
+  Padding wieder verkleinert, damit der Text tiefer sitzt (unteres
+  Padding 2.2vw → 1.5vw, mobil 24px → 16px).
+- **Angebote-Slider: abgeschnittene Unterlängen behoben**: Ursache war die
+  Zeilenhöhe (`line-height`), die noch auf dem alten, kleineren Wert
+  (2.4vw) stand — kleiner als die neue Schriftgröße (4.2vw), wodurch
+  Unterlängen wie bei „g" abgeschnitten wurden. Jetzt `line-height:1.15`
+  (relativ zur Schriftgröße) gesetzt, zusätzlich unteres Padding
+  vergrößert (1.5vw → 2.2vw / mobil 16px → 24px), damit der Text
+  insgesamt etwas höher sitzt.
+- **Angebote-Slider: Bezeichnungen zentriert, semi-bold, 3x Schriftgröße**:
+  „Väterkreis"/„Einzelbegleitung"/„Missionsworkshop" jetzt
+  `text-align:center`, `font-weight:600` (semi-bold) und `font-size:4.2vw`
+  (Desktop) bzw. `48px` (Mobil) — jeweils das Dreifache der bisherigen
+  (geerbten) Basisgröße von 1.4vw/16px.
 - **Gedicht: mehr Breite auf Mobil, Bindestrich gestrichen**: Einrückung
   auf Mobil weiter verkleinert (4% → 2%) für etwas mehr nutzbare Breite.
   Bindestrich am Ende von „und geht und geht, -" entfernt.
