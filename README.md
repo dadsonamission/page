@@ -8,6 +8,152 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Newsletter-Text umformuliert, Telefon/E-Mail leicht verkleinert**:
+  1. Text zu „Erhalte neueste Infos sowohl zu den [Umbruch] Online- als
+     auch Präsenz-Angeboten von [Umbruch] *Dads on a Mission* per
+     Mail:" geändert, „Dads on a Mission" kursiv, auf allen neun Seiten.
+  2. Telefonnummer/E-Mail leicht verkleinert (1.9vw → 1.5vw, mobil 22px
+     → 18px).
+- **Fünf weitere Anpassungen am Kontakt-Panel**:
+  1. Breite um 1/3 reduziert: Desktop 50.1% → 33.4%, Mobil 99.9% → 66.6%.
+  2. Newsletter-Text etwas vergrößert (0.95vw → 1.15vw, mobil 11px →
+     13px), zwei manuelle Zeilenumbrüche ergänzt (statt natürlichem
+     Umbruch) und zentriert (auf allen neun Seiten).
+  3. Impressum/Datenschutz sehr klein (1.4vw → 0.55vw, mobil 18px → 9px)
+     und per `margin-top:auto` in einer Flex-Spalte (`min-height:100vh`)
+     ganz nach unten geschoben, unabhängig vom Inhalt darüber.
+  4. Panel fährt jetzt über die graue Header-Spalte hinweg statt
+     dahinter zu verschwinden: Panel-Z-Index von 900 auf 1010 angehoben
+     (über die Spalte bei 1000), Tab-Z-Index von 1001 auf 1020 (über das
+     Panel), damit die Beschriftung an ihrer festen Stelle sichtbar
+     bleibt.
+  5. Neue Klasse `.panel-open` (per JS beim Öffnen/Schließen auf den Tab
+     geschaltet, `script.js`): Tab-Text wechselt von Weiß (Kontrast zur
+     grauen Spalte, geschlossen) auf denselben Grauton wie der übrige
+     Panel-Text (sobald das weiße Panel darunterliegt, geöffnet) —
+     Weiß wäre auf dem weißen Panel sonst nicht mehr lesbar gewesen.
+- **Newsletter-Text verkleinert, Panel-Breite verdreifacht**:
+  1. `.contact-newsletter-intro` wieder auf die Größe vor der Verdopplung
+     reduziert (Desktop 1.9vw → 0.95vw, Mobil 22px → 11px).
+  2. Panel-Breite verdreifacht: Desktop 16.7% → 50.1%, Mobil 33.3% →
+     99.9% — damit wieder nahe an der ursprünglichen Breite vor der
+     letzten Reduzierung.
+- **Vier weitere Anpassungen am Kontakt-Panel**:
+  1. Alle Schriftgrößen im Panel verdoppelt (Desktop und Mobil) — die
+     letzte Verkleinerung war offenbar zu stark.
+  2. Text ergänzt: „Erhalte neueste Infos zu den **sowohl Online- als
+     auch Präsenz-**Angeboten von Dads on a Mission per Mail:" (auf
+     allen neun Seiten).
+  3. Impressum/Datenschutz stehen bereits als letztes Element im Panel
+     — keine Änderung nötig, war schon so aufgebaut.
+  4. Tab-Beschriftung „Kontakt/Newsletter" nochmal etwas verkleinert
+     (Desktop 1.4vw → 1.1vw, Mobil 15px → 12px), da der Text durch den
+     Zusatz „/Newsletter" länger geworden ist.
+- **Kontakt-Ausklapper komplett umgebaut (alle neun Seiten)**:
+  1. Tab-Beschriftung „Kontakt" → „Kontakt/Newsletter".
+  2. Breite um 2/3 reduziert: Desktop 50% → 16.7%, Mobil 100% → 33.3%.
+     Alle vw-basierten Schriftgrößen/Abstände innerhalb des Panels
+     proportional mitverkleinert (grob durch 2.5–3 geteilt), da sie sonst
+     bei der viel schmaleren Fläche völlig überdimensioniert gewirkt
+     hätten — geschätzte Werte, ggf. Feinjustierung nötig.
+  3. Adresse und Google-Maps-Ausschnitt entfernt (inkl. der jetzt
+     ungenutzten CSS-Regeln `.contact-map`/`.contact-map-link`).
+  4. Neue Reihenfolge: Name („Daniel Goldmann"), Telefonnummer, E-Mail
+     (`info@dadsonamission.de`), dann der Text „Erhalte neueste Infos zu
+     den Angeboten von Dads on a Mission per Mail:" (kleiner
+     Tippfehler „zur den" → „zu den" korrigiert), darunter dieselbe
+     Substack-Einbettung samt Zuschnitt wie bei „Fahrplan & Newsletter"
+     auf der Startseite.
+  **Wichtiger Hinweis:** Der Zuschnitt der Newsletter-Einbettung war
+  ursprünglich für eine deutlich breitere Spalte (bis 700px) kalibriert.
+  Auf der jetzt sehr schmalen Kontakt-Fläche (besonders mobil, ca. 33%
+  eines Handybildschirms) könnte Substack den Inhalt anders umbrechen,
+  wodurch der Zuschnitt nicht mehr exakt passt — bitte unbedingt prüfen,
+  ob dort noch das Eingabefeld zu sehen ist, das war beim vorherigen Mal
+  bei einer Breitenänderung tatsächlich der Fall.
+- **Blog-Platzhalter entfernt + E-Mail-Adresse zurückgeändert**:
+  1. Die beiden noch leeren Blog-Platzhalter entfernt, verbleibender
+     Klopp-Beitrag zentriert (`.blog-grid-single`, gleiche Spaltenbreite
+     wie zuvor, aber mittig statt über die volle Zeile gestreckt) —
+     inklusive Mobile-Korrektur, damit die Flex-Basis dort nicht
+     fälschlich auf die Höhe statt Breite wirkt (gleiches Muster wie
+     beim früheren Karten-Bug).
+  2. E-Mail-Adresse auf allen neun Seiten (Kontakt-Ausklapper + Footer,
+     teils auch Impressum/Fahrplan) von `dan.goldmann@web.de` zurück auf
+     `info@dadsonamission.de` geändert.
+- **Section-Header-Überschriften um ein Drittel verkleinert (außer
+  Fatherhood) + Angebote-Unterzeile geändert**:
+  1. Sieben Header-Überschriften von 6vw auf 4vw verkleinert:
+     Nach-Vatern, Angebote, Fahrplan & Newsletter, Solidarische
+     Finanzierung, Aktuelles aus dem Blog, Vision & Mitmachen, Mission.
+     „Fatherhood is not a Solo Mission" (`.pitch-line1`/`.pitch-line3`)
+     bewusst ausgenommen, bleibt bei 6vw.
+  2. Angebote-Unterzeile „Gemeinsam, individuell, intensiv" →
+     „In Präsenz und Online", Schriftgröße leicht reduziert (3vw → 2.4vw,
+     mobil 20px → 17px).
+- **Drei weitere Anpassungen**:
+  1. Header „Solidarische Finanzierung" auf `#995138` geändert.
+  2. Header „Aktuelles aus dem Blog" auf `#90A1B1` geändert.
+  3. Mission-Silhouette um 0,5cm weiter nach oben verschoben.
+- **Erster Blog-Beitrag befüllt**: Titel „Jürgen Klopp – der Vater der
+  Nation?", Untertitel wie geliefert, Bild (`assets/blog-klopp.jpg`, von
+  PNG auf komprimiertes JPG umgewandelt) ersetzt den ersten Platzhalter.
+  Da der Link noch fehlt, bewusst noch kein `<a>`-Wrapper um die Karte —
+  sobald das Ziel feststeht, einfach nachrüsten. Die anderen beiden
+  Platzhalter bleiben unverändert.
+- **Mission-Silhouette vergrößert**: War deutlich kleiner als bei
+  Nach-Vatern, da das neue Bild quadratisch ist statt hochformatig —
+  bei gleicher Breitenangabe dadurch spürbar kürzer. Regel für Mission
+  von der gemeinsamen Nach-Vatern-Regel getrennt und um das 1.5-fache
+  vergrößert (78% → 117% Breite), reicht jetzt ähnlich weit nach unten.
+  Überstand über die Kartenbreite wird sauber per `overflow:hidden`
+  abgeschnitten.
+- **Mission-Karte: neue Silhouette (Vater & Sohn)**: Gelieferte Datei
+  (weiß-grauer Hintergrund, schwarze Silhouette) freigestellt und in
+  Dark Leather (`#502F20`) eingefärbt — per Luminanz-Maske (heller
+  Hintergrund → transparent, dunkle Figur → volle Deckkraft, weicher
+  Übergang für glatte Kanten). Unter dem bestehenden Dateinamen
+  gespeichert (`assets/silhouette-mission-darkleather.png`), daher
+  automatisch sowohl im Ausgangszustand (Farbverlauf) als auch im
+  Hover-Schatten (15% Deckkraft) wirksam — keine HTML/CSS-Änderung
+  nötig. Alle Farb-/Transparenzwerte unverändert. Originaldatei
+  zusätzlich als `silhouette-mission-darkleather-source.png` abgelegt.
+- **Finanzierungs-Sektion umgebaut + neue Blog-Sektion ergänzt**:
+  1. „Wie finanziert sich Dads on a Mission?" (bisher zweispaltig, beide
+     Spalten auf Santa-Fe) umgebaut ins Muster der anderen Sektionen:
+     Header-Band in der bisherigen Santa-Fe-Farbe mit neuer Überschrift
+     „Solidarische Finanzierung", darunter weißer Body mit dem
+     bisherigen Text in grauer Schrift (Breite/Schriftgröße vereinheitlicht
+     mit Mission/Nach-Vätern, 49vw/1.2vw). Der frühere 2cm-Versatz
+     entfällt dabei automatisch, da die zweispaltige Struktur, auf die er
+     sich bezog, nicht mehr existiert.
+  2. Neue Sektion „Aktuelles aus dem Blog" nach der Vorstellung
+     eingefügt: Header-Band in Swiss Chocolate (`#995138`), weiße
+     Schrift. Darunter drei Platzhalter (Hochformat-Bildfläche
+     gestrichelt umrandet + fettgedruckter Titel + regulärer Untertitel)
+     nebeneinander, zum späteren Befüllen mit Blogartikel-Teasern.
+- **Angebote-Band auf Mobil: Rand an den Seiten behoben**: Subtiler
+  CSS-Effekt — Prozentwerte für Margin/Padding beziehen sich immer auf
+  die Breite des umgebenden Elements. Auf Desktop nutzt der
+  Ausbruch-Trick `vw` (immer gleich der Fensterbreite), daher heben sich
+  Padding und negativer Rand dort exakt auf. Auf Mobil wird aber Prozent
+  verwendet — und die Bezugsbreite für den negativen Rand ist die
+  bereits um das Section-Padding verkleinerte Inhaltsbreite (0.84× der
+  vollen Breite bei 8% Padding je Seite), wodurch `-16%/-8%` etwas zu
+  klein ausfielen und ein schmaler Rand übrig blieb. Korrigiert auf
+  `-19.05%/-9.52%` (rechnerisch: 16/0.84 bzw. 8/0.84), damit sich beide
+  Werte exakt aufheben. Keine weiteren Stellen mit demselben Muster im
+  restlichen Code gefunden.
+- **Neue Seite „Bildimpressum" als Unterseite des Impressums**:
+  `bildimpressum.html`, verlinkt von `impressum.html` (neuer Abschnitt
+  „Bildnachweise") und mit Rückverweis dorthin. Zeigt alle 16
+  tatsächlich im HTML/CSS referenzierten Bilder als Miniaturansicht
+  (per Grep über alle Seiten ermittelt, um wirklich nur genutzte Bilder
+  zu erfassen — nicht die Logo-SVGs, unbenutzte/verwaiste Dateien wie
+  `gold-hatch.png` oder die alten SVG-Quelldateien, die im HTML durch
+  PNG-Versionen ersetzt wurden). Neben jeder Miniatur steht ein Hinweis,
+  wo das Bild verwendet wird, sowie ein Platzhalterfeld zum Ausfüllen
+  der eigentlichen Bildnachweise.
 - **Footer: „Kontakt"/„Folgen" vergrößert**: Von 1.1vw auf 1.4vw
   (Schriftgröße der Adresse, die keine eigene Angabe hat und den
   globalen Body-Standard nutzt).

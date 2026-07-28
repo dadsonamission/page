@@ -294,7 +294,7 @@ p{hyphens:auto;}
 .contact-tab{
   cursor:pointer;
   position:fixed;
-  z-index:1001; /* über der grauen Header-Spalte (z-index:1000), auf der es jetzt sitzt */
+  z-index:1020; /* über dem Panel (1010), damit die Beschriftung an ihrer Stelle sichtbar bleibt, auch wenn das Panel geöffnet ist */
   right:0;
   bottom:2.2vw;
   width:var(--header-w);
@@ -304,22 +304,28 @@ p{hyphens:auto;}
      Textbaseline, damit der Schriftzug wirklich mittig in der Sidebar
      sitzt; wirkt hier VOR der Rotation, also in normaler Bildschirmrichtung. */
   transform:translateX(0.5vw) rotate(180deg);
-  background-color:transparent; /* keine eigene Farbe — Grau der Sidebar scheint durch */
+  background-color:transparent; /* keine eigene Farbe — Grau der Sidebar scheint durch, solange das Panel geschlossen ist */
   color:#fff;
   font-family:var(--font-accent);
   letter-spacing:0.1em;
-  font-size:1.4vw;
+  font-size:1.1vw; /* etwas verkleinert (vorher 1.4vw), da der Text jetzt länger ist ("Kontakt/Newsletter") */
+  transition:color .3s ease-out;
 }
+/* Sobald das Panel offen ist, liegt an dieser Stelle nicht mehr die graue
+   Header-Spalte, sondern das weiße Panel darunter — Weiß wäre dort nicht
+   mehr lesbar, daher Wechsel auf denselben Grauton wie der übrige
+   Panel-Text. */
+.contact-tab.panel-open{color:var(--c-grey);}
 /* ==========================================================================
    KONTAKT-PANEL — ein einfaches, weißes Panel, das über die aktuelle Seite
    gleitet (kein Blog/Logo mehr darin, keine Vollbild-Fläche). Deckt auf
    dem Desktop nur etwa die Hälfte des Bildschirms ab, wirft einen Schatten.
    ========================================================================== */
 #contactSidebar{
-  z-index:900;
+  z-index:1010; /* über die graue Header-Spalte (1000) gehoben, damit das Panel beim Öffnen darüber hinweg rausfährt statt dahinter zu verschwinden */
   position:fixed;
   top:0; right:0; bottom:0;
-  width:50%; /* nur etwa die Hälfte des Bildschirms, wie gewünscht */
+  width:33.4%; /* um 1/3 reduziert (vorher 50.1%) */
   background-color:#fff;
   color:var(--c-ink);
   box-shadow:0 0 150px rgba(0,0,0,.2);
@@ -328,15 +334,13 @@ p{hyphens:auto;}
   transition:transform .5s ease-out;
 }
 #contactSidebar.open{transform:translate3d(0,0,0);}
-/* Dekoratives Logo-Wasserzeichen oben rechts auf der Kontakt-Fläche,
-   dieselbe bereits beschnittene/verschobene Vorlage wie in der
-   Pitch-Sektion (siehe dort) — daher auch hier bündig top:0/right:0.
-   Deutlich kleiner als dort, da die Kontakt-Fläche selbst schmaler ist. */
+/* Dekoratives Logo-Wasserzeichen oben rechts auf der Kontakt-Fläche —
+   proportional zur schmaleren Fläche mitverkleinert (vorher 20vw). */
 .contact-logo-mark{
   position:absolute;
   z-index:-1;
   top:0; right:0;
-  width:20vw; height:20vw;
+  width:9vw; height:9vw;
   color:var(--c-cream);
   opacity:0.4;
   pointer-events:none;
@@ -345,66 +349,65 @@ p{hyphens:auto;}
 #contactSidebar .close{
   cursor:pointer;
   position:absolute;
-  top:2.5vw; right:calc(var(--header-w) + 1.8vw);
+  top:1.5vw; right:calc(var(--header-w) + 1vw);
   z-index:2;
   font-family:var(--font-accent);
-  font-size:2vw;
+  font-size:1.3vw;
   line-height:1;
   color:var(--c-grey);
   transition:color .2s ease-out;
 }
 #contactSidebar .close:hover{color:var(--c-ink);}
-#contactSidebar .contact-panel-inner{padding:6vw 4vw 4vw;}
+#contactSidebar .contact-panel-inner{
+  padding:5vw 2.2vw 2.2vw;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh; /* damit "margin-top:auto" bei Impressum/Datenschutz auch bei kurzem Inhalt bis ganz nach unten drückt */
+}
 #contactSidebar .contact-panel-top{
   display:flex;
-  align-items:center; /* Mitte beider Spalten auf gleicher Höhe */
-  gap:3vw;
-  margin-bottom:2.5vw;
+  flex-direction:column; /* untereinander statt nebeneinander — passt besser zur schmalen Fläche */
+  align-items:flex-start;
+  gap:0.8vw;
+  margin-bottom:1.6vw;
 }
 #contactSidebar .contact-address{
   font-family:'Square Peg', cursive;
   font-weight:700;
-  font-size:3.4vw;
+  font-size:3.2vw; /* verdoppelt (vorher 1.6vw) */
   line-height:1.15;
   color:var(--c-grey);
 }
-#contactSidebar .contact-map{
-  width:100%;
-  aspect-ratio:1/1;
-  max-width:22vw;
-  background-color:var(--c-cream);
-  margin-bottom:2vw;
-  overflow:hidden;
-}
-#contactSidebar .contact-map iframe{width:100%;height:100%;border:0;display:block;}
-#contactSidebar .contact-map-link{margin-bottom:2vw;}
-#contactSidebar .contact-map-link a{
-  font-family:var(--font-accent);
-  font-size:0.85vw;
-  color:var(--c-grey);
-  text-decoration:underline;
-}
-#contactSidebar .contact-map-link a:hover{color:var(--c-accent);}
-/* Telefon/E-Mail: eigene, linksbündige zweite Spalte, deren Mitte auf
-   gleicher Höhe wie die Mitte der Adress-Spalte liegt (align-items:center
-   oben auf .contact-panel-top). */
+/* Telefon/E-Mail: jetzt unter dem Namen statt in eigener Spalte daneben. */
 #contactSidebar .contact-details-col2{
   flex:0 0 auto;
   text-align:left;
-  white-space:nowrap;
 }
 #contactSidebar .contact-details-col2 a{
   display:block;
   font-family:var(--font-accent);
   font-weight:300;
-  font-size:1.9vw;
-  line-height:2.6vw;
+  font-size:1.5vw; /* leicht verkleinert (vorher 1.9vw) */
+  line-height:2.2vw;
   text-decoration:none;
   color:var(--c-grey);
   transition:color .2s ease-out;
 }
 #contactSidebar .contact-details-col2 a:hover{color:var(--c-accent);}
-#contactSidebar .contact-legal{font-size:0.85vw;color:var(--c-grey);}
+#contactSidebar .contact-newsletter-intro{
+  font-size:1.15vw; /* etwas größer (vorher 0.95vw) */
+  line-height:1.7vw;
+  color:var(--c-grey);
+  text-align:center;
+  margin-bottom:1.2vw;
+}
+#contactSidebar .contact-newsletter-embed{max-width:100%;margin:0 0 1.6vw;}
+#contactSidebar .contact-legal{
+  font-size:0.55vw; /* sehr klein (vorher 1.4vw) */
+  color:var(--c-grey);
+  margin-top:auto; /* schiebt die Zeile ganz nach unten */
+  padding-top:2vw;
+}
 #contactSidebar .contact-legal a{color:var(--c-grey);text-decoration:none;}
 #contactSidebar .contact-legal a:hover{color:var(--c-accent);text-decoration:underline;}
 
@@ -415,28 +418,26 @@ p{hyphens:auto;}
     display:flex; align-items:center; justify-content:center;
     writing-mode:horizontal-tb; transform:none;
     background-color:transparent;
-    padding:0; font-size:15px;
+    padding:0; font-size:12px;
   }
   #contactSidebar{
-    width:100%;box-shadow:none;
+    width:66.6%;box-shadow:none; /* um 1/3 reduziert (vorher 99.9%) */
     transform:translate3d(0,100%,0);
   }
   #contactSidebar.open{transform:translate3d(0,0,0);}
-  .contact-logo-mark{width:140px;height:140px;}
-  #contactSidebar .close{top:16px;right:16px;font-size:26px;}
-  #contactSidebar .contact-panel-inner{padding:20% 8% 8%;}
+  .contact-logo-mark{width:60px;height:60px;} /* proportional verkleinert (vorher 140px) */
+  #contactSidebar .close{top:12px;right:12px;font-size:18px;}
+  #contactSidebar .contact-panel-inner{padding:20% 6% 8%;}
   #contactSidebar .contact-panel-top{
     flex-direction:column;
     align-items:flex-start;
-    gap:16px;
-    margin-bottom:20px;
+    gap:10px;
+    margin-bottom:14px;
   }
-  #contactSidebar .contact-address{font-size:28px;}
-  #contactSidebar .contact-map{max-width:100%;margin-bottom:12px;}
-  #contactSidebar .contact-map-link{margin-bottom:20px;}
-  #contactSidebar .contact-map-link a{font-size:14px;}
-  #contactSidebar .contact-details-col2 a{font-size:19px;line-height:27px;}
-  #contactSidebar .contact-legal{font-size:13px;}
+  #contactSidebar .contact-address{font-size:30px;}
+  #contactSidebar .contact-details-col2 a{font-size:18px;line-height:24px;}
+  #contactSidebar .contact-newsletter-intro{font-size:13px;line-height:18px;margin-bottom:10px;text-align:center;}
+  #contactSidebar .contact-legal{font-size:9px;}
 }
 
 /* ==========================================================================
@@ -768,13 +769,21 @@ p{hyphens:auto;}
    der PPTX-Vorlage — beginnt deutlich unterhalb des Schriftzugs (ca. 18%
    der Kartenhöhe), volle eigene Bildproportion (kein Zuschnitt), am
    unteren Kartenrand verankert, horizontal zentriert. */
-.info-card--nachvatern .info-card-silhouette,
-.info-card--mission .info-card-silhouette{
+.info-card--nachvatern .info-card-silhouette{
   inset:auto;
   top:18%;
   left:50%;
   transform:translateX(-50%);
   width:78%;
+  height:auto;
+  object-fit:contain;
+}
+.info-card--mission .info-card-silhouette{
+  inset:auto;
+  top:calc(18% - 0.5cm); /* 0.5cm weiter nach oben */
+  left:50%;
+  transform:translateX(-50%);
+  width:117%; /* um das ca. 1.5-fache vergrößert (78% -> 117%) — das neue Bild ist quadratisch statt hochformatig wie bei Nach-Vatern, dadurch bei gleicher Breite deutlich kürzer; Karte schneidet den Überstand per overflow:hidden sauber ab */
   height:auto;
   object-fit:contain;
 }
@@ -862,14 +871,14 @@ p{hyphens:auto;}
 .angebote-heading-main{
   color:#fff;
   font-weight:800;
-  font-size:6vw;
+  font-size:4vw; /* um ein Drittel verkleinert (vorher 6vw) */
   line-height:0.98;
   letter-spacing:-0.01em;
 }
 .angebote-heading-sub{
   color:var(--c-cream);
   font-weight:300;
-  font-size:3vw;
+  font-size:2.4vw; /* leicht reduziert (vorher 3vw) */
   line-height:1.15;
   margin-top:0.6vw;
 }
@@ -937,9 +946,9 @@ p{hyphens:auto;}
 @media (max-width:900px){
   #container{margin-right:0;}
   .section{padding:16% 8%;}
-  .angebote-heading-band{margin:-16% -8% 8%;padding:16% 8% 8%;}
+  .angebote-heading-band{margin:-19.05% -9.52% 8%;padding:16% 8% 8%;} /* Margin korrigiert: bezieht sich auf die bereits um das Section-Padding verkleinerte Inhaltsbreite, einfache -16%/-8% wären daher zu klein gewesen und ließen einen Rand übrig */
   .angebote-heading-main{font-size:32px;line-height:36px;}
-  .angebote-heading-sub{font-size:20px;line-height:26px;margin-top:8px;}
+  .angebote-heading-sub{font-size:17px;line-height:23px;margin-top:8px;}
   .angebote-intro{max-width:100%;font-size:17px;line-height:26px;margin-bottom:8%;}
   .newsletter-embed{max-width:100%;padding:0 4%;margin-bottom:8%;}
 }
@@ -1187,7 +1196,7 @@ p{hyphens:auto;}
   margin:0;
   color:#fff;
   font-weight:800;
-  font-size:6vw;
+  font-size:4vw; /* um ein Drittel verkleinert (vorher 6vw) */
   line-height:0.98;
   letter-spacing:-0.01em;
 }
@@ -1226,34 +1235,45 @@ p{hyphens:auto;}
    Erklärtext zur Finanzierung (um 2cm nach unten versetzt).
    ========================================================================== */
 .finance-section{
-  display:flex;
-  flex-wrap:wrap;
-  gap:4vw;
-  background-color:var(--c-accent);
-  color:#fff;
-  padding:6vw 10vw;
+  position:relative;
+  z-index:30;
+  background-color:var(--c-bg); /* sonst scheint das fest positionierte Hero-Foto durch */
 }
-.finance-left,.finance-right{flex:1 1 320px;}
-.finance-section h2{color:#fff;margin-bottom:1.5vw;}
-.finance-right{margin-top:2cm;}
-.finance-right p{
-  font-weight:700;
-  font-size:1.05vw;
-  line-height:1.7vw;
-  margin-bottom:1vw;
+.finance-heading-band{
+  background-color:#995138;
+  padding:7vw 10vw 5vw;
 }
-.finance-right p a{
+.finance-heading-band-title{
+  margin:0;
   color:#fff;
+  font-weight:800;
+  font-size:4vw; /* um ein Drittel verkleinert (vorher 6vw) */
+  line-height:0.98;
+  letter-spacing:-0.01em;
+}
+.finance-content{
+  max-width:69vw; /* ergibt 49vw Inhaltsbreite, vereinheitlicht mit den anderen Textblöcken */
+  margin:0 auto;
+  padding:5vw 10vw 6vw;
+}
+.finance-content p{
+  color:var(--c-grey);
+  font-size:1.2vw;
+  line-height:1.95vw;
+  margin:0 0 1.3vw;
+}
+.finance-content p a{
+  color:var(--c-accent);
   text-decoration:underline;
   text-underline-offset:0.2vw;
 }
-.finance-right p a:hover{color:var(--c-grey);}
+.finance-content p a:hover{color:var(--c-ink);}
 
 @media (max-width:900px){
-  .finance-section{padding:14% 8%;gap:24px;}
-  .finance-section h2{margin-bottom:5%;}
-  .finance-right{margin-top:1cm;}
-  .finance-right p{font-size:16px;line-height:24px;margin-bottom:16px;}
+  .finance-heading-band{padding:16% 8% 8%;}
+  .finance-heading-band-title{font-size:44px;line-height:44px;}
+  .finance-content{max-width:100%;padding:8% 8% 12%;}
+  .finance-content p{font-size:16px;line-height:25px;margin-bottom:16px;}
 }
 
 /* ==========================================================================
@@ -1288,6 +1308,76 @@ p{hyphens:auto;}
   .daniel-content{padding:10% 8%;gap:28px;flex-direction:column-reverse;}
   .daniel-text p{margin-bottom:16px;}
   .daniel-photo{flex:0 1 auto;max-width:70%;margin:0 auto;}
+}
+
+/* ==========================================================================
+   AKTUELLES AUS DEM BLOG — Header-Band in Swiss Chocolate (#995138),
+   darunter drei Bild-/Text-Platzhalter (Hochformat) für Blogartikel-Teaser.
+   ========================================================================== */
+.blog-section{
+  position:relative;
+  z-index:30;
+  background-color:var(--c-bg);
+}
+.blog-heading-band{
+  background-color:#90A1B1;
+  padding:7vw 10vw 5vw;
+}
+.blog-heading-band-title{
+  margin:0;
+  color:#fff;
+  font-weight:800;
+  font-size:4vw; /* um ein Drittel verkleinert (vorher 6vw) */
+  line-height:0.98;
+  letter-spacing:-0.01em;
+}
+.blog-grid{
+  display:flex;
+  gap:3vw;
+  padding:5vw 10vw 8vw;
+}
+.blog-item{flex:1 1 33.333%;}
+.blog-grid-single{justify-content:center;}
+.blog-grid-single .blog-item{flex:0 1 33.333%;} /* Breite wie zuvor eine Spalte, aber zentriert statt über die volle Zeile gestreckt */
+.blog-item-image-placeholder{
+  aspect-ratio:3/4; /* Hochformat */
+  border:2px dashed var(--c-grey);
+  background-color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:1.2vw;
+  padding:2vw;
+  text-align:center;
+}
+.blog-item-image-placeholder .subpage-placeholder-note{margin:0;}
+.blog-item-image{
+  aspect-ratio:3/4; /* Hochformat, wie die Platzhalter */
+  overflow:hidden;
+  margin-bottom:1.2vw;
+}
+.blog-item-image img{width:100%;height:100%;object-fit:cover;display:block;}
+.blog-item-title{
+  font-weight:800;
+  color:var(--c-ink);
+  font-size:1.3vw;
+  line-height:1.7vw;
+  margin:0 0 0.4vw;
+}
+.blog-item-subtitle{
+  font-weight:400;
+  color:var(--c-grey);
+  font-size:1.1vw;
+  line-height:1.6vw;
+  margin:0;
+}
+@media (max-width:900px){
+  .blog-heading-band{padding:16% 8% 8%;}
+  .blog-heading-band-title{font-size:44px;line-height:44px;}
+  .blog-grid{flex-direction:column;gap:10%;padding:10% 8% 16%;}
+  .blog-grid-single .blog-item{flex:none;width:100%;} /* Flex-Basis (33.333%) würde im column-Layout sonst fälschlich auf die Höhe statt Breite wirken */
+  .blog-item-title{font-size:20px;line-height:26px;}
+  .blog-item-subtitle{font-size:16px;line-height:22px;}
 }
 
 /* ==========================================================================
@@ -1361,7 +1451,7 @@ p{hyphens:auto;}
 .nachvatern-heading-main{
   color:#fff;
   font-weight:800;
-  font-size:6vw;
+  font-size:4vw; /* um ein Drittel verkleinert (vorher 6vw) */
   line-height:0.98;
   letter-spacing:-0.01em;
 }
@@ -1496,6 +1586,54 @@ p{hyphens:auto;}
 .legal-content a:hover{color:var(--c-ink);}
 .legal-placeholder{font-style:italic;}
 
+/* BILDIMPRESSUM — Miniaturansicht + Info-/Platzhalterfeld je Bild. */
+.bildimpressum-grid{
+  max-width:64vw;
+  margin:2vw auto 0;
+  display:flex;
+  flex-direction:column;
+  gap:2vw;
+  padding-bottom:6vw;
+}
+.bildimpressum-item{
+  display:flex;
+  gap:2vw;
+  align-items:flex-start;
+  padding-bottom:2vw;
+  border-bottom:1px solid #e5e5e5;
+}
+.bildimpressum-thumb{
+  width:14vw;
+  height:10vw;
+  object-fit:cover;
+  flex-shrink:0;
+  background-color:var(--c-bg);
+  border:1px solid #e5e5e5;
+}
+.bildimpressum-info{flex:1 1 auto;}
+.bildimpressum-filename{
+  font-weight:700;
+  color:var(--c-ink);
+  font-size:1.05vw;
+  margin-bottom:0.3vw;
+}
+.bildimpressum-usage{
+  color:var(--c-grey);
+  font-size:0.95vw;
+  margin-bottom:0.6vw;
+  font-style:italic;
+}
+.bildimpressum-info .legal-placeholder{font-size:0.95vw;}
+@media (max-width:900px){
+  .bildimpressum-grid{max-width:100%;padding:0 8% 16%;gap:8%;margin-top:6%;}
+  .bildimpressum-item{flex-direction:column;gap:3%;padding-bottom:6%;}
+  .bildimpressum-thumb{width:100%;height:50vw;}
+  .bildimpressum-filename{font-size:16px;}
+  .bildimpressum-usage{font-size:14px;}
+  .bildimpressum-info .legal-placeholder{font-size:14px;}
+}
+
+
 /* VISION & MITMACHEN — Fließtext in der etablierten grauen Optik. */
 /* Header-Band: ahmt .nachvatern-heading-band nach (identische Größe/
    Struktur), hier in Santa-Fe statt Grau, Schrift weiß (wie im Original). */
@@ -1507,7 +1645,7 @@ p{hyphens:auto;}
   margin:0;
   color:#fff;
   font-weight:800;
-  font-size:6vw;
+  font-size:4vw; /* um ein Drittel verkleinert (vorher 6vw) */
   line-height:0.98;
   letter-spacing:-0.01em;
 }
@@ -1561,7 +1699,7 @@ p{hyphens:auto;}
   margin:0;
   color:var(--c-ink);
   font-weight:800;
-  font-size:6vw;
+  font-size:4vw; /* um ein Drittel verkleinert (vorher 6vw) */
   line-height:0.98;
   letter-spacing:-0.01em;
 }

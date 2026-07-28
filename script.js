@@ -40,6 +40,7 @@
     var shouldOpen = typeof open === "boolean" ? open : !contactSidebar.classList.contains("open");
     contactSidebar.classList.toggle("open", shouldOpen);
     contactSidebar.setAttribute("aria-hidden", shouldOpen ? "false" : "true");
+    contactTab.classList.toggle("panel-open", shouldOpen); /* Tab-Textfarbe wechselt per CSS auf Grau, sobald das (jetzt über der grauen Leiste liegende) Panel offen ist */
   }
   contactTab.addEventListener("click", function () { toggleContact(); });
   contactTab.addEventListener("keydown", function (e) {
