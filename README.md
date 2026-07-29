@@ -8,6 +8,33 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Drittes Hero-Bild zum Testen, beide vorherigen bleiben erhalten**:
+  Neues Foto als `assets/hero-hauptbild-3.jpg` gespeichert
+  (Originalgröße, keine Vergrößerung). `--hero-photo` zeigt jetzt darauf,
+  beide bisherigen Versionen (`hero-hauptbild.jpg`,
+  `hero-hauptbild-2.jpg`) bleiben als Dateien und als auskommentierte
+  Zeilen direkt darüber erhalten — zum Zurückwechseln einfach die
+  gewünschte Zeile aktivieren und die anderen beiden auskommentieren.
+- **Hero-Bild zurückgesetzt + Mobile-Schriftgröße angeglichen**:
+  1. `--hero-photo` zurück auf `assets/hero-hauptbild.jpg` (ursprüngliche
+     Version), die neue Datei bleibt weiterhin als
+     `assets/hero-hauptbild-2.jpg` erhalten, jetzt auskommentiert.
+  2. „Startseite" auf Mobil von 15px auf 12px verkleinert, passend zur
+     aktuellen Größe von „Kontakt/Newsletter" im grauen Balken (war
+     zwischenzeitlich auseinandergelaufen, da der Tab seither weiter auf
+     12px verkleinert wurde).
+- **Hero-Bild ausgetauscht, alte Version bleibt erhalten**: Neues Foto
+  (Gruppe von Männern, Arme umeinander) als
+  `assets/hero-hauptbild-2.jpg` gespeichert (Originalgröße, keine
+  Vergrößerung, da das Ausgangsbild bereits passend groß war). Die
+  bisherige Version bleibt unverändert als `assets/hero-hauptbild.jpg`
+  erhalten. `--hero-photo` in `style.css` zeigt jetzt auf die neue Datei,
+  die alte Zeile ist direkt darunter auskommentiert hinterlegt — zum
+  Zurückwechseln einfach die beiden Zeilen tauschen (Kommentarzeichen
+  ver­schieben).
+- **Startseite: Satz geändert**: „Wir zeigen uns nicht damit und
+  verurteilen uns im Stillen." → „Wir zeigen uns nicht und verurteilen
+  uns im Stillen."
 - **Newsletter-Text umformuliert, Telefon/E-Mail leicht verkleinert**:
   1. Text zu „Erhalte neueste Infos sowohl zu den [Umbruch] Online- als
      auch Präsenz-Angeboten von [Umbruch] *Dads on a Mission* per

@@ -21,8 +21,13 @@
   --c-cream:     #FBCD82; /* Pastel Light Orange */
   --c-grey:      #90A1B1; /* Cadet Gray */
 
-  /* Hero-Foto, Quelldatei unter assets/hero-hauptbild.jpg. */
-  --hero-photo: url("assets/hero-hauptbild.jpg");
+  /* Hero-Foto, aktuell assets/hero-hauptbild-2.jpg (Gruppe von Männern,
+     Arme umeinander). Frühere Version bleibt als Datei erhalten
+     (assets/hero-hauptbild.jpg) — zum Zurückwechseln einfach die
+     nachfolgende Zeile ein-/auskommentieren. */
+  /* --hero-photo: url("assets/hero-hauptbild-2.jpg"); */
+  /* --hero-photo: url("assets/hero-hauptbild.jpg"); */
+  --hero-photo: url("assets/hero-hauptbild-3.jpg");
 
   /* Schriftart "Geom" (Google Fonts, siehe <head>) für Überschriften UND
      Fließtext — bewusst eine einzige Markenschrift in unterschiedlichen
@@ -257,7 +262,7 @@ p{hyphens:auto;}
     left:16px; top:50%;
     transform:translateY(-50%);
     font-family:var(--font-accent);
-    font-size:15px; /* an "Kontakt" angeglichen (vorher 12px) */
+    font-size:12px; /* an "Kontakt/Newsletter" angeglichen (vorher 15px, der Tab ist inzwischen auf 12px verkleinert) */
     letter-spacing:0.05em;
     text-decoration:none;
     color:#fff;
