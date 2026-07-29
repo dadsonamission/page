@@ -8,6 +8,20 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Favicon (Browser-Tab-Symbol) ergänzt, alle neun Seiten**: Gelieferte
+  Logo-Datei in die üblichen Favicon-Formate/-Größen umgewandelt:
+  `favicon.ico` (Mehrfach-Auflösung 16/32/48px, für maximale
+  Browser-Kompatibilität), `favicon-16x16.png`, `favicon-32x32.png`,
+  `apple-touch-icon.png` (180px, für iOS-Homebildschirm/Safari-Tabs).
+  Entsprechende `<link>`-Tags direkt nach der Viewport-Meta-Zeile in
+  jeder Seite ergänzt. Dateien liegen im Hauptverzeichnis (nicht in
+  `assets/`), da Favicon-Pfade üblicherweise relativ zur HTML-Datei
+  direkt im Root erwartet werden.
+- **Viertes Hero-Bild, alle vorherigen bleiben erhalten**: Neues Foto als
+  `assets/hero-hauptbild-4.jpg` gespeichert (Originalgröße).
+  `--hero-photo` zeigt jetzt darauf, alle drei bisherigen Versionen
+  bleiben als Dateien und als auskommentierte Zeilen direkt darüber
+  erhalten — zum Zurückwechseln einfach die gewünschte Zeile aktivieren.
 - **Drittes Hero-Bild zum Testen, beide vorherigen bleiben erhalten**:
   Neues Foto als `assets/hero-hauptbild-3.jpg` gespeichert
   (Originalgröße, keine Vergrößerung). `--hero-photo` zeigt jetzt darauf,

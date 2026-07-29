@@ -27,7 +27,8 @@
      nachfolgende Zeile ein-/auskommentieren. */
   /* --hero-photo: url("assets/hero-hauptbild-2.jpg"); */
   /* --hero-photo: url("assets/hero-hauptbild.jpg"); */
-  --hero-photo: url("assets/hero-hauptbild-3.jpg");
+  /* --hero-photo: url("assets/hero-hauptbild-3.jpg"); */
+  --hero-photo: url("assets/hero-hauptbild-4.jpg");
 
   /* Schriftart "Geom" (Google Fonts, siehe <head>) für Überschriften UND
      Fließtext — bewusst eine einzige Markenschrift in unterschiedlichen
