@@ -767,7 +767,7 @@ p{hyphens:auto;}
   object-position:center;
   pointer-events:none;
 }
-.info-card--nachvatern .info-card-photo{object-position:center 85%;} /* Richtung umgekehrt (genau entgegengesetzt zur letzten Änderung calc(50% - 1cm)) und deutlich verstärkt, damit die Köpfe klar weiter unten im Ausschnitt erscheinen */
+.info-card--nachvatern .info-card-photo{object-position:top;} /* Ausschnitt jetzt bereits exakt im 3:4-Format mit großzügigem Himmel-Abstand über den Köpfen zugeschnitten (siehe assets/card-nachvatern.jpg) — object-position dient nur noch als Sicherheitsnetz bei minimalen Rundungsdifferenzen */
 /* Dunkles Overlay über dem Foto, damit die weiße Schrift (Überschrift
    dauerhaft, Reveal-Text/Tagline beim Hover) unabhängig von der
    jeweiligen Bildhelligkeit immer lesbar bleibt — oben/unten etwas
@@ -930,7 +930,8 @@ p{hyphens:auto;}
   .angebote-heading-main{font-size:32px;line-height:36px;}
   .angebote-heading-sub{font-size:17px;line-height:23px;margin-top:8px;}
   .angebote-intro{max-width:100%;font-size:17px;line-height:26px;margin-bottom:8%;}
-  .newsletter-embed{max-width:100%;padding:0 4%;margin-bottom:8%;}
+  .newsletter-embed{max-width:100%;padding:0 4%;margin-bottom:8%;overflow:hidden;}
+  .newsletter-embed-crop{width:700px;transform-origin:top left;} /* feste Desktop-Breite, damit Substack intern nicht anders umbricht als am Desktop kalibriert — die passende Skalierung auf die tatsächlich verfügbare Mobile-Breite übernimmt script.js (siehe dort), da sie vom jeweiligen Gerät abhängt */
 }
 
 /* ==========================================================================

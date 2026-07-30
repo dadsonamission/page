@@ -372,5 +372,42 @@
       }
     });
   }
+
+  /* ---- Substack-Newsletter-Einbettung auf Mobil: feste Breite +
+         passgenaue Skalierung statt Substack selbst umbrechen zu lassen.
+         Grund: Bei einer festen Pixel-Zuschnittsposition (siehe
+         .newsletter-embed-crop, --nl-crop-top in style.css) bricht
+         Substack den Inhalt bei schmaler Fensterbreite intern anders um
+         als am Desktop kalibriert — der Zuschnitt landet dann an der
+         falschen Stelle (z. B. "by ..."-Zeile statt Eingabefeld sichtbar,
+         inkl. eines ungewollten Scroll-Bereichs). Fix: iframe/Crop-Fenster
+         rendern IMMER in fester 700px-Breite (wie am Desktop), dafür wird
+         die gesamte Fläche per transform:scale auf die tatsächlich
+         verfügbare mobile Breite herunterskaliert — Substack sieht dadurch
+         nie eine schmale Breite und bricht nie anders um. Betrifft alle
+         Vorkommen gemeinsam (Kontakt-Panel, Fahrplan & Newsletter, alle
+         Footer), da sie dieselben Klassen teilen. */
+  var scaleNewsletterEmbeds = function () {
+    var crops = document.querySelectorAll(".newsletter-embed-crop");
+    crops.forEach(function (crop) {
+      var wrapper = crop.parentElement;
+      if (!wrapper) return;
+      if (window.innerWidth <= 900) {
+        var availableWidth = wrapper.clientWidth;
+        if (!availableWidth) return;
+        var scale = availableWidth / 700; /* 700px = feste Innenbreite, siehe CSS */
+        var baseHeight = crop.offsetHeight; /* Layout-Höhe, von transform nicht beeinflusst */
+        crop.style.transform = "scale(" + scale + ")";
+        wrapper.style.height = (baseHeight * scale) + "px";
+        wrapper.style.overflow = "hidden";
+      } else {
+        crop.style.transform = "";
+        wrapper.style.height = "";
+        wrapper.style.overflow = "";
+      }
+    });
+  };
+  window.addEventListener("resize", scaleNewsletterEmbeds);
+  scaleNewsletterEmbeds();
 })();
 

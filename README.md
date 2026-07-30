@@ -8,6 +8,25 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Nach-Vatern-Bild direkt neu zugeschnitten (statt object-position)**:
+  Der verfügbare Spielraum bei `object-fit:cover` war zu gering (nur
+  ca. 11% der Bildhöhe, da sich die Seitenverhältnisse von Bild und
+  Karte kaum unterscheiden) — reines Nachjustieren der Position konnte
+  daher nie eine deutliche Verschiebung bewirken. Stattdessen das
+  Originalbild direkt mit großzügigem Himmel-Abstand über den Köpfen neu
+  zugeschnitten (Start bei 10% der Bildhöhe statt 0%), damit die Köpfe
+  sicher nicht mit der Überschrift kollidieren.
+- **Substack-Newsletter-Einbettung auf Mobil repariert (alle
+  Vorkommen: Kontakt-Panel, Fahrplan & Newsletter, alle neun Footer)**:
+  Ursache war, dass Substack bei der bisherigen festen Zuschnittsposition
+  auf schmaler Fensterbreite intern anders umbricht als am Desktop
+  kalibriert — der Zuschnitt landete dadurch an der falschen Stelle
+  (Autor-Zeile statt Eingabefeld, samt ungewolltem Scroll-Bereich). Fix:
+  Die Einbettung rendert jetzt immer in fester 700px-Breite (wie am
+  Desktop) und wird per `transform:scale()` in `script.js` passgenau auf
+  die tatsächlich verfügbare Mobile-Breite herunterskaliert — Substack
+  bricht dadurch nie anders um als kalibriert, unabhängig vom
+  Bildschirm. Reagiert per Resize-Listener auch auf Drehung des Geräts.
 - **Drei weitere Anpassungen an den Karten**:
   1. Mission-Bild: Ausschnitt nach rechts verschoben (x0/x1 von 300/840
      auf 370/910), damit der Vater weiter links im Bild erscheint.
