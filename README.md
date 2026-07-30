@@ -8,6 +8,73 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Drei weitere Anpassungen an den Karten**:
+  1. Mission-Bild: Ausschnitt nach rechts verschoben (x0/x1 von 300/840
+     auf 370/910), damit der Vater weiter links im Bild erscheint.
+  2. Mission-Text: „Eine Aufgabe, bei der wir der Welt dienen." → „Eine
+     Aufgabe, bei der wir etwas in die Welt bringen."
+  3. Nach-Vatern-Bild: Richtung nochmal korrigiert — meine letzte
+     Analyse der object-position-Semantik war falsch. Jetzt genau
+     entgegengesetzt zur letzten Änderung (`calc(50% - 1cm)` →
+     `85%`) und deutlich verstärkt, damit die Köpfe klar weiter unten
+     erscheinen. Falls das immer noch nicht stimmt, bitte kurz
+     Bescheid geben, dann probiere ich es mit einem Screenshot-Abgleich
+     statt reiner Berechnung.
+- **Textkorrekturen bei den Karten**:
+  1. Mission: „Wenn wir uns unserer..." → „Wenn wir in unserer...".
+  2. Mission-Tagline: „[Warum eine Mission für Väter.]" →
+     „[Warum eine Mission [Umbruch] für Väter wichtig ist]" (Punkt
+     entfernt, Zeilenumbruch nach „Mission").
+  3. Gemeinschaft-Tagline: „[Warum Gemeinschaft für Väter wichtig ist.]"
+     → „[Warum Gemeinschaft [Umbruch] für Väter wichtig ist]" (Punkt
+     entfernt, Zeilenumbruch nach „Gemeinschaft").
+- **Richtung bei beiden Kartenbildern korrigiert**: Hatte beim letzten Mal
+  Rahmen/Bild-Bewegung vertauscht. Nach-Vatern jetzt korrekt: Rahmen 1cm
+  nach oben (`object-position:center calc(50% - 1cm)`, vorher fälschlich
+  65% nach unten), dadurch erscheinen die Köpfe weiter unten im
+  Ausschnitt. Mission-Bild neu zugeschnitten mit Rahmen näher an den
+  gemessenen Schuhen (Koordinaten per Bildvermessung geschätzt: Schuhe
+  bei ca. y=1300 von 1600px Bildhöhe, Ausschnitt endet knapp darunter
+  bei y=1320) — sollte die Schuhe jetzt nah am unteren Kartenrand
+  zeigen. Bei Bedarf gerne weiter feinjustieren.
+- **Kartenbilder nachjustiert (Nach-Vatern leicht, Mission deutlich
+  tiefer)**: Nach-Vatern per `object-position:center 65%` (vorher 50%)
+  leicht nach unten verschoben. Mission-Bild komplett neu zugeschnitten
+  — der neue Ausschnitt endet bewusst exakt am unteren Rand des
+  Originalfotos, damit die Schuhe des Jungen nah am unteren Kartenrand
+  liegen (vorheriger Ausschnitt hatte darunter noch sichtbaren
+  Boden/Wiese, wodurch die Schuhe zu weit oben in der Karte saßen).
+- **Karten auf der Startseite komplett umgebaut: echte Fotos statt
+  Silhouetten/Farbverlauf**:
+  1. Silhouetten (beide Zustände — voller Farbverlauf oben wie
+     15%-Schatten beim Hover) vollständig entfernt.
+  2. Neue Kartenbilder: Gemeinschaft = linker Ausschnitt aus
+     `Homepage_Hero_best_hoch` (Gruppenfoto), Nach-Vatern =
+     `arifur-rahman...` (Silhouette Vater/Kind bei Sonnenuntergang) komplett,
+     Mission = auf Vater und Sohn eingezoomter Ausschnitt aus `IMG_2996`
+     (Bergwanderung) — Zuschnitt-Koordinaten geschätzt, ggf. Feinjustierung
+     nötig. Alle drei als `assets/card-*.jpg` abgelegt.
+  3. Da das Foto jetzt dauerhaft sichtbar ist (kein Wechsel zu Weiß mehr
+     beim Hover), neues `.info-card-scrim` (dunkler Verlauf-Overlay)
+     ergänzt, damit die Schrift unabhängig von der Bildhelligkeit lesbar
+     bleibt. Überschrift ist jetzt bei allen drei Karten dauerhaft weiß
+     (nicht mehr nur bei den ersten beiden wie ursprünglich gefragt — bei
+     dauerhaftem Fotohintergrund ergab eine abweichende Behandlung für
+     Mission keinen Sinn mehr, da auch dort kein Wechsel zu Weiß/Grau
+     mehr stattfindet). Reveal-Text jetzt ebenfalls weiß, Tagline in
+     Cream statt Dark Leather (gegen den dunklen Scrim besser lesbar).
+- **Drei weitere Änderungen**:
+  1. Breite des Fatherhood-Textes (`.pitch-story`) an die Mission-Seite
+     angeglichen (60vw → 49vw).
+  2. Footer auf allen neun Seiten: neue dritte Spalte „Newsletter"
+     zwischen „Kontakt" und „Folgen", mit derselben
+     Substack-Einbettung/Zuschnitt wie an den anderen Stellen der Seite.
+     `#footer .column` von `width:50%` auf `flex:1 1 33.333%`
+     umgestellt (Mobil bereits `display:block`/`width:100%`, daher kein
+     Flex-Basis-Problem wie bei früheren column-Layouts zu erwarten).
+  3. Adresse „Dorfackerstraße 12, 72074 Tübingen" aus allen Footern
+     gestrichen — im Impressum selbst (gesetzlich vorgeschrieben nach
+     § 5 TMG) bewusst unverändert erhalten.
 - **Favicon (Browser-Tab-Symbol) ergänzt, alle neun Seiten**: Gelieferte
   Logo-Datei in die üblichen Favicon-Formate/-Größen umgewandelt:
   `favicon.ico` (Mehrfach-Auflösung 16/32/48px, für maximale

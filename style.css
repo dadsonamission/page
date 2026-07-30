@@ -667,7 +667,7 @@ p{hyphens:auto;}
 .pitch-content{
   padding:5vw 10vw 3.5vw; /* unterer Abstand halbiert (vorher 7vw) */
 }
-.pitch-story{max-width:60vw;margin:0 auto;}
+.pitch-story{max-width:49vw;margin:0 auto;} /* an die Breite der Mission-Seite angeglichen (vorher 60vw) */
 .pitch-story p{
   color:var(--c-grey);
   font-size:1.4vw; /* gleiche Größe wie der Nach-Vatern-Text (Body-Standard) */
@@ -757,51 +757,36 @@ p{hyphens:auto;}
   padding:3vw;
   color:#fff;
   text-decoration:none;
-  transition:background .4s ease-out;
 }
-.info-card-silhouette{
+.info-card-photo{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center bottom;
-  opacity:1;
-  transition:opacity .4s ease-out;
+  object-position:center;
   pointer-events:none;
 }
-.info-card:hover .info-card-silhouette{opacity:0.15;} /* bleibt als Schatten sichtbar (85% Transparenz), statt komplett zu verschwinden — gleiche Position wie im Ausgangszustand */
-/* Nach-Vatern und Mission: kleiner und zentriert statt vollflächig, wie in
-   der PPTX-Vorlage — beginnt deutlich unterhalb des Schriftzugs (ca. 18%
-   der Kartenhöhe), volle eigene Bildproportion (kein Zuschnitt), am
-   unteren Kartenrand verankert, horizontal zentriert. */
-.info-card--nachvatern .info-card-silhouette{
-  inset:auto;
-  top:18%;
-  left:50%;
-  transform:translateX(-50%);
-  width:78%;
-  height:auto;
-  object-fit:contain;
-}
-.info-card--mission .info-card-silhouette{
-  inset:auto;
-  top:calc(18% - 0.5cm); /* 0.5cm weiter nach oben */
-  left:50%;
-  transform:translateX(-50%);
-  width:117%; /* um das ca. 1.5-fache vergrößert (78% -> 117%) — das neue Bild ist quadratisch statt hochformatig wie bei Nach-Vatern, dadurch bei gleicher Breite deutlich kürzer; Karte schneidet den Überstand per overflow:hidden sauber ab */
-  height:auto;
-  object-fit:contain;
+.info-card--nachvatern .info-card-photo{object-position:center 85%;} /* Richtung umgekehrt (genau entgegengesetzt zur letzten Änderung calc(50% - 1cm)) und deutlich verstärkt, damit die Köpfe klar weiter unten im Ausschnitt erscheinen */
+/* Dunkles Overlay über dem Foto, damit die weiße Schrift (Überschrift
+   dauerhaft, Reveal-Text/Tagline beim Hover) unabhängig von der
+   jeweiligen Bildhelligkeit immer lesbar bleibt — oben/unten etwas
+   stärker abgedunkelt, in der Mitte heller, damit vom Foto selbst noch
+   genug zu sehen bleibt. */
+.info-card-scrim{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.1) 32%, rgba(0,0,0,.6) 100%);
+  pointer-events:none;
 }
 .info-card h2{
   position:relative;
   z-index:1;
   flex-shrink:0;
-  color:inherit;
+  color:#fff; /* dauerhaft weiß, kein Wechsel mehr beim Hover (kein Farbverlauf/Weiß-Hintergrund mehr, sondern permanent das Foto) */
   font-size:2.2vw;
   line-height:1.1;
   margin:0 0 1.2vw;
-  transition:color .4s ease-out;
 }
 .info-card-reveal{
   position:relative;
@@ -814,7 +799,7 @@ p{hyphens:auto;}
   flex-grow:1;
 }
 .info-card-reveal p{
-  color:var(--c-grey);
+  color:#fff;
   margin:0 0 1.2vw;
   font-size:1vw;
   line-height:1.6vw;
@@ -823,17 +808,9 @@ p{hyphens:auto;}
   margin-top:auto;
   margin-bottom:0;
   text-align:right;
-  color:var(--c-ink);
+  color:var(--c-cream);
 }
-.info-card:hover{background:#FBF8F2;}
-.info-card:hover h2{color:var(--c-grey);}
 .info-card:hover .info-card-reveal{opacity:1; transform:translateY(0);}
-
-/* Je Karte ein eigener Verlauf, wie in der Vorlage (linear, 90°/von oben
-   nach unten, drei unterschiedliche Farbkombinationen aus der Palette). */
-.info-card--gemeinschaft{background:linear-gradient(180deg, #B46E54 11%, #FBCD82 74%, #502F20 100%);}
-.info-card--nachvatern{background:linear-gradient(180deg, #90A1B1 0%, #90A1B1 55%, #FBCD82 100%);}
-.info-card--mission{background:linear-gradient(180deg, #995138 0%, #FBCD82 39%, #FBCD82 100%);}
 
 @media (max-width:900px){
   .cards-section{padding:8% 8% 16%;flex-direction:column;gap:28px;}
@@ -843,14 +820,11 @@ p{hyphens:auto;}
 }
 
 /* Tippen-Interaktion für Touch-Geräte: Klasse .is-active wird per JS beim
-   ersten Antippen einer Karte gesetzt (siehe script.js) und verhält sich
-   optisch genau wie :hover — erst der Verlauf, nach dem Tippen die
-   weißliche Fläche mit Text. Zweites Tippen auf dieselbe (bereits
-   aktive) Karte folgt dann ganz normal dem Link. */
-.info-card.is-active{background:#FBF8F2;}
-.info-card.is-active h2{color:var(--c-grey);}
+   ersten Antippen einer Karte gesetzt (siehe script.js) und blendet den
+   Reveal-Text ein — Foto/Schrift-Farbe bleiben unverändert, da sie nicht
+   mehr zwischen zwei Zuständen wechseln. Zweites Tippen auf dieselbe
+   (bereits aktive) Karte folgt dann ganz normal dem Link. */
 .info-card.is-active .info-card-reveal{opacity:1; transform:translateY(0);}
-.info-card.is-active .info-card-silhouette{opacity:0.15;} /* bleibt als Schatten sichtbar (85% Transparenz), gleiche Position wie im Ausgangszustand */
 
 /* ==========================================================================
    ALLGEMEINE INHALTS-SEKTIONEN (Container rechts um die Header-Spalte)
@@ -1063,11 +1037,12 @@ p{hyphens:auto;}
   display:flex;
   gap:4vw;
 }
-#footer .column{width:50%;}
-#footer h3{font-size:1.4vw;line-height:2vw;color:var(--c-ink);margin-bottom:1vw;} /* auf die Schriftgröße der Adresse vergrößert (vorher 1.1vw; Adresse hat keine eigene Angabe und nutzt den globalen Body-Standard 1.4vw) */
+#footer .column{flex:1 1 33.333%;} /* auf drei Spalten umgestellt (vorher width:50% bei zwei Spalten) */
+#footer h3{font-size:1.4vw;line-height:2vw;color:var(--c-ink);margin-bottom:1vw;}
 #footer a{text-decoration:none;color:var(--c-accent);}
 #footer .socials li{display:inline-block;margin-right:1.2vw;}
 #footer .fineprint{margin-top:2vw;font-size:.85vw;}
+#footer .footer-newsletter-embed{max-width:100%;}
 
 @media (max-width:900px){
   #footer{margin-right:0;padding-bottom:var(--header-h-mobile);}
