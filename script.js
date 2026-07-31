@@ -389,13 +389,14 @@
          Footer), da sie dieselben Klassen teilen. */
   var scaleNewsletterEmbeds = function () {
     var crops = document.querySelectorAll(".newsletter-embed-crop");
+    var enlargeFactor = 1.2; /* macht die Einbettung auf Mobil spürbar größer, ohne die kalibrierten 700px Innenbreite zu ändern (das würde Substack wieder anders umbrechen lassen) */
     crops.forEach(function (crop) {
       var wrapper = crop.parentElement;
       if (!wrapper) return;
       if (window.innerWidth <= 900) {
         var availableWidth = wrapper.clientWidth;
         if (!availableWidth) return;
-        var scale = availableWidth / 700; /* 700px = feste Innenbreite, siehe CSS */
+        var scale = (availableWidth / 700) * enlargeFactor; /* 700px = feste Innenbreite, siehe CSS */
         var baseHeight = crop.offsetHeight; /* Layout-Höhe, von transform nicht beeinflusst */
         crop.style.transform = "scale(" + scale + ")";
         wrapper.style.height = (baseHeight * scale) + "px";

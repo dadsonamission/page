@@ -8,6 +8,28 @@ Einfach `index.html` doppelklicken/im Browser öffnen — läuft lokal ohne
 Server; die Unterseiten sind über das Vollbild-Menü erreichbar.
 
 ## Aktueller Stand
+- **Footer-Überschriften auf Mobil zu klein behoben**: `#footer h3`
+  (Kontakt/Newsletter/Folgen) hatte gar keine eigene Mobile-Regel und
+  blieb daher beim winzigen `vw`-Wert (1.4vw ≈ 5px auf einem
+  Handybildschirm), während der Text darunter korrekt die globale
+  16px-Mobile-Regel erbte. Jetzt ergänzt: 16px, gleiche Größe wie der
+  Text darunter.
+- **Substack-Einbettung auf Mobil vergrößert (überall) + Kontakt-Panel
+  verbreitert**:
+  1. Neuer Vergrößerungsfaktor (1.2x) in der Skalierungsformel in
+     `script.js`, macht die Einbettung an allen drei Stellen (Kontakt,
+     Fahrplan & Newsletter, Footer) spürbar größer, ohne die kalibrierte
+     700px-Innenbreite zu ändern (das hätte Substack wieder anders
+     umbrechen lassen und das gerade behobene Problem zurückgebracht).
+  2. Kontakt-Panel auf Mobil von 66.6% auf 88% Breite vergrößert.
+  3. Da die Skalierungsformel die tatsächlich verfügbare Breite des
+     jeweiligen Containers automatisch ausliest, wird die Einbettung im
+     jetzt breiteren Kontakt-Panel dadurch automatisch zusätzlich größer
+     dargestellt — keine gesonderte Anpassung dafür nötig.
+- **Nach-Vatern-Bild noch weiter nach oben verschoben**: Ausschnittsfenster
+  um weitere 5% der Originalbildhöhe nach oben verschoben (mehr Himmel
+  oberhalb der Köpfe, gleiche Ausschnittshöhe wie zuvor beibehalten),
+  damit die Köpfe noch weiter unten im Kartenbild erscheinen.
 - **Nach-Vatern-Bild direkt neu zugeschnitten (statt object-position)**:
   Der verfügbare Spielraum bei `object-fit:cover` war zu gering (nur
   ca. 11% der Bildhöhe, da sich die Seitenverhältnisse von Bild und
